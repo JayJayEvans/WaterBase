@@ -5,9 +5,8 @@ catalina start
 open web browser to localhost:8080
 Should see default webpage
 cd /usr/local/Cellar/tomcat/8.5.12/libexec/webapps/ROOT
-rm * //dont remove the directory
-git init
-git clone https://github.com/JayJayEvans/WaterBase.git
+rm -r * 
+git clone https://github.com/JayJayEvans/WaterBase.git .    //notice the space then period
 cp mysql-connector-java-5.1.41-bin.jar /usr/local/Cellar/tomcat/8.5.12/libexec/lib
 
 
