@@ -18,7 +18,7 @@
   <table width="993" height="102" border="0">
     <tr>
       <td width="251" height="96"><img src="http://i66.tinypic.com/346oqht.jpg" width="251" height="88" alt="Logo" /></td>
-      <td width="726" class="right">24X7 Customer Support - <a href="contact.jsp">Contact us</a> | <a href="http://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:8080/">Home</a> |
+      <td width="726" class="right">24X7 Customer Support - <a href="contact.jsp">Contact us</a> | <a href="main.jsp">Home</a> |
         <% if(session.getAttribute("uname")==null) {
 			%>
         <a href="login.jsp">Login</a>

@@ -33,7 +33,7 @@
     <script type="text/javascript">
 function Redirect()
 {
-    window.location="main.jsp";
+    window.location="index.jsp";
 }
 document.write("You will be redirected to main page in a few sec.");
 setTimeout('Redirect()', 5000);
@@ -43,7 +43,8 @@ setTimeout('Redirect()', 5000);
 else
 {%>
 You're already Logged out. 
-Click <a href="main.jsp">here</a> to go to the home page.
+Click <a href="index.jsp">here</a> to go back to log in page.
 <%}%>
+
 </body>
 </html>
