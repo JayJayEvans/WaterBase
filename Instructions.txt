@@ -1,0 +1,26 @@
+Connect to Ubuntu Server
+
+ssh -X <USERNAME>ec2-52-42-229-104.us-west-2.compute.amazonaws.com
+//-X allows for x11 redirection, a GUI can’t run on the terminal so we redirect it to our computer to run, after connecting
+try xclock
+
+
+Accounts:
+ejay    password
+pearson password
+
+
+Using Git
+In the directory you want the project to be in, git init
+git clone https://github.com/JayJayEvans/WaterBase.git
+cd WaterBase
+git pull https://github.com/JayJayEvans/WaterBase.git
+
+Important Prerequisite to run the program! This does not persist unless you put it in your bash profile so do so
+export CLASSPATH=.:mysql-connector-java-5.1.41-bin.jar
+
+
+Using Mysql
+I’ve configured a .my.cnf file on both of your home directories, it contains login information for mysql, so all you have 
+to do is type mysql into the command line and you’ll automatically connect. Keep in mind we’ll be sharing this database 
+so be careful with changes.
