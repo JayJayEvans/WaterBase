@@ -44,19 +44,18 @@
       
          Statement st=con.createStatement();
        
-          ps= con.prepareStatement("insert into register values (name, user, password, date, address, phoneNumber)"
-	          + "(?,?,?,?,?,?)");
+          ps= con.prepareStatement("insert into register values (?,?,?,?,?,?)");
             ps.setString(1,s);
             ps.setString(2,s1);
             ps.setString(3,s2);
             ps.setString(4,s3);
             ps.setString(5,s4);
-           ps.setString(6,s5);
-               int insertResult = ps.executeUpdate();
-             if (insertResult!=0)
-            {
+            ps.setString(6,s5);
+            ps.execute();
+             
+            
                  out.println("Successfully registered");
-            }          
+                      
         %>
         <br><hr>
                To Login <a href="login.jsp">Click Here</a>
