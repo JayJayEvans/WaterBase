@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Log in</title>
+<title>File Upload</title>
 <link rel="shortcut icon"href="favicon.ico" />
 <style type="text/css">
 .right {	text-align: right;
@@ -17,11 +17,11 @@
 
 
 <center> 
-<form action="loginconf.jsp" method="post">
+<form action="fileConf.jsp" method="post">
   <table width="993" height="102" border="0">
     <tr>
       <td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-      <td width="726" class="right">24X7 Customer Support - <a href="contact.jsp">Contact us</a> | <a href="index.jsp">Home</a> |
+      <td width="726" class="right">24X7 Customer Support - <a href="contact.jsp">Contact us</a> | <a href="main.jsp">Home</a> |
         <% if(session.getAttribute("uname")==null) {
 			%>
         <a href="login.jsp">Login</a>
@@ -32,27 +32,17 @@
     </tr>
   </table>
   <hr />
-  <p>&nbsp;</p>
-  <table width="1"> 
-  <tr> 
-<td colspan="2" class="italics"> User Login </td> 
-</Tr> 
-<tr> 
-<td> Username: </td> 
-<td> <input type="text" name="id"> </td> 
-</Tr> 
-<tr> 
-<td> Password: </td> 
-<td> <input type="password" name="password"> </td> 
-</Tr> 
-<tr> 
-<td> <input type="submit" value="Log In"> </td> 
-<td><input type="reset" value="Clear"> </td> 
-</Tr> 
-</Table>
+  <h3>File Upload:</h3>
+  Select a file to upload: <br />
+  <form action="fileConf.java" method="post"
+	                          enctype="multipart/form-data">
+	  <input type="file" name="file" size="50" />
+	  <br />
+	  <input type="submit" value="Upload File" />
+  </form>
   <p>&nbsp;</p>
   <p>&nbsp;</p> 
-</Form> 
+</form> 
 
 </Center>
 </body>

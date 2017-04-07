@@ -2,35 +2,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<link href="../css/sidebar.css" rel="stylesheet" type="text/css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+	<script src="./js/sidebar.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Main</title>
 </head>
 
 <body>
-
-	<p><b>Note: Welcome <%=session.getAttribute("uname")%>, what do you need?
-	</b> .</p>
-
-	  <form action="">
-		    <input type="radio" name="choice" value="1"> 1.) Manually enter well information<br>
-		      <input type="radio" name="choice" value="2"> 2.) Upload comma delimited well information file<br>
-		      <input type="radio" name="choice" value="3"> 3.) Find today's current rainfall at user entered latitude/longitude<br><br>
-		      <input type="submit" value="Submit">
-	  </form>
-	   <%@ page import="java.lang.String" %>
-	<%
-		String choice = request.getParameter("choice");
-			%>
-
-		<%	
-		if(choice.equals("1")){
-			out.println("Hello World");
-		}
-		else
-			out.println("Hello Hell");		
 	
-	
-	%>
+
+
+
+	<div class="nav-right visible-xs">
+		  <div class="button" id="btn">
+			      <div class="bar top"></div>
+			          <div class="bar middle"></div>
+				      <div class="bar bottom"></div>
+				        </div>
+	</div>
+	<!-- nav-right -->
+	<main>
+
+
+	  <nav>
+		      <div class="nav-right hidden-xs">
+			            <div class="button" id="btn">
+					            <div class="bar top"></div>
+						            <div class="bar middle"></div>
+							            <div class="bar bottom"></div>
+								          </div>
+									      </div>
+									          <!-- nav-right -->
+										    </nav>
+
+										      <a href="http://codepen.io/tonkec/" class="ua" target="_blank">
+											          <i class="fa fa-user"></i>
+												    </a>
+	</main>
+
+	<div class="sidebar">
+		  <ul class="sidebar-list">
+			      <li class="sidebar-item"><a href="fileUpload.jsp" class="sidebar-anchor">Upload Well File</a></li>
+			          <li class="sidebar-item"><a href="manualEntry.jsp" class="sidebar-anchor">Manually Enter Well Info</a></li>
+				      <li class="sidebar-item"><a href="#" class="sidebar-anchor">Item 3</a></li>
+				          <li class="sidebar-item"><a href="#" class="sidebar-anchor">Item 4</a></li>
+					    </ul>
+	</div>
+
+
 
 
 
