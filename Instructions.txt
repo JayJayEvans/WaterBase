@@ -29,13 +29,21 @@ mysql Password: suiteswellzwfate1
 Connect to Ubuntu Server - final location of project
 
 ssh -XC <USERNAME>ec2-52-42-229-104.us-west-2.compute.amazonaws.com
-
 /var/lib/tomcat8/webapps/jsp    //project location
-
 http://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:8080/
-
 Accounts:
 ejay    password
 pearson password
+
+
+To Do List:
+File Uplaod Configuration - Jason
+Register at login page
+Manual Data Entry 
+Pull RainInfo for a specified latitude/long
+Change sessions to cookies
+Prevent Main Page loading unless user is logged in
+Contact Us page: Embedded email form and list phone numbers
+
 
 
