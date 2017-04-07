@@ -51,7 +51,7 @@
             ps.setString(4,s3);
             ps.setString(5,s4);
             ps.setString(6,s5);
-	    int succ = ps.execute();             
+	    int succ = ps.executeUpdate();             
             if(succ != 0) 
                  out.println("Successfully registered");
                       

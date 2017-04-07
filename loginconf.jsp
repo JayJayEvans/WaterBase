@@ -29,7 +29,7 @@ String password = request.getParameter ("password");
 
 <% 
  
-String sql = "SELECT name from register where user=? And password =?"; 
+String sql = "SELECT name from register where id=? And password =?"; 
 
 try {  
 ps = conn.prepareStatement (sql); 
@@ -40,7 +40,8 @@ if (rs.next ()) {
 out.println (rs.getString ("name")); 
 flag = true; 
 session.setAttribute("uname", rs.getString ("name")); 
-} else { 
+} else {
+out.println("Invalid");
 request.setAttribute("err", "user name or password error!"); 
 }
 
