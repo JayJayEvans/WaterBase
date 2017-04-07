@@ -10,6 +10,12 @@ git clone https://github.com/JayJayEvans/WaterBase.git .    //notice the space t
 cp mysql-connector-java-5.1.41-bin.jar /usr/local/Cellar/tomcat/8.5.12/libexec/lib
 
 
+SASS CSS Framework
+- sudo gem install sass
+- sass files have .scss extension and need to be converted for use
+- sass <filename>.scss <filename>.css
+
+
 Using Mysql on workbench
 
 ssh Hostname: ec2-52-42-229-104.us-west-2.compute.amazonaws.com
