@@ -40,7 +40,7 @@
         Connection con;
         ResultSet rs= null;
        Class.forName("com.mysql.jdbc.Driver");
-        con=DriverManager.getConnection("jdbc:mysql://http://ec2-52-42-229-104.us-west-2.compute.amazonaws.com/:3306/project", "evansj", "suiteswellzwfate1");
+        con=DriverManager.getConnection("jdbc:mysql://http://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
       
          Statement st=con.createStatement();
        
