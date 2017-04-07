@@ -12,6 +12,7 @@ cp mysql-connector-java-5.1.41-bin.jar /usr/local/Cellar/tomcat/8.5.12/libexec/l
 
 SASS CSS Framework
 - sudo gem install sass
+- sudo gem install compass
 - sass files have .scss extension and need to be converted for use
 - sass <filename>.scss <filename>.css
 
