@@ -43,8 +43,8 @@
 
 	<div class="sidebar">
 		  <ul class="sidebar-list">
-			      <li class="sidebar-item"><a href="fileUpload.jsp" class="sidebar-anchor">Upload Well File</a></li>
-			          <li class="sidebar-item"><a href="manualEntry.jsp" class="sidebar-anchor">Manually Enter Well Info</a></li>
+			      <li class="sidebar-item"><a href="../databaseInsertion/fileUpload.jsp" class="sidebar-anchor">Upload Well File</a></li>
+			          <li class="sidebar-item"><a href="../databaseInsertion/manualEntry.jsp" class="sidebar-anchor">Manually Enter Well Info</a></li>
 				      <li class="sidebar-item"><a href="#" class="sidebar-anchor">Item 3</a></li>
 				          <li class="sidebar-item"><a href="#" class="sidebar-anchor">Item 4</a></li>
 					    </ul>
