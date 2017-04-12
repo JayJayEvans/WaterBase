@@ -17,17 +17,17 @@
 
 
 <center> 
-<form action="../accountControl/loginconf.jsp" method="post">
+<form action="../src/AccountControl/loginconf.jsp" method="post">
   <table width="993" height="102" border="0">
     <tr>
       <td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-      <td width="726" class="right">24X7 Customer Support - <a href="../accountControl/contact.jsp">Contact us</a> | <a href="index.jsp">Home</a> |
+      <td width="726" class="right">24X7 Customer Support - <a href="../src/AccountControl/contact.jsp">Contact us</a> | <a href="#">Home</a> |
         <% if(session.getAttribute("uname")==null) {
 			%>
         <a href="#">Login</a>
         <%} else {
 				%>
-        <a href="../accountControl/logout.jsp">Logout</a>
+        <a href="../src/AccountControl/logout.jsp">Logout</a>
         <%}%></td>
     </tr>
   </table>

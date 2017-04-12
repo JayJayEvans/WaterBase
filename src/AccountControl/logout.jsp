@@ -11,13 +11,14 @@
 </head>
 
 <body>
+<%@ page language="java" %>
 <table width="993" height="102" border="0">
   <tr>
     <td width="251" height="96"><img src="http://i66.tinypic.com/346oqht.jpg" width="251" height="88" alt="Logo" /></td>
-    <td width="726" class="right">24X7 Customer Support - <a href="contact.jsp">Contact us</a> | <a href="index.jsp">Home</a> |
+    <td width="726" class="right">24X7 Customer Support - <a href="contact.jsp">Contact us</a> | <a href="../../index.jsp">Home</a> |
       <% if(session.getAttribute("uname")==null) {
 			%>
-      <a href="login.jsp">Login</a>
+      <a href="../../index.jsp">Login</a>
       <%} else {
 				%>
       <a href="logout.jsp">Logout</a>
@@ -25,31 +26,25 @@
   </tr>
 </table>
 <hr />
-<p><strong>Username or Password Incorrect!</strong> Click <a href="register.jsp"><strong>here</strong></a> to register.</p>
-<center> 
-<form action="loginconf.jsp" method="post">
-  <p>&nbsp;</p>
-  <table width="1"> 
-  <tr> 
-<td colspan="2" class="italics"> User Login </td> 
-</Tr> 
-<tr> 
-<td> Username: </td> 
-<td> <input type="text" name="id"> </td> 
-</Tr> 
-<tr> 
-<td> Password: </td> 
-<td> <input type="password" name="password"> </td> 
-</Tr> 
-<tr> 
-<td> <input type="submit" value="Log In"> </td> 
-<td><input type="reset" value="Clear"> </td> 
-</Tr> 
-</Table>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p> 
-</Form> 
+<% if(session.getAttribute("uname")!=null) {
+	session.invalidate();
+	out.println("Successfully Logged out.");
+	%>
+    <script type="text/javascript">
+function Redirect()
+{
+    window.location="../../index.jsp";
+}
+document.write("You will be redirected to main page in a few sec.");
+setTimeout('Redirect()', 5000);
+</script>
+<%
+}
+else
+{%>
+You're already Logged out. 
+Click <a href="../index.jsp">here</a> to go back to log in page.
+<%}%>
 
-</Center></p>
 </body>
 </html>
