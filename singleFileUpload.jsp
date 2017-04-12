@@ -58,9 +58,9 @@ File file = new File(saveFile);
 
 
 <%
-String sql = "INSERT INTO Well(WellID,AquiferCode,TypeCode,OwnerID,UsageState,PumpType,BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Diameter,TopDepth,BottomDepth,Comments)";
-sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-String sql2 = "INSERT INTO Owner(WellID,OwnerType,OwnerName) VALUES(?,?,?)";
+String sql = "INSERT INTO Well(WellID,AquiferCode,TypeCode,OwnerID,Latitude,Longitude,Country,State,WellDepth,UsageState,PumpType,BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Diameter,TopDepth,BottomDepth,Comments)";
+sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+String sql2 = "INSERT INTO Owner(WellID,OwnerType,OwnerName,State) VALUES(?,?,?,?)";
 String sql3 = "SELECT name from register where user=? And password =?";
 String query = "Select OwnerID from Owner where WellID=";
 String token = "";
@@ -77,7 +77,7 @@ try {
 	if(count !=4)
 		token = sc.next();
 		switch(count){
-				case 1:
+				case 1://WellID
 					query += token;
 					int tok = Integer.parseInt(token);
 					wellID = tok;
@@ -91,22 +91,10 @@ try {
 				case 2: //AquiferCode
 				case 3: //TypeCode
 
-
 					if(token.equals(" "))
 						ps.setNull(count,0);
 					else
 						ps.setString(count,token);
-					break;
-
-
-				case 16://comments
-				case 7: //usageState
-				case 8: //PumpType
-
-					if(token.equals(" "))
-						ps.setNull(count-2,0);
-					else
-						ps.setString(count-2,token);
 					break;
 
 
@@ -128,13 +116,16 @@ try {
 					}
 					break;
 
-
-				case 9:
-				case 10:
-				case 11:
-				case 13:
-				case 14:
-				case 15:
+	
+				case 7: //Latitude
+				case 8: //Longitude
+				case 11://WellDepth
+				case 14://BottomElevation
+				case 15://WaterLevelElevation
+				case 16://SurfaceElevation
+				case 18://Diameter
+				case 19://TopDepth
+				case 20://BottomDepth
 					
 					if(token.equals(" "))
 						ps.setNull(count-2,0);
@@ -145,7 +136,23 @@ try {
 					}
 					break;
 
-				case 12:
+
+				case 9: //Country
+				case 10://State
+				case 12: //usageState
+				case 13: //PumpType
+				case 21://comments
+
+					if(token.equals(" "))
+						ps.setNull(count-2,0);
+					else
+						ps.setString(count-2,token);
+					if(count == 10)
+						ps1.setString(4,token);
+					break;
+
+
+				case 17:
 					if(token.equals(" ") )
 						ps.setNull(count-2,0);
 					else{
