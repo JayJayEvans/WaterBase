@@ -18,7 +18,7 @@
     <td width="726" class="right">24X7 Customer Support - <a href="contact.jsp">Contact us</a> | <a href="../index.jsp">Home</a> |
       <% if(session.getAttribute("uname")==null) {
 			%>
-      <a href="login.jsp">Login</a>
+      <a href="../index.jsp">Login</a>
       <%} else {
 				%>
       <a href="logout.jsp">Logout</a>
