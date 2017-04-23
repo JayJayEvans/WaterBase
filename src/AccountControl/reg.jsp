@@ -42,7 +42,7 @@
       
          Statement st=con.createStatement();
        
-          ps= con.prepareStatement("insert into Register values (?,?,?,?)");
+            ps = con.prepareStatement("insert into Register(UserName,Password,EmailAddress,Name) values (?,?,?,?)");
             ps.setString(1,s);
             ps.setString(2,s1);
             ps.setString(3,s2);

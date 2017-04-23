@@ -44,6 +44,8 @@ if ((contentType != null) && (contentType.indexOf("multipart/form-data") >= 0)) 
 PreparedStatement ps;
 PreparedStatement ps1;
 PreparedStatement ps2;
+PreparedStatement ps3;
+PreparedStatement ps4;
 Connection conn;
 Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
@@ -58,61 +60,63 @@ File file = new File(saveFile);
 
 
 <%
-String sql = "INSERT INTO Well(WellID,AquiferCode,TypeCode,OwnerID,Latitude,Longitude,Country,State,WellDepth,UsageState,PumpType,BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Diameter,TopDepth,BottomDepth,Comments)";
-sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-String sql2 = "INSERT INTO Owner(WellID,OwnerType,OwnerName,State) VALUES(?,?,?,?)";
-String sql3 = "SELECT name from register where user=? And password =?";
-String query = "Select OwnerID from Owner where WellID=";
+String sql = "INSERT INTO Well(WellID,AquiferCode,TypeCode,OwnerID,Latitude,Longitude,Country,State,WellDepth,UsageState,PumpType,BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Comments)";
+sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+String sql2 = "INSERT INTO Owner(OwnerType,OwnerName) VALUES(?,?)";
+String sql3 = "INSERT INTO Casing(CasingID,Diameter,TopDepth,BottomDepth) VALUES(?,?,?,?)";
+String query = "SELECT LAST_INSERT_ID()";
 String token = "";
+boolean casingOccured = true;
 %>
 <%
 try {
 	ps = conn.prepareStatement (sql);
-	ps1 = conn.prepareStatement(sql2);
+	ps1 = conn.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+	ps2 = conn.prepareStatement(query);
+	ps3 = conn.prepareStatement(sql3);
+	ps4 = conn.prepareStatement(query);
+	ResultSet rs=null;
 	Scanner sc = new Scanner(file);
 	sc.useDelimiter(",");
 	int count = 1;
 	int wellID = -1;
 	while(sc.hasNext()){
-	if(count !=4)
-		token = sc.next();
+		if(count !=4)
+			token = sc.next();
 		switch(count){
 				case 1://WellID
-					query += token;
 					int tok = Integer.parseInt(token);
 					wellID = tok;
 					//if(token == " " )
 					//	ps.setNull(count,0);
 					//else
-						ps.setInt(count,tok);
-
+					ps.setInt(count,tok);
 					break;
 
 				case 2: //AquiferCode
 				case 3: //TypeCode
 
-					if(token.equals(" "))
-						ps.setNull(count,0);
-					else
-						ps.setString(count,token);
+					ps.setString(count,token);
 					break;
 
 
 				case 5: //OwnerType
 					if(token.equals(" "))
-						ps1.setNull(2,0);
+						ps.setNull(4,0);
 					else{
-						ps1.setString(2,token);
-						ps1.setInt(1,wellID);
+						ps1.setString(1,token);
 					}
 					break;
 
 				case 6: //OwnerName
 					if(token.equals(" "))
-						ps1.setNull(3,0);
-					else{
-						ps1.setString(3,token);
-						ps1.setInt(1,wellID);
+						ps.setNull(4,0);
+					else{	
+						ps1.setString(2,token);
+						ps1.executeUpdate();
+						rs = ps1.getGeneratedKeys();
+						rs.next();
+						ps.setInt(4,rs.getInt(1));
 					}
 					break;
 
@@ -123,10 +127,7 @@ try {
 				case 14://BottomElevation
 				case 15://WaterLevelElevation
 				case 16://SurfaceElevation
-				case 18://Diameter
-				case 19://TopDepth
-				case 20://BottomDepth
-					
+								
 					if(token.equals(" "))
 						ps.setNull(count-2,0);
 
@@ -141,36 +142,79 @@ try {
 				case 10://State
 				case 12: //usageState
 				case 13: //PumpType
-				case 21://comments
 
 					if(token.equals(" "))
 						ps.setNull(count-2,0);
 					else
 						ps.setString(count-2,token);
-					if(count == 10)
-						ps1.setString(4,token);
 					break;
+			
 
 
-				case 17:
-					if(token.equals(" ") )
+				case 17://casingID
+					if(token.equals(" ")){
 						ps.setNull(count-2,0);
+						casingOccured=false;
+					}
 					else{
 						int intTok = Integer.parseInt(token);
 						ps.setInt(count-2,intTok);
-					
+						ps3.setInt(1,intTok);
 					}
 					break;
 
+
+				case 18:{//Diameter{
+				
+					if(token.equals(" ") )
+						ps3.setNull(2,0);
+					else{
+						float floatTok = Float.parseFloat(token);
+						ps3.setFloat(2,floatTok);
+					}
+
 				}
+						break;
+				
+
+				case 19:{//TopDepth{
+					if(token.equals(" ") )
+						ps3.setNull(3,0);
+					else{
+						float floatTok = Float.parseFloat(token);
+						ps3.setFloat(3,floatTok);
+					}
+
+				}
+					break;
+				
+			
+				case 20:{//BottomDepth{
+					
+					if(token.equals(" ") )
+						ps3.setNull(4,0);
+					else{
+						float floatTok = Float.parseFloat(token);
+						ps3.setFloat(4,floatTok);
+					}
+					if(casingOccured)
+						ps3.executeUpdate();
+				}	
+					break;
+				
+				case 21://comments
+
+					if(token.equals(" "))
+						ps.setNull(16,0);
+					else
+						ps.setString(16,token);
+					break;
+
+			
+			}
 		count++;
 	}
 
-	ps2 = conn.prepareStatement(query);	
-	ps1.executeUpdate();
-	ResultSet rs = ps2.executeQuery();
-	if(rs.next())
-		ps.setInt(4,rs.getInt("OwnerID"));
 	ps.executeUpdate ();
 
 

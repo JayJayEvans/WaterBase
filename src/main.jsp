@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<link href="./CSS/sidebar.css" rel="stylesheet" type="text/css"/>
+	<link href="../CSS/sidebar.css" rel="stylesheet" type="text/css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-	<script src="./JS/sidebar.js" type="text/javascript"></script>
+	<script src="../JS/sidebar.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Main</title>
 </head>
@@ -43,8 +43,8 @@
 
 	<div class="sidebar">
 		  <ul class="sidebar-list">
-			      <li class="sidebar-item"><a href="DatabaseInsertion/fileUpload.jsp" class="sidebar-anchor">Upload Well File</a></li>
-			          <li class="sidebar-item"><a href="DatabaseInsertion/manualEntry.jsp" class="sidebar-anchor">Manually Enter Well Info</a></li>
+			      <li class="sidebar-item"><a href="../DatabaseInsertion/fileUpload.jsp" class="sidebar-anchor">Upload Well File</a></li>
+			          <li class="sidebar-item"><a href="../DatabaseInsertion/manualEntry.jsp" class="sidebar-anchor">Manually Enter Well Info</a></li>
 				      <li class="sidebar-item"><a href="#" class="sidebar-anchor">Item 3</a></li>
 				          <li class="sidebar-item"><a href="#" class="sidebar-anchor">Item 4</a></li>
 					    </ul>

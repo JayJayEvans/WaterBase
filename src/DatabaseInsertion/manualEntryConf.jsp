@@ -21,17 +21,18 @@
 PreparedStatement ps;
 PreparedStatement ps1;
 PreparedStatement ps2;
+PreparedStatement ps3;
 Connection conn;
 Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
-
+boolean casingOccured = false;
 Statement st=conn.createStatement();
 %>
 
 <%
 
 String param = request.getParameter("WellID");
- %> 
+%> 
      <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
                                  <% out.println(param); %> 
      </td></tr></table>
@@ -40,25 +41,25 @@ String param = request.getParameter("WellID");
 
 
 <%
-String sql = "INSERT INTO Well(WellID,AquiferCode,TypeCode,OwnerID,Latitude,Longitude,Country,State,WellDepth,UsageState,PumpType,BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Diameter,TopDepth,BottomDepth,Comments)";
-sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-String sql2 = "INSERT INTO Owner(WellID,OwnerType,OwnerName,State) VALUES(?,?,?,?)";
-String query = "Select OwnerID from Owner where WellID=";
+String sql = "INSERT INTO Well(WellID,AquiferCode,TypeCode,OwnerID,Latitude,Longitude,Country,State,WellDepth,UsageState,PumpType,BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Comments)";
+sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+String sql2 = "INSERT INTO Owner(OwnerType,OwnerName) VALUES(?,?)";
+String sql3 = "INSERT INTO Casing(CasingID,Diameter,TopDepth,BottomDepth) VALUES(?,?,?,?)";
+String query = "SELECT LAST_INSERT_ID()";
 String token = "";
+ResultSet rs=null;
 %>
 <%
 try {
 	ps = conn.prepareStatement (sql);
-	ps1 = conn.prepareStatement(sql2);
-	
+	ps1 = conn.prepareStatement(sql2,Statement.RETURN_GENERATED_KEYS);
+	ps2 = conn.prepareStatement(sql3);
+	ps3 = conn.prepareStatement(query);	
 	if(param.equals(" ")){
 		ps.setNull(1,0);
 	}
 	else{
-		query+=param;
 		ps.setInt(1,Integer.parseInt(param));
-		ps1.setInt(1,Integer.parseInt(param));
-
 	}
 
 
@@ -104,7 +105,6 @@ try {
 	if(param.equals(" "))
 		ps.setNull(8,0);
 	else{
-		ps1.setString(4,param);
 		ps.setString(8,param);
 	}
 	
@@ -158,77 +158,82 @@ try {
 
 	param = request.getParameter("CasingID");
 
-	if(param.equals(" "))
+	if(param.equals(" ")){
 		ps.setNull(15,0);
-	else
+	}
+	else{
+		casingOccured=true;
 		ps.setInt(15,Integer.parseInt(param));
-
-   %>
+		ps2.setInt(1,Integer.parseInt(param));		
+	}
    
-    <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
-			      </td></tr></table>
   
-   
-              <%
 
 	param = request.getParameter("Diameter");
 
-	if(param.equals(" "))
-		ps.setNull(16,0);
+	if(param.equals(" ")){
+		if(casingOccured)
+			ps2.setNull(2,0);	
+	}
 	else
-		ps.setFloat(16,Float.parseFloat(param));
+		ps2.setFloat(2,Float.parseFloat(param));
 
 
 
 
 	param = request.getParameter("TopDepth");
 
-	if(param.equals(" "))
-		ps.setNull(17,0);
+	if(param.equals(" ")){
+		if(casingOccured)
+			ps2.setNull(3,0);
+		}
 	else
-		ps.setFloat(17,Float.parseFloat(param));
+		ps2.setFloat(3,Float.parseFloat(param));
 
 
 
 	param = request.getParameter("BottomDepth");
 
-	if(param.equals(" "))
-		ps.setNull(18,0);
+	if(param.equals(" ")){
+		if(casingOccured)
+			ps2.setNull(4,0);
+	}
 	else
-		ps.setFloat(18,Float.parseFloat(param));
+		ps2.setFloat(4,Float.parseFloat(param));
 
 	param = request.getParameter("Comments");
 
-	if(param.equals(" "))
-		ps.setNull(19,0);
+
+
+	if(param.equals(" ")){
+			ps.setNull(16,0);
+	}
 	else
-		ps.setString(19,param);
+		ps.setString(16,param);
 
 
 	param = request.getParameter("OwnerType");
+
+	if(param.equals(" "))
+		ps1.setNull(1,0);
+	else
+		ps1.setString(1,param);
+
+
+	param = request.getParameter("OwnerName");
 
 	if(param.equals(" "))
 		ps1.setNull(2,0);
 	else
 		ps1.setString(2,param);
 
-
-	param = request.getParameter("OwnerName");
-
-	if(param.equals(" "))
-		ps1.setNull(3,0);
-	else
-		ps1.setString(3,param);
-
-
-
-
-
-	ps2 = conn.prepareStatement(query);	
 	ps1.executeUpdate();
-	ResultSet rs = ps2.executeQuery();
-	if(rs.next())
-		ps.setInt(4,rs.getInt("OwnerID"));
+	rs = ps1.getGeneratedKeys();
+	rs.next();
+	ps.setInt(4,rs.getInt(1));
+	ps2.executeUpdate();
+
+
 	ps.executeUpdate ();
 
 
