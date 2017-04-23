@@ -208,14 +208,17 @@ try {
 						ps.setNull(16,0);
 					else
 						ps.setString(16,token);
-					break;
+					
+				ps.executeUpdate();
+				count = 0;		
+						
+				break;
 
 			
 			}
 		count++;
 	}
 
-	ps.executeUpdate ();
 
 
 	%>

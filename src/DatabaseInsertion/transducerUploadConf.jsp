@@ -138,15 +138,16 @@ try {
 					}
 					recordCount++;
 					break;
-
-	
-			
+				case 10:
+					count = 0;
+					recordCount =0;
+					if(!wellExists)
+						ps.executeUpdate();
+					ps1.executeUpdate();
+				break;			
 			}
 		count++;
 	}
-	if(!wellExists)	
-	ps.executeUpdate ();
-	ps1.executeUpdate();
 
 	%>
 	
