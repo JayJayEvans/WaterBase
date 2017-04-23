@@ -23,26 +23,26 @@
 <% 
 boolean flag = false; 
 
-String name = request.getParameter ("id"); 
+String user = request.getParameter ("id"); 
 String password = request.getParameter ("password"); 
 %>
 
 <% 
  
-String sql = "SELECT name from register where id=? And password =?"; 
+String sql = "SELECT name from Register where UserName=? And Password =?"; 
 
 try {  
 ps = conn.prepareStatement (sql); 
-ps.setString (1,name); 
+ps.setString (1,user); 
 ps.setString (2,password); 
 rs = ps.executeQuery (); 
 if (rs.next ()) { 
-out.println (rs.getString ("name")); 
+out.println (rs.getString ("user")); 
 flag = true; 
-session.setAttribute("uname", rs.getString ("name")); 
+session.setAttribute("uname", rs.getString ("user")); 
 } else {
 out.println("Invalid");
-request.setAttribute("err", "user name or password error!"); 
+request.setAttribute("err", "UserName or Password error!"); 
 }
 
 rs.close (); 
@@ -61,7 +61,7 @@ if (flag) {
 
 %>
 
-<jsp:forward page="loginsuccess.jsp" />
+<jsp:forward page="../main.jsp" />
 
 <%
 

@@ -1,4 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+
+<%
+boolean passwordMatch = true;
+
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -28,19 +34,16 @@
    <hr />
    <strong><em>Register here</em></strong>
    <form action="reg.jsp"><table><b>
-           <tr><td>Name</td><td><input type="text" name="name"></td></tr>
-            <tr><td>User ID</td><td><input type="text" name="id"></td></tr>
-            <tr><td>Password</td><td><input type="password" name="password"></td></tr>
-            <tr><td>Phone No.</td><td><input type="text" name="phone"></td></tr>
-            <tr><td>Date of Birth</td><td><input type="text" name="date"></td></tr>
-            <tr><td>Address</td><td><textarea name="address"></textarea></td></tr>
-                <br>
-                </b></table><br />
+            <tr><td>UserName     </td><td><input type="text" name="id"></td></tr>
+            <tr><td>Password     </td><td><input type="password" name="password"></td></tr>
+	    <tr><td>Name         </td><td><input type="text" name="name"></td></tr>
+	    <tr><td>Email Address</td><td><input type="email" name="address"></td></tr>
+                <br></b></table><br/>
      <input type="submit" value="Register" />
-                    </form>
-            <br><hr>
+    </form>
+              <br><hr>
               Already Registered!! To Login <a href="../../index.jsp">Click Here</a>
-                <hr>
+              <hr>
                 
     </center>
 </body>

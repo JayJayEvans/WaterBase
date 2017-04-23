@@ -30,12 +30,10 @@
        
 <%
         String m=null, mn=null;
-        String s=request.getParameter("name");
-        String s1=request.getParameter("id");
-        String s2=request.getParameter("password");
-        String s3=request.getParameter("date");
-        String s4=request.getParameter("address");
-		String s5=request.getParameter("phone");
+        String s=request.getParameter("id");
+        String s1=request.getParameter("password");
+        String s2=request.getParameter("address");
+        String s3=request.getParameter("name");
         PreparedStatement ps;
         Connection con;
         ResultSet rs= null;
@@ -44,13 +42,11 @@
       
          Statement st=con.createStatement();
        
-          ps= con.prepareStatement("insert into register values (?,?,?,?,?,?)");
+          ps= con.prepareStatement("insert into Register values (?,?,?,?)");
             ps.setString(1,s);
             ps.setString(2,s1);
             ps.setString(3,s2);
             ps.setString(4,s3);
-            ps.setString(5,s4);
-            ps.setString(6,s5);
 	    int succ = ps.executeUpdate();             
             if(succ != 0) 
                  out.println("Successfully registered");

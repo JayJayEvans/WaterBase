@@ -65,7 +65,7 @@
 			    Comments:<br>
 			    <input type="text" name="Comments" placeholder="Optional"><br><br>
 
-			    <input type="submit" placeholder="Submit">
+			    <input type="submit" placeholder="Submit onclick="window.location.href='manualEntryConf.jsp'" >
 	
 	</FORM>
 	</BODY>
