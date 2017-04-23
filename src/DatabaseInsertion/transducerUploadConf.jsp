@@ -62,17 +62,22 @@ File file = new File(saveFile);
 <%
 String sql = "INSERT INTO Transducers(TransID,TransType,TransName,WellID) VALUES(?,?,?,?)";
 String sql2 = "INSERT INTO TransducerRecords(TransID,InputTime,Temperature,Conductivity,Pressure,Salinity,TDS) VALUES(?,?,?,?,?,?,?)";
+Scanner scan = new Scanner(file);
+try{
+while(scan.hasNextLine()){
+wellExists = false;
+String line = scan.nextLine();
 String query = "SELECT WellID FROM Transducers WHERE TransID='";
 
 String token = "";
 %>
 <%
-try {
+
 	ps = conn.prepareStatement (sql);
 	ps1 = conn.prepareStatement(sql2);
 	ps2 = null;
 	ResultSet rs=null;
-	Scanner sc = new Scanner(file);
+	Scanner sc = new Scanner(line);
 	sc.useDelimiter(",");
 	int count = 1;
 	int recordCount = 1;
@@ -138,17 +143,18 @@ try {
 					}
 					recordCount++;
 					break;
-				case 10:
-					count = 0;
-					recordCount =0;
-					if(!wellExists)
-						ps.executeUpdate();
-					ps1.executeUpdate();
-				break;			
 			}
 		count++;
 	}
 
+	count = 0;
+	recordCount =0;
+	if(!wellExists)
+		ps.executeUpdate();
+
+	ps1.executeUpdate();
+
+	}
 	%>
 	
  <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>

@@ -75,8 +75,12 @@ try {
 	ps2 = conn.prepareStatement(query);
 	ps3 = conn.prepareStatement(sql3);
 	ps4 = conn.prepareStatement(query);
+	Scanner scan = new Scanner(file);
+	while(scan.hasNextLine()){
+	casingOccured = true;
+	String line = scan.nextLine();
 	ResultSet rs=null;
-	Scanner sc = new Scanner(file);
+	Scanner sc = new Scanner(line);
 	sc.useDelimiter(",");
 	int count = 1;
 	int wellID = -1;
@@ -209,16 +213,15 @@ try {
 					else
 						ps.setString(16,token);
 					
-				ps.executeUpdate();
-				count = 0;		
-						
 				break;
 
 			
 			}
 		count++;
 	}
-
+	ps.executeUpdate();
+	count = 0;
+	}
 
 
 	%>
