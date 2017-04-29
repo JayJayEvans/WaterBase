@@ -43,7 +43,7 @@ setTimeout('Redirect()', 5000);
 else
 {%>
 You're already Logged out. 
-Click <a href="../index.jsp">here</a> to go back to log in page.
+Click <a href="../index.html">here</a> to go back to log in page.
 <%}%>
 
 </body>

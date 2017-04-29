@@ -42,7 +42,7 @@ boolean passwordMatch = true;
      <input type="submit" value="Register" />
     </form>
               <br><hr>
-              Already Registered!! To Login <a href="../../index.jsp">Click Here</a>
+              Already Registered!! To Login <a href="../../index.html">Click Here</a>
               <hr>
                 
     </center>

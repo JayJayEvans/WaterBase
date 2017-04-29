@@ -1,5 +1,3 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,15 +19,16 @@
   <table width="993" height="102" border="0">
     <tr>
       <td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-      <td width="726" class="right">24X7 Customer Support - <a href="../src/AccountControl/contact.jsp">Contact us</a> | <a href="#">Home</a> |
+      <td width="726" class="right">24X7 Customer Support - <a href="../src/AccountControl/contact.jsp">Contact us</a> | <a href="#">Home</a> | <a href ="./src/AccountControl/rainfall.jsp"> Rainfall Info</a> | 
         <% if(session.getAttribute("uname")==null) {
-			%>
+      %>
         <a href="#">Login</a>
         <%} else {
-				%>
+        %>
         <a href="../src/AccountControl/logout.jsp">Logout</a>
         <%}%></td>
     </tr>
+
   </table>
   <hr />
   <p>&nbsp;</p>
