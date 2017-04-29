@@ -22,22 +22,19 @@ PreparedStatement ps;
 PreparedStatement ps1;
 PreparedStatement ps2;
 PreparedStatement ps3;
+PreparedStatement ps4;
 Connection conn;
 Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
 Statement st=conn.createStatement();
-%>
-
-<%
-
-String param = "Hello";
+String wellID = "";
+String aquifer ="";
+String type = "";
+String owner = "";
 %> 
-     <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
-                                 <% out.println(param); %> 
-     </td></tr></table>
-                                                                  <%
-%>
 
+     <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b> 
+     </td></tr></table>
 
 <%
 String wellQuery = "SELECT * FROM Well WHERE ";
@@ -45,6 +42,10 @@ String ownerQuery = "SELECT * FROM Owner WHERE ";
 String transQuery = "SELECT * FROM Transducers WHERE ";
 String token = "";
 boolean needAnd = false;
+boolean wellIdEntered = false;
+boolean aquiferEntered = false;
+boolean typeEntered = false;
+boolean ownerEntered = false;
 ResultSet rs=null;
 ResultSet rs1=null;
 ResultSet rs2=null;
@@ -52,53 +53,112 @@ ResultSet rs2=null;
 <%
 try {
 	
-	param = request.getParameter("WellID");
-	if(!param.equals("")){
+	wellID = request.getParameter("WellID");
+	aquifer = request.getParameter("AquiferCode");
+	type = request.getParameter("TypeCode");
+	owner = request.getParameter("OwnerID");
+
+	if(!wellID.equals("")){
+		wellIdEntered = true;
 		wellQuery += "WellID='";
-		wellQuery += param;
+		wellQuery += wellID;
 		wellQuery += "'";
 		transQuery += "WellID='";
-		transQuery += param;
+		transQuery += wellID;
 		transQuery += "'";
 		needAnd = true;
 	
 	}
 
 
-	param = request.getParameter("AquiferCode");
 
-	if(!param.equals("")){
+	if(!aquifer.equals("")){
+		aquiferEntered=true;
 		if(needAnd)
 			wellQuery += " AND ";
 		wellQuery += "AquiferCode='";
-		wellQuery += param;
+		wellQuery += aquifer;
 		wellQuery += "'";
+		needAnd=true;
 	}
 					
 
 
-	param = request.getParameter("TypeCode");
-
-	if(!param.equals("")){
+	if(!type.equals("")){
+		typeEntered = true;
 		if(needAnd)
 			wellQuery += " AND ";
 		wellQuery += "TypeCode='";
-		wellQuery += param;
+		wellQuery += type;
 		wellQuery += "'";
-
+		needAnd=true;
 	}
-	param = request.getParameter("OwnerID");
 
-	if(!param.equals("")){
+
+	if(!owner.equals("")){
+		ownerEntered = true;
 		if(needAnd)
 			wellQuery += " AND ";
 		wellQuery += "OwnerID='";
-		wellQuery += param;
+		wellQuery += owner;
 		wellQuery += "'";
 		ownerQuery += "OwnerID='";
-		ownerQuery += param;
+		ownerQuery += owner;
 		ownerQuery += "'";
+		needAnd=true;
 	}
+
+	if(wellIdEntered == false){
+		String getWellID = "SELECT WellID FROM Well WHERE ";
+		if(ownerEntered){
+			getWellID += "OwnerID='";
+			getWellID += owner;
+			getWellID += "'";
+		}
+		else if(typeEntered){
+			getWellID += "TypeCode='";
+			getWellID += type;
+			getWellID += "'";
+		}
+		else if(aquiferEntered){
+			getWellID += "AquiferCode='";
+			getWellID += aquifer;
+			getWellID += "'";
+
+		}
+		ps4 = conn.prepareStatement(getWellID);
+		ResultSet rs4 = ps4.executeQuery();
+
+		while(rs4.next())
+			wellID = Integer.toString(rs4.getInt("WellID"));
+
+		transQuery += "WellID='";
+		transQuery += wellID;
+		transQuery += "'";
+
+	}
+
+
+
+	if(ownerEntered==false){
+		String getOwner = "SELECT OwnerID FROM Well WHERE WellID='";
+		getOwner += wellID;
+		getOwner += "'";
+		//out.println(getOwner);
+		ps3 = conn.prepareStatement(getOwner);
+		ResultSet rs3 = ps3.executeQuery();
+
+		while(rs3.next()){
+			owner = Integer.toString(rs3.getInt("OwnerID"));
+		
+		
+		}
+		ownerQuery += "OwnerID='";
+		ownerQuery += owner;
+		ownerQuery += "'";
+		}
+
+
 	//out.println(wellQuery);
 	//out.println(ownerQuery);
 	//out.println(transQuery);	
@@ -106,9 +166,13 @@ try {
 	ps1 = conn.prepareStatement(ownerQuery);
 	ps2 = conn.prepareStatement(transQuery);
 	rs = ps.executeQuery();
-	rs1 = ps1.executeQuery();
-	rs2 = ps2.executeQuery();
-	
+	if(rs.next())
+		rs1 = ps1.executeQuery();
+	rs.beforeFirst();
+	if(rs.next())
+		rs2 = ps2.executeQuery();
+	rs.beforeFirst();
+
 	int count = 1;
 	while(rs.next()){
 		out.print(rs.getInt(1) + " ");
@@ -127,19 +191,32 @@ try {
 		out.print(rs.getFloat(14) + " ");
 		out.print(rs.getInt(15) + " ");
 		out.print(rs.getString(16) + " ");
+			
+	}
+	%>
+		<Br>
+
+	<%
+	rs.beforeFirst();
+	if(rs.next()){
+		while(rs1.next()){
+			out.print(rs1.getInt(1) + " ");
+			out.print(rs1.getString(2) + " ");
+			out.print(rs1.getString(3) + " ");
 		
+		}
 	}
-	out.println();
-	count = 1;
-	while(rs1.next()){
-		out.print(rs1.getString(count) + " ");
-		count++;
-	}
-	out.println();
-	count = 1;
-	while(rs2.next()){
-		out.println(rs2.getString(count));
-		count++;	
+	rs.beforeFirst();
+	%>
+		<Br>
+	<%
+	if(rs.next()){
+		while(rs2.next()){
+			out.print(rs2.getInt(1) + " ");
+			out.print(rs2.getString(2) + " ");
+			out.print(rs2.getString(3) + " ");
+			out.print(rs2.getInt(4) + " ");
+		}
 	}
 	out.println();
 
