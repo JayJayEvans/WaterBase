@@ -8,29 +8,10 @@
 					<title>Main</title>
 	</head>
 
-<<<<<<< HEAD
-<body>
-	
-	
-
-
-
-	<div class="nav-right visible-xs">
-		  <div class="button" id="btn">
-			      <div class="bar top"></div>
-			          <div class="bar middle"></div>
-				      <div class="bar bottom"></div>
-				        </div>
-	</div>
-	<!-- nav-right -->
-	<main>
-	<center><img src="http://i66.tinypic.com/346oqht.jpg" border="0" class="wrap align-right" ></center>
-=======
 	<body>
 
 
 
->>>>>>> 5e0bce9871a2fcd6da5ff7cc372dcd35a4f5d4c4
 
 
 <nav id="navigation">
@@ -48,29 +29,11 @@
 						    <li><a href="../DatabaseInsertion/rainfall.jsp">Rainfall  Data</a></li>
     					 				          </ul></li>
 
-<<<<<<< HEAD
-	<div class="sidebar">
-		  <ul class="sidebar-list">
-			      <li class="sidebar-item"><a href="../DatabaseInsertion/wellUpload.jsp" class="sidebar-anchor">Upload Well File</a></li>
-			      
-			      <li class="sidebar-item"><a href="../DatabaseInsertion/transducerUpload.jsp" class="sidebar-anchor">Upload Transducer File</a></li>
-				
-				  <li class="sidebar-item"><a href="../DatabaseInsertion/manualEntry.jsp" class="sidebar-anchor">Manually Enter Well Info</a></li>	   
-				
-				  <li class="sidebar-item"><a href="../DatabaseInsertion/manualTransEntry.jsp" class="sidebar-anchor">Manually Enter Transducer Info</a></li>				 
-	     
-	     		  <li class="sidebar-item"><a href="../DatabaseQuerys/wellQuery.jsp" class="sidebar-anchor">Query Well Info</a></li>
-	
-				  <li class="sidebar-item"><a href="./rainfall.jsp" class="sidebar-anchor">Enter Rainfall Info</a></li>
-
-    			  <li class="sidebar-item"><a href="../DatabaseQuerys/transReadingQuery.jsp" class="sidebar-anchor">Query Transducer Readings</a></li>
-=======
 			     <li class="dropdown"><a href="#" class="trigger-drop">Query Data<i class="arrow"></i></a><ul class="drop">
 						    <li><a href="../DatabaseQuerys/wellQuery.jsp">Well Data</a></li>
 					            <li><a href="../DatabaseQuerys/transReadingsQuery.jsp">Transducer Data</a></li>
 						    <li><a href="../DatabaseQuerys/locationQuery.jsp">Location Data</a></li>
 						    <li><a href="../DatabaseQuerys/advancedQuery.jsp">Advanced Transducer Data</a></li>
->>>>>>> 5e0bce9871a2fcd6da5ff7cc372dcd35a4f5d4c4
 
 					  				          </ul></li>
 				

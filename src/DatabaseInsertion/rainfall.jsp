@@ -9,11 +9,7 @@
   <table width="993" height="102" border="0">
     <tr>
       <td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-<<<<<<< HEAD:src/AccountControl/rainfall.jsp
-      <td align="right" width="726" class="right">24X7 Customer Support - <a href="./contact.jsp">Contact us</a> | <a href="../../index.jsp">Home</a> | 
-=======
       <td align="right" width="726" class="right">24X7 Customer Support - <a href="./contact.jsp">Contact us</a> | <a href="../main.jsp">Home</a> | <a href="./rainfall.jsp">Rainfall Info</a> | 
->>>>>>> 5e0bce9871a2fcd6da5ff7cc372dcd35a4f5d4c4:src/DatabaseInsertion/rainfall.jsp
         <% if(session.getAttribute("uname")==null) {
       %>
         <a href="../../index.jsp">Login</a>
