@@ -62,7 +62,6 @@ out.println (e);
 if (flag) { 
 
 %>
-
  <jsp:forward page="../main.jsp" /> 
 
 <%

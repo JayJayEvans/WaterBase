@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic);
 body,
 html {
@@ -248,5 +249,48 @@ nav {
 
   .visible-xs {
     display: none; } }
+=======
+/*
+Error: Invalid CSS after "...,700,700italic)": expected media query list, was ";"
+        on line 1 of sidebar.css
+
+1: @import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic);
+2: body,
+3: html {
+4:   height: 100%;
+5:   padding: 0;
+6:   margin: 0;
+
+Backtrace:
+sidebar.css:1
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:1207:in `expected'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:1137:in `expected'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/scss/parser.rb:74:in `parse_media_query_list'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:1039:in `parse_import_arg'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:998:in `block in parse_import_directive'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:997:in `loop'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:997:in `parse_import_directive'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:812:in `parse_directive'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:646:in `parse_line'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:536:in `build_tree'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:555:in `block in append_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `each'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:554:in `append_children'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:409:in `_to_tree'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:391:in `run'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/exec/base.rb:52:in `parse'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/lib/sass/exec/base.rb:19:in `parse!'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.23/bin/sass:13:in `<top (required)>'
+/usr/local/bin/sass:23:in `load'
+/usr/local/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid CSS after \"...,700,700italic)\": expected media query list, was \";\"\A         on line 1 of sidebar.css\A \A 1: @import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic);\A 2: body,\A 3: html {\A 4:   height: 100%;\A 5:   padding: 0;\A 6:   margin: 0;"; }
+>>>>>>> 5e0bce9871a2fcd6da5ff7cc372dcd35a4f5d4c4
 
 /*# sourceMappingURL=sidebar.css.map */
