@@ -6,7 +6,7 @@
 			<br><br><br>
 			<center><table border="2" >
 					<tr><center><td colspan="2"><p align=
-					"center"><B>PROGRAM FOR UPLOADING THE FILE</B><center></td></tr>
+					"center"><B>PROGRAM FOR UPLOADING WELL FILE</B><center></td></tr>
 					<tr><td><b>Choose the file To Upload:</b>
 						</td>
 						<td><INPUT NAME="F1" TYPE="file"></td></tr>
