@@ -7,12 +7,19 @@
    
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script type="text/javascript">
-          function clicked(_name,_email) {
+          function clicked(_name,_email, _message) {
 
                 
                 emailjs.init("user_3kXGkqWqfIyOdbDulmL0d");
 
                 emailjs.send("gmail","waterbase",{to_name: _name, email: _email})
+                .then(function(response) {
+                console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
+                }, function(err) {
+                console.log("FAILED. error=", err);
+                });
+
+                emailjs.send("gmail","tous",{from_name: _name, from_email: _email, message: _message})
                 .then(function(response) {
                 console.log("SUCCESS. status=%d, text=%s", response.status, response.text);
                 }, function(err) {
@@ -39,7 +46,7 @@
   <table width="993" height="102" border="0">
     <tr>
       <td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-      <td align="right" width="726" class="right">24X7 Customer Support - <a href="./contact.jsp">Contact us</a> | <a href="../../index.jsp">Home</a> | <a href="./rainfall.jsp">Rainfall Info</a> | 
+      <td align="right" width="726" class="right">24X7 Customer Support - <a href="./contact.jsp">Contact us</a> | <a href="../../index.jsp">Home</a> | 
         <% if(session.getAttribute("uname")==null) {
       %>
         <a href="../../index.jsp">Login</a>
@@ -111,6 +118,7 @@
 
         var texareaelement = document.createElement('textarea'); 
           texareaelement.setAttribute("name", "dmessage");
+          texareaelement.setAttribute("id","messagehere");
           createform.appendChild(texareaelement);
 
         var messagebreak = document.createElement('br');
@@ -126,7 +134,7 @@
 
    </script>
    
-   <input type="submit" onclick="clicked( document.getElementById('namehere').value, document.getElementById('emailhere').value);" value="Submit" />
+   <input type="submit" onclick="clicked( document.getElementById('namehere').value, document.getElementById('emailhere').value, document.getElementById('messagehere').value);" value="Submit" />
 
 </div></center>
 

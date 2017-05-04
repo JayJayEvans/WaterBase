@@ -4,37 +4,63 @@ html {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: 'Arimo', sans-serif; }
+  font-family: 'Arimo', sans-serif; 
+  overflow: hidden;
+  }
 
 main {
   z-index: 2;
   position: relative;
+  top: 0px;
   height: 100%;
-  background-color: #2D3142;
+  background-color: #FFF;
   -webkit-transition: transform .7s ease-in-out;
   -moz-transition: transform .7s ease-in-out;
   -ms-transition: transform .7s ease-in-out;
   -o-transition: transform .7s ease-in-out;
-  transition: transform .7s ease-in-out; }
+  transition: transform .7s ease-in-out;}
+  
+img {
+ display: block;
+ position: relative;
+ top: 100;
+
+}
+
+img.wrap {
+ max-width: 70%;
+ margin:  300px;
+
+}
+
+img.align-right {
+ float: right;
+ margin-top: 120px;
+
+}
+
+
 
 .sidebar {
   height: 100%;
   width: 400px;
-  position: fixed;
-  top: 0;
+  position: absolute;
+  top: 00;
   z-index: 1;
   right: 0;
-  background-color: #EF8354; }
+  background-color: #007499;
+ }
 
 .bar {
   display: block;
+
   height: 5px;
   width: 50px;
-  background-color: #EF8354;
+  background-color: #007499;
   margin: 10px auto; }
 
 .button {
-  cursor: pointer;
+
   display: inline-block;
   width: auto;
   margin: 0 auto;
@@ -47,7 +73,8 @@ main {
 .nav-right {
   position: fixed;
   right: 40px;
-  top: 20px; }
+  top: 00px;
+ }
 
 .nav-right.visible-xs {
   z-index: 3; }
@@ -71,7 +98,8 @@ main {
   -moz-transition: all .7s ease;
   -ms-transition: all .7s ease;
   -o-transition: all .7s ease;
-  transition: all .7s ease; }
+  transition: all .7s ease; 
+}
 
 .button.active .top {
   -webkit-transform: translateY(15px) rotateZ(45deg);
@@ -98,14 +126,14 @@ main {
   transform: translateX(-400px); }
 
 nav {
-  padding-top: 30px; }
+  padding-top: 00px; }
 
 .sidebar-list {
   padding: 0;
   margin: 0;
   list-style: none;
   position: relative;
-  margin-top: 150px;
+  margin-top: 100px;
   text-align: center; }
 
 .sidebar-item {
@@ -181,16 +209,18 @@ nav {
 .ua {
   position: absolute;
   bottom: 20px;
-  left: 60px; }
+  left: 60px;
+ }
 
 .fa {
   font-size: 1.4em;
-  color: #EF8354;
+  color: #FFF;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
   -o-transition: all 1s ease;
-  transition: all 1s ease; }
+  transition: all 1s ease;
+ }
 
 .ua:hover .fa {
   color: #FFF;
@@ -203,7 +233,8 @@ nav {
   -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
   -o-transition: all 1s ease;
-  transition: all 1s ease; }
+  transition: all 1s ease; 
+}
 
 @media (min-width: 480px) {
   .nav-list {

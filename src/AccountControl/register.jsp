@@ -20,7 +20,7 @@ boolean passwordMatch = true;
  <center>
    <table width="993" height="102" border="0">
      <tr>
-       <td width="251" height="96"><img src="head.png" width="251" height="88" alt="Logo" /></td>
+       <td width="251" height="96"><img src="http://i66.tinypic.com/346oqht.jpg" width="251" height="88" alt="Logo" /></td>
        <td width="726" class="right">24X7 Customer Support - <a href="contact.jsp">Contact us</a> | <a href="../../index.jsp">Home</a> |
 <% if(session.getAttribute("uname")==null) {
 			%>
@@ -42,7 +42,7 @@ boolean passwordMatch = true;
      <input type="submit" value="Register" />
     </form>
               <br><hr>
-              Already Registered!! To Login <a href="../../index.html">Click Here</a>
+              Already Registered!! To Login <a href="../../index.jsp">Click Here</a>
               <hr>
                 
     </center>

@@ -11,6 +11,7 @@
 
 <body>
 	
+	
 
 
 
@@ -23,6 +24,7 @@
 	</div>
 	<!-- nav-right -->
 	<main>
+	<center><img src="http://i66.tinypic.com/346oqht.jpg" border="0" class="wrap align-right" ></center>
 
 
 	  <nav>
@@ -44,11 +46,18 @@
 	<div class="sidebar">
 		  <ul class="sidebar-list">
 			      <li class="sidebar-item"><a href="../DatabaseInsertion/wellUpload.jsp" class="sidebar-anchor">Upload Well File</a></li>
-			          <li class="sidebar-item"><a href="../DatabaseInsertion/transducerUpload.jsp" class="sidebar-anchor">Upload Transducer File</a></li>
-					<li class="sidebar-item"><a href="../DatabaseInsertion/manualEntry.jsp" class="sidebar-anchor">Manually Enter Well Info</a></li>	   
-					<li class="sidebar-item"><a href="../DatabaseInsertion/manualTransEntry.jsp" class="sidebar-anchor">Manually Enter Transducer Info</a></li>				 
-	     				  <li class="sidebar-item"><a href="../DatabaseQuerys/wellQuery.jsp" class="sidebar-anchor">Query Well Info</a></li>
-						<li class="sidebar-item"><a href="../DatabaseQuerys/transReadingQuery.jsp" class="sidebar-anchor">Query Transducer Readings</a></li>
+			      
+			      <li class="sidebar-item"><a href="../DatabaseInsertion/transducerUpload.jsp" class="sidebar-anchor">Upload Transducer File</a></li>
+				
+				  <li class="sidebar-item"><a href="../DatabaseInsertion/manualEntry.jsp" class="sidebar-anchor">Manually Enter Well Info</a></li>	   
+				
+				  <li class="sidebar-item"><a href="../DatabaseInsertion/manualTransEntry.jsp" class="sidebar-anchor">Manually Enter Transducer Info</a></li>				 
+	     
+	     		  <li class="sidebar-item"><a href="../DatabaseQuerys/wellQuery.jsp" class="sidebar-anchor">Query Well Info</a></li>
+	
+				  <li class="sidebar-item"><a href="./rainfall.jsp" class="sidebar-anchor">Enter Rainfall Info</a></li>
+
+    			  <li class="sidebar-item"><a href="../DatabaseQuerys/transReadingQuery.jsp" class="sidebar-anchor">Query Transducer Readings</a></li>
 
 		  </ul>
 	</div>
