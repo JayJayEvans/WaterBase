@@ -19,20 +19,21 @@
 	    <ul class="links">    
 			     		    
 		    	      <li class="dropdown"><a href="#" class="trigger-drop">File Upload<i class="arrow"></i></a><ul class="drop">
-					            <li><a href="../DatabaseInsertion/wellUpload.jsp">Well File</a></li>
-						    <li><a href="../DatabaseInsertion/transducerUpload.jsp">Transducer File</a></li>
+					            <li><a href="../DatabaseInsertion/wellUpload.jsp">Well</a></li>
+						    <li><a href="../DatabaseInsertion/transducerUpload.jsp">Transducer</a></li>
 									          </ul></li>
 
 			      <li class="dropdown"><a href="#" class="trigger-drop">Enter Data<i class="arrow"></i></a><ul class="drop">
-						    <li><a href="../DatabaseInsertion/manualEntry.jsp">Well Data</a></li>
-					   	    <li><a href="../DatabaseInsertion/manualTransEntry.jsp">Transducer Data</a></li>
-						    <li><a href="../DatabaseInsertion/rainfall.jsp">Rainfall  Data</a></li>
+						    <li><a href="../DatabaseInsertion/manualEntry.jsp">Well</a></li>
+					   	    <li><a href="../DatabaseInsertion/manualSingleTrans.jsp">Transducer</a></li>
+						    <li><a href="../DatabaseInsertion/manualTransEntry.jsp">Recordings</a></li>
+						    <li><a href="../DatabaseInsertion/rainfall.jsp">Rainfall</a></li>
     					 				          </ul></li>
 
 			     <li class="dropdown"><a href="#" class="trigger-drop">Query Data<i class="arrow"></i></a><ul class="drop">
-						    <li><a href="../DatabaseQuerys/wellQuery.jsp">Well Data</a></li>
-					            <li><a href="../DatabaseQuerys/transReadingsQuery.jsp">Transducer Data</a></li>
-						    <li><a href="../DatabaseQuerys/locationQuery.jsp">Location Data</a></li>
+						    <li><a href="../DatabaseQuerys/wellQuery.jsp">Well</a></li>
+					            <li><a href="../DatabaseQuerys/transReadingsQuery.jsp">Recordings</a></li>
+						    <li><a href="../DatabaseQuerys/locationQuery.jsp">Location</a></li>
 						    <li><a href="../DatabaseQuerys/advancedQuery.jsp">Advanced Transducer Data</a></li>
 
 					  				          </ul></li>

@@ -55,7 +55,7 @@ try {
 	ps1 = conn.prepareStatement(sql2,Statement.RETURN_GENERATED_KEYS);
 	ps2 = conn.prepareStatement(sql3);
 	ps3 = conn.prepareStatement(query);	
-	if(param.equals(" ")){
+	if(param.equals(" ") || param == null || param.isEmpty()){
 		ps.setNull(1,0);
 	}
 	else{
@@ -64,22 +64,20 @@ try {
 
 
 	param = request.getParameter("AquiferCode");
-
-	if(param.equals(" "))
+	 if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(2,0);
 	else
 		ps.setString(2,param);
 
 	param = request.getParameter("TypeCode");
 
-	if(param.equals(" "))
+		if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(3,0);
 	else
 		ps.setString(3,param);
 
 	param = request.getParameter("Latitude");
-
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(5,0);
 	else
 		ps.setFloat(5,Float.parseFloat(param));
@@ -87,7 +85,7 @@ try {
 	
 	param = request.getParameter("Longitude");
 
-	if(param.equals(" "))
+		if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(6,0);
 	else
 		ps.setFloat(6,Float.parseFloat(param));
@@ -95,14 +93,14 @@ try {
 	
 	param = request.getParameter("Country");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())	
 		ps.setNull(7,0);
 	else
 		ps.setString(7,param);
 
 	param = request.getParameter("State");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(8,0);
 	else{
 		ps.setString(8,param);
@@ -110,29 +108,28 @@ try {
 	
 	param = request.getParameter("WellDepth");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())	
 		ps.setNull(9,0);
 	else
 		ps.setFloat(9,Float.parseFloat(param));
 
 
 	param = request.getParameter("UsageState");
-
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(10,0);
 	else
 		ps.setString(10,param);
 
 	param = request.getParameter("PumpType");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(11,0);
 	else
 		ps.setString(11,param);
 
 	param = request.getParameter("BottomElevation");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())	
 		ps.setNull(12,0);
 	else
 		ps.setFloat(12,Float.parseFloat(param));
@@ -140,7 +137,7 @@ try {
 
 	param = request.getParameter("WaterLevelElevation");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(13,0);
 	else
 		ps.setFloat(13,Float.parseFloat(param));
@@ -149,7 +146,7 @@ try {
 
 	param = request.getParameter("SurfaceElevation");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(14,0);
 	else
 		ps.setFloat(14,Float.parseFloat(param));
@@ -157,10 +154,8 @@ try {
 	
 
 	param = request.getParameter("CasingID");
-
-	if(param.equals(" ")){
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(15,0);
-	}
 	else{
 		casingOccured=true;
 		ps.setInt(15,Integer.parseInt(param));
@@ -171,7 +166,7 @@ try {
 
 	param = request.getParameter("Diameter");
 
-	if(param.equals(" ")){
+	if(param.equals(" ") || param == null || param.isEmpty()){
 		if(casingOccured)
 			ps2.setNull(2,0);	
 	}
@@ -183,7 +178,7 @@ try {
 
 	param = request.getParameter("TopDepth");
 
-	if(param.equals(" ")){
+	if(param.equals(" ") || param == null || param.isEmpty()){
 		if(casingOccured)
 			ps2.setNull(3,0);
 		}
@@ -193,8 +188,7 @@ try {
 
 
 	param = request.getParameter("BottomDepth");
-
-	if(param.equals(" ")){
+	if(param.equals(" ") || param == null || param.isEmpty()){
 		if(casingOccured)
 			ps2.setNull(4,0);
 	}
@@ -204,8 +198,7 @@ try {
 	param = request.getParameter("Comments");
 
 
-
-	if(param.equals(" ")){
+	if(param.equals(" ") || param == null || param.isEmpty()){
 			ps.setNull(16,0);
 	}
 	else
@@ -214,7 +207,7 @@ try {
 
 	param = request.getParameter("OwnerType");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps1.setNull(1,0);
 	else
 		ps1.setString(1,param);
@@ -222,7 +215,7 @@ try {
 
 	param = request.getParameter("OwnerName");
 
-	if(param.equals(" "))
+	if(param.equals(" ") || param == null || param.isEmpty())
 		ps1.setNull(2,0);
 	else
 		ps1.setString(2,param);
