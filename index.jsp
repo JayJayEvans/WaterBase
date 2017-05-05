@@ -5,7 +5,7 @@
 <title>Log in</title>
 <link rel="shortcut icon"href="favicon.ico" />
 <style type="text/css">
-.right {	text-align: right;
+.right {  text-align: right;
 }
 </style>
 <link href="italics.css" rel="stylesheet" type="text/css" />
@@ -21,11 +21,7 @@
   <table width="993" height="102" border="0">
     <tr>
       <td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-<<<<<<< HEAD
-      <td width="726" class="right">24X7 Customer Support - <a href="../src/AccountControl/contact.jsp">Contact us</a> | <a href="#">Home</a> | 
-=======
       <td width="726" class="right">24X7 Customer Support - <a href="../src/AccountControl/contact.jsp">Contact us</a> | <a href="#">Home</a> |  
->>>>>>> 5e0bce9871a2fcd6da5ff7cc372dcd35a4f5d4c4
         <% if(session.getAttribute("uname")==null) {
       %>
         <a href="#">Login</a>
