@@ -4,12 +4,13 @@
 	<head>
 		<link rel="stylesheet" href="../CSS/rainfall.css"/>  
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 		<title>Well Query</title>
 
 
 		<link href="../CSS/menu.css" rel="stylesheet" type="text/css"/>
 		<nav id="navigation">
-	    <a href="#" class="logo"> WaterBase</a>
+	    <a href="../../index.jsp" class="logo"> WaterBase</a>
 	    <ul class="links">    
 			     		    
 		    	      <li class="dropdown"><a href="#" class="trigger-drop">File Upload<i class="arrow"></i></a><ul class="drop">
@@ -38,7 +39,7 @@
 
 			   
 				
-			     <li><a href="../AccountControl/logout.jsp">Logout</a></li>
+			         <li><a href="../AccountControl/contact.jsp">Contact Us</a></li>
 
 
 			
@@ -47,6 +48,10 @@
 
 	</nav>
 		
+		<title>Untitled Document</title>
+		<link rel="stylesheet" href="../CSS/rainfall.css"/>
+		
+
 	</head>
 	<BODY> 
 	<div class="container">  

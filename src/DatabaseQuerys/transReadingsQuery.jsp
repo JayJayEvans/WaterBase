@@ -8,7 +8,7 @@
 
 		<link href="../CSS/menu.css" rel="stylesheet" type="text/css"/>
 		<nav id="navigation">
-	    <a href="#" class="logo"> WaterBase</a>
+	    <a href="../../index.jsp" class="logo"> WaterBase</a>
 	    <ul class="links">    
 			     		    
 		    	      <li class="dropdown"><a href="#" class="trigger-drop">File Upload<i class="arrow"></i></a><ul class="drop">
@@ -37,7 +37,7 @@
 
 			   
 				
-			     <li><a href="../AccountControl/logout.jsp">Logout</a></li>
+			     <li><a href="../AccountControl/contact.jsp">Contact Us</a></li>
 
 
 			
