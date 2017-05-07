@@ -6,7 +6,10 @@
 		<title>Untitled Document</title>
 	</head>
 	<BODY> 
-	<FORM ACTION="transReadingsQueryConf.jsp" METHOD="post">
+
+	  <link rel="stylesheet" href="../CSS/rainfall.css"/>
+
+	<FORM id="rainfall" ACTION="transReadingsQueryConf.jsp" METHOD="post">
 	
 		<script type="text/javascript">
 		    function clicked() {
@@ -41,25 +44,36 @@
 		     }
 
 		</script>
-
-
-
 			    TransducerID:<br>
-			    <input type="text" name="TransID" id='trans' placeholder="Manditory"/><br>
+			    <input type="text" name="TransID" placeholder="Manditory"/><br><br>
 			      
 			    WellID:<br>
-			    <input type="text" name="WellID" id='well' placeholder="Manditory"/><br>
-			      
+			    <input type="text" name="WellID" placeholder="Manditory"/><br><br>
+			    
+			    Beginning Date:<br>
+			    <input type="date" name="begDate"/><br><br>
+  
 			    Beginning Time:<br>
-			    <input type="text" name="Beginning" id='beg' placeholder="Manditory"/><br>
-			      
+			    <input type="text" name="begTime" placeholder="hh:mm:ss"/><br>
+			    <small><sup><i>*Military Time</i></sup></small><br><br>
+			    
+			    End Date:<br>
+			    <input type="date" name="endDate"/><br><br>
+	      
 			    End Time:<br>
-			    <input type="text" name="End" id='end' placeholder="Optional"/><br>
+			    <input type="text" name="endTime" placeholder="hh:mm:ss"/><br>
+			    <small><sup><i>*Military Time</i></sup></small><br><br>
 			      
-			    <input type="checkbox" name="getRain" value="rain">Get rainfall at location?<br>
-			 <button name="submit" type="submit"  onclick="clicked();" >Submit</button>
+			    <input type="checkbox" name="getRain" value="rain">Get rainfall at location?<br><br>
+			   
 			    <input type="submit" value="Submit"/>
-	
+			    <input type="reset">
+
+
+
+
+
+
 	</FORM>
 	</BODY>
 	</HTML>
