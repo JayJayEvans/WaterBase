@@ -7,25 +7,22 @@
 
 
 <link rel="stylesheet" href="../CSS/rainfall.css"/>
-
 <center>
 	<table width="993" height="102" border="0">
 		<tr>
 			<td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-			<td align="right" width="726" class="right">24X7 Customer Support - <a href="./contact.jsp">Contact us</a> | <a href="../main.jsp">Home</a>|
-				<% if(session.getAttribute("uname")==null) {
-				%>
-				<a href="../../index.jsp">Login</a>
-				<%} else {
-				%>
-				<a href="./logout.jsp">Logout</a>
-				<%}%></td>
+			<td align="right" width="726" class="right">24X7 Customer Support - <a href="../AccountControl/contact.jsp">Contact us</a> | <a href="../../main.jsp">Home</a> 
 		</tr>
 	</table>
 </center>
 <title>Rainfall Information</title>
 	</head>
-	<BODY> 
+	
+<BODY> 
+
+
+
+	<div class="container">
 	<FORM id="rainfall" ACTION="manualEntryConf.jsp" METHOD="post">
  		<h3><font color ="black"><center>Well Information</font></center></h3>
     		<h4><center><i>Please enter well  information below</i></center></h4>
@@ -34,7 +31,7 @@
 			    <input type="text" name="WellID" placeholder="Manditory" required/><br>
 			</fieldset>
 			<fieldset>
-			    AquiferCode:<br>
+			    AquiferCode:
 			    <input type="text" name="AquiferCode" placeholder="Manditory" required/><br>
 			</fieldset>
 			<fieldset>
@@ -116,7 +113,7 @@
 			</fieldset>
 			<fieldset>
 
-			    <input type="submit" value="Submit"/>
+				<button name="submit" type="submit" id="myBtn" >Submit</button>
 			</fieldset>
 
 	</FORM>
