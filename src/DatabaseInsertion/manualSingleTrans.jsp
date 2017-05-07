@@ -9,7 +9,7 @@
 			<table width="993" height="102" border="0">
 				<tr>
 					<td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-					<td align="right" width="726" class="right">24X7 Customer Support - <a href="../AccountControl/contact.jsp">Contact us</a> | <a href="../../main.jsp">Home</a> 
+					<td align="right" width="726" class="right">24X7 Customer Support - <a href="../AccountControl/contact.jsp">Contact us</a> | <a href="../../index.jsp">Home</a> 
 				</tr>
 			</table>
 		</center>
@@ -18,7 +18,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Untitled Document</title>
 	</head>
-	<BODY> 
+	<BODY>
+		<div class="container">	
 	<FORM id="rainfall" ACTION="manualSingleTransConf.jsp" METHOD="post">
 		<h3><font color ="black"><center>New Transducer Information</font></center></h3>
 		    <h4><center><i>Please enter device information below</i></center></h4>
