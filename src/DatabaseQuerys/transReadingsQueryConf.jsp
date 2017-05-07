@@ -23,14 +23,18 @@ PreparedStatement ps1;
 PreparedStatement ps2;
 PreparedStatement ps3;
 PreparedStatement ps4;
+
 Connection conn;
 Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
 Statement st=conn.createStatement();
+
+String transID = "";
 String wellID = "";
-String aquifer ="";
-String type = "";
-String owner = "";
+String begDate = "";
+String endDate = "";
+String begTime = "";
+String endTime = "";
 %> 
 
      <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b> 
@@ -38,14 +42,21 @@ String owner = "";
 
 <%
 String wellQuery = "SELECT * FROM Well WHERE ";
-String ownerQuery = "SELECT * FROM Owner WHERE ";
+String timeQuery = "SELECT * FROM TransducerRecords WHERE ";
 String transQuery = "SELECT * FROM Transducers WHERE ";
 String token = "";
-boolean needAnd = false;
+
+boolean needAndWell = false;
+boolean needAndTime = false;
+boolean needAndTrans = false;
+
 boolean wellIdEntered = false;
-boolean aquiferEntered = false;
-boolean typeEntered = false;
-boolean ownerEntered = false;
+boolean transIdEntered = false;
+boolean begDateEntered = false;
+boolean endDateEntered = false;
+boolean begTimeEntered = false;
+boolean endTimeEntered = false;
+
 ResultSet rs=null;
 ResultSet rs1=null;
 ResultSet rs2=null;
@@ -53,60 +64,97 @@ ResultSet rs2=null;
 <%
 try {
 	
+	transID = request.getParameter("TransID");
 	wellID = request.getParameter("WellID");
-	aquifer = request.getParameter("AquiferCode");
-	type = request.getParameter("TypeCode");
-	owner = request.getParameter("OwnerID");
+	begDate = request.getParameter("begDate");
+	begTime = request.getParameter("begTime");
+	
+	//You need the TransID or the WellID or both in order to query
+	if(!transID.equals("")){
+		transIdEntered = true;
+	
+		transQuery += "TransID='";
+		transQuery += transID;
+		transQuery += "'";
+		
+		timeQuery += "TransID='";
+		timeQuery += transID;
+		timeQuery += "'"; 
+		
+		needAndTrans = true;
+		needAndTime = true;
+	}
 
 	if(!wellID.equals("")){
 		wellIdEntered = true;
+	
 		wellQuery += "WellID='";
 		wellQuery += wellID;
 		wellQuery += "'";
+	
 		transQuery += "WellID='";
 		transQuery += wellID;
 		transQuery += "'";
-		needAnd = true;
 	
+		needAndWell = true;
+		needAndTrans = true;	
 	}
 
+	if(!begDate.equals("")){
+		begDateEntered = true;
+		endDate = request.getParameter("endDate");
+		
+		if(needAndTime)
+			timeQuery += " AND ";
 
+		timeQuery += "Date='";
+		timeQuery += begDate;
+		timeQuery += "'";
+		
+		needAndTime = true;
+	}
 
-	if(!aquifer.equals("")){
-		aquiferEntered=true;
-		if(needAnd)
-			wellQuery += " AND ";
-		wellQuery += "AquiferCode='";
-		wellQuery += aquifer;
-		wellQuery += "'";
-		needAnd=true;
+	if(!begTime.equals("")){
+		begTimeEntered = true;
+		endTime = request.getParameter("endTime");
+
+		if(needAndTime)
+			timeQuery += " AND ";
+
+		timeQuery += "Time='";
+		timeQuery += begTime;
+		timeQuery += "'";
+		
+		needAndTime = true;
 	}
 					
+	if(!endDate.equals("")){
+		endDateEntered = true;
 
+		if(needAndTime)
+			timeQuery += " AND ";
 
-	if(!type.equals("")){
-		typeEntered = true;
-		if(needAnd)
-			wellQuery += " AND ";
-		wellQuery += "TypeCode='";
-		wellQuery += type;
-		wellQuery += "'";
-		needAnd=true;
+		timeQuery += "Date='";
+		timeQuery += endDate;
+		timeQuery += "'";
+		
+		needAndTime = true;
 	}
 
+	if(!endTime.equals("")){
+		endTimeEntered = true;
 
-	if(!owner.equals("")){
-		ownerEntered = true;
-		if(needAnd)
-			wellQuery += " AND ";
-		wellQuery += "OwnerID='";
-		wellQuery += owner;
-		wellQuery += "'";
-		ownerQuery += "OwnerID='";
-		ownerQuery += owner;
-		ownerQuery += "'";
-		needAnd=true;
-	}
+		if(needAndTime)
+			timeQuery += " AND ";
+
+		timeQuery += "Time='";
+		timeQuery += endTime;
+		timeQuery += "'";
+
+		needAndTime = true;
+	}	
+	
+
 
 	if(wellIdEntered == false){
 		String getWellID = "SELECT WellID FROM Well WHERE ";
@@ -239,7 +287,8 @@ try {
 
 
 	<%
-}
-%>
-</body>
+	}
+	%>
+	
+	</body>
 	</html>
