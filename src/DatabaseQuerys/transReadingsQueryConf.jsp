@@ -69,7 +69,7 @@ try {
 	begDate = request.getParameter("begDate");
 	begTime = request.getParameter("begTime");
 	
-	//You need the TransID or the WellID or both in order to query
+	//You need the TransID and/or the WellID in order to query
 	if(!transID.equals("")){
 		transIdEntered = true;
 	
