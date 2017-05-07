@@ -9,14 +9,7 @@
 			<table width="993" height="102" border="0">
 				<tr>
 					<td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-					<td align="right" width="726" class="right">24X7 Customer Support - <a href="./contact.jsp">Contact us</a> | <a href="../main.jsp">Home</a> |
-						<% if(session.getAttribute("uname")==null) {
-						%>
-						<a href="../../index.jsp">Login</a>
-						<%} else {
-						%>
-						<a href="./logout.jsp">Logout</a>
-						<%}%></td>
+					<td align="right" width="726" class="right">24X7 Customer Support - <a href="../AccountControl/contact.jsp">Contact us</a> | <a href="../../main.jsp">Home</a> 
 				</tr>
 			</table>
 		</center>
@@ -47,7 +40,7 @@
 			    <input type="text" name="TransName" placeholder="Manditory" required/><br>
 		        </fieldset>
 			<fieldset>
-			    <input type="submit" value="Submit"/>
+				<button name="submit" type="submit" id="myBtn" >Submit</button>	
 			</fieldset>	
 	</FORM>
 	</BODY>

@@ -24,7 +24,7 @@ nav{
 	background:$color-base;
 	box-shadow:0 0px 9px 4px rgba(#000, .1), 0 -5px 2px 2px rgba(#000, .1);
 	z-index:1000;
-	min-width:580px;
+	min-width:1000px;
 
 	.logo{
 		position:relative;
@@ -56,7 +56,7 @@ nav{
 			float:left;
 			list-style:none;
 			position:relative;
-			margin:10px;
+			margin:0px;
 			display:inline-block;      
 
 			&>a{
