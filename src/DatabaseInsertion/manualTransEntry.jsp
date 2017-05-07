@@ -61,8 +61,8 @@
 		<script type="text/javascript">
 			  function clicked() {
 
-				  if(!document.getElementById('temp').value && !document.getElementById('cond').value && 
-	  				!document.getElementById('press').value && !document.getElementById('sal').value && !document.getElementById('tds').value){
+				  if(!document.getElementById('trans_id').value && 
+	  				!document.getElementById('date').value && !document.getElementById('time').value){
 					  //location.reload(true);
 					  alert("You must provide required data!\nPlease try again!");
 					  event.preventDefault();

@@ -11,11 +11,11 @@
 
 
 <%@ page import="java.io.*" %>
- <%@ page language="java" %>
-         <%@ page import="java.sql.*" %>
-	          <%@ page import="java.sql.DriverManager.*" %>
-		          <%@ page import="java.io.*" %>
-			          <%@ page import="java.util.*" %>
+<%@ page language="java" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.DriverManager.*" %>
+<%@ page import="java.io.*" %>
+<%@ page import="java.util.*" %>
 
 <%     
 PreparedStatement ps;
@@ -23,90 +23,296 @@ PreparedStatement ps1;
 PreparedStatement ps2;
 PreparedStatement ps3;
 PreparedStatement ps4;
+
 Connection conn;
 Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
 Statement st=conn.createStatement();
-String wellID = "";
-String aquifer ="";
-String type = "";
-String owner = "";
 %> 
 
      <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b> 
      </td></tr></table>
 
 <%
-String wellQuery = "SELECT * FROM Well WHERE ";
-String ownerQuery = "SELECT * FROM Owner WHERE ";
-String transQuery = "SELECT * FROM Transducers WHERE ";
+//Java
+
+//Strings to get the values from the text fields
+String transIDStr = "";
+int transIDInt = -1;
+String wellIDStr = "";
+int wellIDInt = -1;
+String begDate = "";
+String endDate = "";
+String begTime = "";
+String endTime = "";
 String token = "";
-boolean needAnd = false;
+
 boolean wellIdEntered = false;
-boolean aquiferEntered = false;
-boolean typeEntered = false;
-boolean ownerEntered = false;
+boolean transIdEntered = false;
+boolean begDateEntered = false;
+boolean endDateEntered = false;
+boolean begTimeEntered = false;
+boolean endTimeEntered = false;
+boolean raincheck = false;
+
 ResultSet rs=null;
 ResultSet rs1=null;
 ResultSet rs2=null;
 %>
 <%
 try {
+	transIDStr = request.getParameter("tran_id");
+	wellIDStr = request.getParameter("well_id");
+	begDate = request.getParameter("begDate");
+	begTime = request.getParameter("begTime");
+	endDate = request.getParameter("endDate");
+	endTime = request.getParameter("endTime");
 	
-	wellID = request.getParameter("WellID");
-	aquifer = request.getParameter("AquiferCode");
-	type = request.getParameter("TypeCode");
-	owner = request.getParameter("OwnerID");
 
-	if(!wellID.equals("")){
-		wellIdEntered = true;
-		wellQuery += "WellID='";
-		wellQuery += wellID;
-		wellQuery += "'";
-		transQuery += "WellID='";
-		transQuery += wellID;
-		transQuery += "'";
-		needAnd = true;
-	
+	if(!transIDStr.equals("")){
+		transIdEntered = true;
+		transIDInt = Integer.parseInt(transIDStr);
 	}
 
+	if(!wellIDStr.equals("")){
+		wellIdEntered = true;
+		wellIDInt = Integer.parseInt(wellIDStr);
+	}
 
+	if(!begDate.equals("")){
+		begDateEntered = true;
+	}
 
-	if(!aquifer.equals("")){
-		aquiferEntered=true;
-		if(needAnd)
-			wellQuery += " AND ";
-		wellQuery += "AquiferCode='";
-		wellQuery += aquifer;
-		wellQuery += "'";
-		needAnd=true;
+	if(!begTime.equals("")){
+		begTimeEntered = true;
 	}
 					
+	if(!endDate.equals("")){
+		endDateEntered = true;
+	}
+
+	if(!endTime.equals("")){
+		endTimeEntered = true;
+	}	
+
+	//If the checkbox is checked
+	if(request.getParameter( "getRain" ) == "rain"){
+		raincheck = true;
+	}
+	
+
+	//ERROR CHECK
+	if(!transIdEntered && !wellIdEntered){
+%> 
+    <script> 
+        alert("Transducer ID and/or Well ID must be provided!\nPlease Try again!"); 
+        window.history.back();
+    </script>
+<%
+  	}
+
+  	//ERROR CHECK
+  	if((begDateEntered && !endDateEntered) || (!begDateEntered && endDateEntered)){
+%> 
+    <script> 
+        alert("You must provide a start date and an end date!\nPlease Try again!"); 
+        window.history.back();
+    </script>
+<%
+  	}
+
+  	//ERROR CHECK
+  	if((begTimeEntered && !endTimeEntered) || (!begTimeEntered && endTimeEntered)){
+%> 
+    <script> 
+        alert("You must provide a start time and an end time!\nPlease Try again!"); 
+        window.history.back();
+    </script>
+<%
+  	}
+
+  	if(!raincheck) {
+
+	  	//Query for when only the transID is entered
+	  	if(transIdEntered && !wellIdEntered && !begDateEntered && !endDateEntered &&
+	  		!begTimeEntered && !endTimeEntered) {	  		
+			String transID_Query = new String();
+			transID_Query = String.format("SELECT * FROM TransducerRecords WHERE TransID = %d ORDER BY Date ASC, Time;", transIDInt);
+
+			ps = conn.prepareStatement(transID_Query);
+	        rs = ps.executeQuery();
+	  	}
+	    //Query for when the transID and start/end date are entered
+	  	else if(transIdEntered && !wellIdEntered && begDateEntered && endDateEntered &&
+	  		!begTimeEntered && !endTimeEntered) {
+
+	  		//Set default values for time
+	  		begTime = "00:00:00";
+	  		endTime = "23:59:59";
+			
+			String transID_date_Query = new String();
+			transID_date_Query = String.format("(SELECT * FROM TransducerRecords WHERE TransID = %d AND Date = %s AND Time = %s) EXCEPT (SELECT * FROM TransducerRecords WHERE TransID = %d AND Date = %s AND Time = %s) ORDER BY Date ASC, Time;", transIDInt, begDate, begTime, transIDInt, endDate, endTime);
+
+			ps = conn.prepareStatement(transID_date_Query);
+	        rs = ps.executeQuery();
+	  	}
+	    //Query for when the transID and start/end date and time are entered
+	  	else if(transIdEntered && !wellIdEntered && begDateEntered && endDateEntered &&
+	  		begTimeEntered && endTimeEntered) {
+			
+			String transID_date_time_Query = new String();
+			transID_date_time_Query = String.format("(SELECT * FROM TransducerRecords WHERE TransID = %d AND Date = %s AND Time = %s) EXCEPT (SELECT * FROM TransducerRecords WHERE TransID = %d AND Date = %s AND Time = %s) ORDER BY Date ASC, Time;", transIDInt, begDate, begTime, transIDInt, endDate, endTime);
+
+			ps = conn.prepareStatement(transID_date_time_Query);
+	        rs = ps.executeQuery();
+	  	}
+	  	//Query for when only the wellID is entered
+	  	else if(!transIdEntered && wellIdEntered && !begDateEntered && !endDateEntered &&
+	  		!begTimeEntered && !endTimeEntered) {
+	  		
+			String wellID_Query = new String();
+			wellID_Query = String.format("SELECT r.* FROM Transducers t, TransducerRecords r WHERE t.TransID = r.TransID AND t.WellID = %d", wellIDInt);
+	  	}
+		//Query for when the wellID and start/end date are entered
+	  	else if(!transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
+	  		!begTimeEntered && !endTimeEntered) {
+	  		
+			String wellID_date_Query = new String();
+			wellID_date_Query = String.format("SELECT * FROM Transducers WHERE ");
+	  	}
+		//Query for when the wellID and start/end date and time are entered
+	  	else if(!transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
+	  		begTimeEntered && endTimeEntered) {
+	  		
+			String wellID_date_time_Query = new String();
+			wellID_date_time_Query = String.format("SELECT * FROM Transducers WHERE ");
+	  	}
+		//Query for when the transID and wellID are entered
+	  	else if(transIdEntered && wellIdEntered && !begDateEntered && !endDateEntered &&
+	  		!begTimeEntered && !endTimeEntered) {
+	  		
+	  		//ERROR CHECK
+
+			String transID_wellID_Query = new String();
+			transID_wellID_Query = String.format("SELECT * FROM Transducers WHERE ");
+	  	}
+		//Query for when the transID, wellID and start/end date and time are entered
+	  	else if(!transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
+	  		begTimeEntered && endTimeEntered) {
+	  		
+			String transID_wellID_date_time_Query = new String();
+			transID_wellID_date_time_Query = String.format("SELECT * FROM Transducers WHERE ");
+	  	}
+%>
+
+        <center><table style="width:50%">
+        <tr>
+        <th align='center'>Transducer ID</th>
+        <th align='center'>Temperature</th>
+        <th align='center'>Conductivity</th> 
+        <th align='center'>Pressure</th>
+        <th align='center'>Salinity</th> 
+        <th align='center'>TDS</th>
+        <th align='center'>Date</th> 
+        <th align='center'>Time</th> 
+        </tr>
+<%
+
+        if(!rs.next()){
+
+%> 
+	        <tr>
+	        <td><center> <%out.print("<   empty record >"); %> </td></center>
+	        </tr>
+<%
+        }
+        else{
+
+            rs.beforeFirst(); 
+            
+            while(rs.next()){
+            	double  temp1 = -100.0; 
+%>
+                <tr>
+
+            	<td align='center'><%out.print(rs.getInt(1));%></td>
 
 
-	if(!type.equals("")){
-		typeEntered = true;
-		if(needAnd)
-			wellQuery += " AND ";
-		wellQuery += "TypeCode='";
-		wellQuery += type;
-		wellQuery += "'";
-		needAnd=true;
+                <td align='center'><%
+                temp1 = rs.getDouble(2);
+        
+                if(rs.wasNull()){
+                    out.print("NULL");
+                }
+                else{
+                    out.print(temp1);
+                }
+                    
+				%></td>
+
+                <td align='center'><%
+                temp1 = rs.getDouble(3);
+                    
+                if(rs.wasNull()){
+                    out.print("NULL");
+                }
+                else{
+                    out.print(temp1);
+                }  
+
+                %></td>
+
+                <td align='center'><%
+                temp1 = rs.getDouble(4);
+                
+                if(rs.wasNull()){
+                    out.print("NULL");
+                }
+                else{
+                    out.print(temp1);
+                }  
+
+                %></td>
+
+                <td align='center'><%
+                temp1 = rs.getDouble(5);
+                
+                if(rs.wasNull()){
+                    out.print("NULL");
+                }
+                else{
+                    out.print(temp1);
+                }    
+
+                %></td>
+
+                <td align='center'><%
+                temp1 = rs.getDouble(6);
+                   
+                if(rs.wasNull()){
+                    out.print("NULL");
+                }
+                else{
+                    out.print(temp1);
+                }    
+
+                %></td>
+
+                <td align='center'><%out.print(rs.getString(7));%></td>
+                <td align='center'><%out.print(rs.getString(8));%></td>
+                </tr>
+                <%
+            }
+        }
+	}
+	else {
+
 	}
 
 
-	if(!owner.equals("")){
-		ownerEntered = true;
-		if(needAnd)
-			wellQuery += " AND ";
-		wellQuery += "OwnerID='";
-		wellQuery += owner;
-		wellQuery += "'";
-		ownerQuery += "OwnerID='";
-		ownerQuery += owner;
-		ownerQuery += "'";
-		needAnd=true;
-	}
+
+
+/*****************************************************************
 
 	if(wellIdEntered == false){
 		String getWellID = "SELECT WellID FROM Well WHERE ";
@@ -156,8 +362,7 @@ try {
 		ownerQuery += "OwnerID='";
 		ownerQuery += owner;
 		ownerQuery += "'";
-		}
-
+	
 
 	//out.println(wellQuery);
 	//out.println(ownerQuery);
@@ -226,7 +431,8 @@ try {
   </td></tr></table>
  
 
-	<%
+	<%	}
+******************************************************/
 
 
 
@@ -239,7 +445,8 @@ try {
 
 
 	<%
-}
-%>
-</body>
+	}
+	%>
+	
+	</body>
 	</html>
