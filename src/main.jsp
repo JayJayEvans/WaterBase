@@ -30,8 +30,6 @@
 					            <li><a href="../DatabaseQuerys/transReadingsQuery.jsp">Transducer Data</a></li>
 						    <li><a href="../DatabaseQuerys/location.jsp">Location Data</a></li>
 
-						    <li><a href="../DatabaseQuerys/wellQuery.jsp">Well</a></li>
-					            <li><a href="../DatabaseQuerys/transReadingsQuery.jsp">Recordings</a></li>
 
 						    <li><a href="../DatabaseQuerys/advancedQuery.jsp">Advanced Transducer Data</a></li>
 
