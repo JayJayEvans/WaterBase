@@ -8,20 +8,56 @@
 	<BODY> 
 	<FORM ACTION="transReadingsQueryConf.jsp" METHOD="post">
 	
+		<script type="text/javascript">
+		    function clicked() {
+
+			  if(!document.getElementById('trans').value && !document.getElementById('well').value){
+			  	  location.reload(true);
+			  	  alert("You must provide TransID, WellID, or both!\nPlease try again!");
+				  event.preventDefault();
+				  return false;
+
+
+			  }
+			  if(document.getElementById('beg').value && !document.getElementById('end').value){
+			  	  location.reload(true);
+			  	  alert("You must provide an End Time if you input a Beginning!\nPlease try again!");
+				  event.preventDefault();
+				  return false;
+
+
+			  }
+			  if(!document.getElementById('beg').value && document.getElementById('end').value){
+			  	  location.reload(true);
+			  	  alert("You must provide a Beginning time if you input an End!\nPlease try again!");
+				  event.preventDefault();
+				  return false;
+
+
+			  }
+
+			  return true;
+
+		     }
+
+		</script>
+
+
+
 			    TransducerID:<br>
-			    <input type="text" name="TransID" placeholder="Manditory"/><br>
+			    <input type="text" name="TransID" id='trans' placeholder="Manditory"/><br>
 			      
 			    WellID:<br>
-			    <input type="text" name="WellID" placeholder="Manditory"/><br>
+			    <input type="text" name="WellID" id='well' placeholder="Manditory"/><br>
 			      
 			    Beginning Time:<br>
-			    <input type="text" name="Beginning" placeholder="Manditory"/><br>
+			    <input type="text" name="Beginning" id='beg' placeholder="Manditory"/><br>
 			      
 			    End Time:<br>
-			    <input type="text" name="End" placeholder="Optional"/><br>
+			    <input type="text" name="End" id='end' placeholder="Optional"/><br>
 			      
 			    <input type="checkbox" name="getRain" value="rain">Get rainfall at location?<br>
-
+			 <button name="submit" type="submit"  onclick="clicked();" >Submit</button>
 			    <input type="submit" value="Submit"/>
 	
 	</FORM>

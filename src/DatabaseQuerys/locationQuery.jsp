@@ -8,6 +8,8 @@
 
 <body>
 
+  <link rel="stylesheet" href="../CSS/location.css"/>  
+
 <script type="text/javascript">
 
     function myNewFunction(sel)
@@ -28,6 +30,7 @@
   <%@ page import="java.sql.DriverManager.*" %>
   <%@ page import="java.io.*" %>
   <%@ page import="java.util.*" %>
+
 
   <%     
   PreparedStatement ps;
@@ -83,55 +86,64 @@ String locationQ = String.format("SELECT Transducers.TransID, Transducers.WellID
 ps = conn.prepareStatement(locationQ);
 rs = ps.executeQuery();
 
-
 %>
 
-<select id="isTitles" name="isTitles" onchange="myNewFunction(this);" >
-<option value="" disabled selected>Select ID you want information for</option>
+<center><table style="width:15%">
+  <tr>
+    <th align='center'>Transducer ID</th>
+    <th align='center'>Well ID</th> 
+  </tr>
 
-<%
-while(rs.next()){
 
-  %><option> Transducer_ID=<%
-  out.print(rs.getInt(1) + " "); %> Well_ID=
-  <% out.print(rs.getInt(2) + " "); 
-  %></option>
-  <%
-}%>
-</select>
-
-<script type="text/javascript">
-
-    function myNewFunction(sel)
-    {</script>
-      
-        <script type="text/javascript">
-        alert(</script> <%request.getParameter("isTitles");%> <script>); 
-        //alert(sel.options[sel.selectedIndex].text);
-        //alert(System.out.println("ejay"));
-    }
-</script>
-
-<script>/*
-    function myNewFunction(sel)
-    {
-      
-      
-        alert(sel.options[sel.selectedIndex].text);
-        alert(<%System.out.println("ejay");%>);
-    }*/
-</script>
 
 <%
 
+if(!rs.next()){
+  %> 
+  <tr>
+    <td> <%out.print("<   empty   >"); %> </td>
+  </tr>
  
+  <%
+}else{
+      rs.beforeFirst(); 
+      while(rs.next()){
+      
+        %><tr>
+          <td align='center'><%out.print(rs.getInt(1));%></td>
+          <td align='center'><%out.print(rs.getInt(2));%></td>
+        </tr>
+<%
+      }
+}
 
 
-
-String tQ = String.format("SELECT * FROM Transducers, (SELECT Well.WellID FROM Well WHERE Well.Latitude > %s AND Well.Latitude < %s AND Well.Longitude >%s AND Well.Longitude < %s ) AS WELLids WHERE WELLids.WellID = Transducers.WellID;", minlat, maxlat, minlong, maxlong);
 
 
 %>
+</center></table> 
+
+  
+<div class="container2">  
+        <form id="rainfall"  action="locationQuery2.jsp" method="post">
+          <h3><font color ="black"><center>Transducer Lookup</font></center></h3>
+          <h4><center><i>Please enter Transducer Id you would like information for from the results above</i></center></h4>
+
+          <center><fieldset>
+            Transducer ID: <input placeholder="optional" id="tran_id" name="tran_id"  type="number" tabindex="1"  autofocus>
+          </fieldset></center>
+
+
+
+          
+
+          <fieldset>
+            <button name="submit" type="submit" id="myBtn" name="contact-submit"  data-submit="...Sending" >Submit</button>
+          </fieldset>
+        </form>
+
+
+ </div> 
 
 
 </body>

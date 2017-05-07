@@ -31,12 +31,6 @@ String wellID = "";
 String aquifer ="";
 String type = "";
 String owner = "";
-%> 
-
-     <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b> 
-     </td></tr></table>
-
-<%
 String wellQuery = "SELECT * FROM Well WHERE ";
 String ownerQuery = "SELECT * FROM Owner WHERE ";
 String transQuery = "SELECT * FROM Transducers WHERE ";
@@ -174,6 +168,15 @@ try {
 	rs.beforeFirst();
 
 	int count = 1;
+	if(rs.next()){
+		rs.beforeFirst();
+		%>
+		<b>
+		<%
+		out.println("Well Info: ");
+		%>
+		</b>
+		<%
 	while(rs.next()){
 		out.print(rs.getInt(1) + " ");
 		out.print(rs.getString(2) + " ");
@@ -193,12 +196,18 @@ try {
 		out.print(rs.getString(16) + " ");
 			
 	}
+	}
 	%>
 		<Br>
-
+		<b>
 	<%
 	rs.beforeFirst();
 	if(rs.next()){
+		out.print("Owner Info: ");
+		%>
+		</b>
+		<%
+
 		while(rs1.next()){
 			out.print(rs1.getInt(1) + " ");
 			out.print(rs1.getString(2) + " ");
@@ -208,9 +217,14 @@ try {
 	}
 	rs.beforeFirst();
 	%>
-		<Br>
+	<Br><b>
 	<%
 	if(rs.next()){
+		out.print("Transducer Info: ");
+		%>
+		</b>
+		<%
+
 		while(rs2.next()){
 			out.print(rs2.getInt(1) + " ");
 			out.print(rs2.getString(2) + " ");
@@ -219,14 +233,6 @@ try {
 		}
 	}
 	out.println();
-
-	%>
-	
- <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
-  </td></tr></table>
- 
-
-	<%
 
 
 

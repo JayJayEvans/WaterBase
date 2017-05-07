@@ -40,11 +40,11 @@
 </Tr> 
 <tr> 
 <td> Username: </td> 
-<td> <input type="text" name="id"> </td> 
+<td> <input type="text" name="id" required> </td> 
 </Tr> 
 <tr> 
 <td> Password: </td> 
-<td> <input type="password" name="password"> </td> 
+<td> <input type="password" name="password" required> </td> 
 </Tr> 
 <tr> 
 <td> <input type="submit" value="Log In"> </td> 

@@ -16,4 +16,8 @@
 								</center>      
 	</FORM>
 	</BODY>
+	<br><br><b>README:</b> Each line of file is comma delimited and contains information for a single entry, multiple entries are supported.<br> If you choose to not enter optional data, use a space in place of the data that would be entered.  <br>
+	         <br><b>FILE FORMAT:</b> TransducerID,TransType,TransName,Temperature,Conductivity,Pressure,Salinity,TDS,Date,Time
+		 <br><br>Date must be in MM/DD/YYYY format, Time must be in HH:MM:SS, You also must enter at least 1 entry for 1 of the optional data!<br>
+	         <br><b>Optional Data:</b> Temperature,Conductivity,Pressure,Salinity,TDS
 	</HTML>

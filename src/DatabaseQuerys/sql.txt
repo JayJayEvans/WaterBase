@@ -1,0 +1,40 @@
+SELECT project.Transducers.TransID FROM project.Transducers, (SELECT project.Well.WellID FROM project.Well WHERE project.Well.Latitude > 10 AND project.Well.Latitude < 13 AND project.Well.Longitude > 10 AND project.Well.Longitude < 13 ) AS WELLids WHERE WELLids.WellID = project.Transducers.WellID;
+
+SELECT project.Well.WellID FROM project.Well WHERE project.Well.Latitude > 12 AND project.Well.Latitude < 13 AND project.Well.Longitude > 11 AND project.Well.Longitude < 13
+
+
+  <%
+//Java 
+
+  maxlong = request.getParameter("max_long"); 
+  minlong= request.getParameter("min_long"); 
+  maxlat= request.getParameter("max_lat"); 
+  minlat = request.getParameter("min_lat"); 
+
+  try{
+  Double.parseDouble(maxlong);
+  Double.parseDouble(minlong);
+  Double.parseDouble(maxlat);
+  Double.parseDouble(minlat);
+
+}catch(Exception e){
+%> 
+<script> //javascript
+  alert("Please enter valid number!\nTry again!");
+  event.preventDefault();
+</script>
+<% //end java script  
+} //back to java
+
+String locationQ = String.format("SELECT Transducers.TransID FROM Transducers, (SELECT Well.WellID FROM Well WHERE Well.Latitude > %s AND Well.Latitude < %s AND Well.Longitude >%s AND Well.Longitude < %s ) AS WELLids WHERE WELLids.WellID = Transducers.WellID;", minlat, maxlat, minlong, maxlong);
+
+
+ps = conn.prepareStatement(locationQ);
+rs = ps.executeQuery();
+
+while(rs.next()){
+out.print(rs.getInt(1) + " ");  
+}
+
+//end of Java
+%> 

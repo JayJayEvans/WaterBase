@@ -7,7 +7,6 @@
 
 <%     
 PreparedStatement ps;
-PreparedStatement ps1;
 PreparedStatement ps2;
 PreparedStatement ps3;
 PreparedStatement ps4;
@@ -19,104 +18,120 @@ Statement st=conn.createStatement();
 %>
 
 <%
-boolean wellExists = false;
+boolean success = true;
 %>
 
 
 <%
 String token = "";
-String sql = "INSERT INTO Transducers(TransID,TransType,TransName,WellID) VALUES(?,?,?,?)";
-String sql2 = "INSERT INTO TransducerRecords(TransID,InputTime,Temperature,Conductivity,Pressure,Salinity,TDS) VALUES(?,?,?,?,?,?,?)";
+String sql = "INSERT INTO TransducerRecords(TransID,Date,Temperature,Conductivity,Pressure,Salinity,TDS,Time) VALUES(?,?,?,?,?,?,?,?)";
 try{
-String query = "SELECT WellID FROM Transducers WHERE TransID='";
 
 %>
 <%
 token = request.getParameter("TransID");
 
 	ps = conn.prepareStatement (sql);
-	ps1 = conn.prepareStatement(sql2);
 	ps2 = null;
 	ResultSet rs=null;
-				if(token.equals(" ")){//TransID
+				if(token.equals(" ") || token == null || token.isEmpty()){//TransID
 					ps.setNull(1,0);
-					ps1.setNull(1,0);
 				}
 				else{
 
 					int tok = Integer.parseInt(token);
-					//if(token == " " )
-					//	ps.setNull(count,0);
-					//else
-					query+=token;
-					query+="'";
-					ps2 = conn.prepareStatement(query);
-					rs = ps2.executeQuery();
-					if(rs.next())
-						wellExists = true;
-					
-					if(!wellExists)
 						ps.setInt(1,tok);
 					
-					ps1.setInt(1,tok);
 				}	
-				
-				token = request.getParameter("TransType");
-					if(!wellExists)
-						ps.setString(2,token);
-		
-				token = request.getParameter("TransName");
-					if(!wellExists)
-						ps.setString(3,token);	
 
-				token = request.getParameter("WellID");
-					int tok = Integer.parseInt(token);
-					if(!wellExists)
-						ps.setInt(4,tok);
+				token = request.getParameter("Date");
+					try{
+						if(!token.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")){
+							throw new InputMismatchException("date violates regex");
+						}
+					}
+					catch (InputMismatchException e){
+						success = false;
+						%>
+						<script type="text/javascript">
+							    var errorp = 'Submission Error:'
+							    alert( "\nVerify that date is properly formatted\n Please try again!"); 
+							    window.history.back();
+						</script>
+						<%
+					}
+					finally{
+						if(success == true){
+							ps.setString(2,token);
+						}
+					}
+				
+
 				
 				token = request.getParameter("Temperature");
-					if(token.equals(" "))
-						ps1.setNull(3,0);
+				 if(token.equals(" ") || token == null || token.isEmpty())		
+					ps.setNull(3,0);
 					else
-						ps1.setFloat(3,Float.parseFloat(token));
+						ps.setFloat(3,Float.parseFloat(token));
 
 				token = request.getParameter("Conductivity");
-					if(token.equals(" "))
-						ps1.setNull(4,0);
+				 if(token.equals(" ") || token == null || token.isEmpty())
+						ps.setNull(4,0);
 					else
-						ps1.setFloat(4,Float.parseFloat(token));
-
+						ps.setFloat(4,Float.parseFloat(token));
+				
 				token = request.getParameter("Pressure");
-					if(token.equals(" "))
-						ps1.setNull(5,0);
+						
+				 if(token.equals(" ") || token == null || token.isEmpty())				
+						ps.setNull(5,0);
 					else
-						ps1.setFloat(5,Float.parseFloat(token));
+						ps.setFloat(5,Float.parseFloat(token));
 
 
 				token = request.getParameter("Salinity");
-					if(token.equals(" "))
-						ps1.setNull(6,0);
+					 if(token.equals(" ") || token == null || token.isEmpty())
+						ps.setNull(6,0);
 					else
-						ps1.setFloat(6,Float.parseFloat(token));
+						ps.setFloat(6,Float.parseFloat(token));
 			
 			
 				token = request.getParameter("TDS");
-					if(token.equals(" "))
-						ps1.setNull(7,0);
+						
+					 if(token.equals(" ") || token == null || token.isEmpty())
+						ps.setNull(7,0);
 					else
-						ps1.setFloat(7,Float.parseFloat(token));
+						ps.setFloat(7,Float.parseFloat(token));
 				
-					
-				java.util.Date date = new java.util.Date();
-				java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
-				ps1.setTimestamp(2, timestamp);
+				
+						
+				token = request.getParameter("Time");
+					try{
+						if(!token.matches("([0-9]{2}):([0-9]{2}):([0-9]{2})")){
+							throw new InputMismatchException("time violates regex");
+						}
+					}
+					catch (InputMismatchException e){
+						success = false;
+						%>
+						<script type="text/javascript">
+							    var errorp = 'Submission Error:'
+							    alert( "\nVerify that time is properly formatted\n Please try again!"); 
+							    window.history.back();
+						</script>
+						<%
+					}
+					finally{
+						if(success == true){
+							ps.setString(8,token);
+						}
+					}
 
 
 
-	if(!wellExists)
+
+
 		ps.executeUpdate();
 
-	ps1.executeUpdate();
 
 	%>
 	

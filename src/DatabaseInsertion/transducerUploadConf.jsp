@@ -49,31 +49,26 @@ PreparedStatement ps4;
 Connection conn;
 Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
-
+boolean success =true;
 Statement st=conn.createStatement();
 %>
 
 <%
-boolean wellExists = false;
 File file = new File(saveFile);
 %>
 
 
 <%
-String sql = "INSERT INTO Transducers(TransID,TransType,TransName,WellID) VALUES(?,?,?,?)";
-String sql2 = "INSERT INTO TransducerRecords(TransID,InputTime,Temperature,Conductivity,Pressure,Salinity,TDS) VALUES(?,?,?,?,?,?,?)";
+String sql2 = "INSERT INTO TransducerRecords(TransID,Temperature,Conductivity,Pressure,Salinity,TDS,Date,Time) VALUES(?,?,?,?,?,?,?,?)";
 Scanner scan = new Scanner(file);
 try{
 while(scan.hasNextLine()){
-wellExists = false;
 String line = scan.nextLine();
-String query = "SELECT WellID FROM Transducers WHERE TransID='";
 
 String token = "";
 %>
 <%
 
-	ps = conn.prepareStatement (sql);
 	ps1 = conn.prepareStatement(sql2);
 	ps2 = null;
 	ResultSet rs=null;
@@ -82,75 +77,94 @@ String token = "";
 	int count = 1;
 	int recordCount = 1;
 	while(sc.hasNext()){
-		if(count != 5)
 			token = sc.next();
 		
-		switch(count){
+		switch(recordCount){
 				case 1:{//TransID
 					int tok = Integer.parseInt(token);
-					//if(token == " " )
-					//	ps.setNull(count,0);
-					//else
-					query+=token;
-					query+="'";
-					ps2 = conn.prepareStatement(query);
-					rs = ps2.executeQuery();
-					if(rs.next())
-						wellExists = true;
-					
-					if(!wellExists)
-						ps.setInt(count,tok);
 					
 					ps1.setInt(recordCount,tok);
-						recordCount++;
 					}	
-					break;
+				break;
 
 
-				case 2: //TransType
-				case 3: //TypeName
-					if(!wellExists)
-						ps.setString(count,token);
-					break;
-			
-				case 4://WellID
-					int tok = Integer.parseInt(token);
-					//if(token == " " )
-					//	ps.setNull(count,0);
-					//else
-					if(!wellExists)
-						ps.setInt(count,tok);
-					break;
 
-				case 5:
-					java.util.Date date = new java.util.Date();
-					java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
-					ps1.setTimestamp(recordCount, timestamp);
-					recordCount++;
-
-					break;
-
-
-				case 6: //Temperature
-				case 7: //conductivity
-				case 8: //Pressure
-				case 9: //Salinity
-				case 10: //TDS
+				case 2: //Temperature
+				case 3: //conductivity
+				case 4: //Pressure
+				case 5: //Salinity
+				case 6: //TDS
 					if(token.equals(" "))
 						ps1.setNull(recordCount,0);
 					else{	
-						ps1.setFloat(recordCount,Float.parseFloat(token));
+						ps1.setFloat(recordCount,Float.valueOf(token));
 					}
-					recordCount++;
 					break;
+				case 7:
+					if(token.equals(" "))
+						ps1.setNull(recordCount,0);
+					else{
+						try{
+							if(!token.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")){
+								throw new InputMismatchException("date violates regex");
+
+						 	}
+						 }
+						catch (InputMismatchException e){
+							success = false;
+						 %>
+						 <script type="text/javascript">
+						       var errorp = 'Submission Error:'
+						       alert( "\nVerify that date is properly formatted\n Please try again!"); 
+						       window.history.back();
+						 </script>
+						 <%
+						 }
+						 finally{
+						 	if(success == true){
+						 		ps1.setString(recordCount,token);
+						 	}
+						 }
+
+
+
+					}
+					break;
+				case 8:
+
+				if(token.equals(" "))
+				ps1.setNull(recordCount,0);
+				else{
+				try{
+				if(!token.matches("([0-9]{2}):([0-9]{2}):([0-9]{2})")){
+				throw new InputMismatchException("time violates regex");
+
+				}
+				}
+				catch (InputMismatchException e){
+				success = false;
+				%>
+				<script type="text/javascript">
+					    var errorp = 'Submission Error:'
+					    alert( "\nVerify that time is properly formatted\n Please try again!"); 
+					    window.history.back();
+				</script>
+				<%
+				}
+				finally{
+					if(success == true){
+						ps1.setString(recordCount,token);
+					}
+				}
+
+
+
+				}
+				break;
 			}
-		count++;
+			recordCount++;
 	}
 
-	count = 0;
-	recordCount =0;
-	if(!wellExists)
-		ps.executeUpdate();
 
 	ps1.executeUpdate();
 
