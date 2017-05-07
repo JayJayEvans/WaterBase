@@ -65,26 +65,30 @@
           <h3><font color ="black"><center>Location Query</font></center></h3>
           <h4><center><i>Please enter query information below</i></center></h4>
 
+          <center>
           <fieldset>
             <input placeholder="Maximum Longitude" id="max_longi" name="max_long" type="number" tabindex="1" required autofocus>
             <font size="1px" color="red"> *required</font>
-          </fieldset>
+          </fieldset></center>
 
+          <center>
           <fieldset>
             <input placeholder="Minimum Longitude" id="min_longi" name="min_long" type="number" tabindex="1" required autofocus>
             <font size="1px" color="red"> *required</font>
-          </fieldset>
+          </fieldset></center>
 
+          <center>
           <fieldset>
             <input placeholder="Maximum Latitude" id="max_lati" name="max_lat" type="number" tabindex="2" required autofocus>
             <font size="1px" color="red"> *required</font>
-          </fieldset>
+          </fieldset></center>
 
 
+          <center>
           <fieldset>
             <input placeholder="Minimum Latitude" id="min_lati" name="min_lat" type="number" tabindex="1" required autofocus>
             <font size="1px" color="red"> *required</font>
-          </fieldset>
+          </fieldset></center>
 
           <fieldset>
             <button name="submit" type="submit" id="myBtn" name="contact-submit"  data-submit="...Sending" >Submit</button>
