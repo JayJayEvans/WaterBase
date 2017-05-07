@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Untitled Document</title>
 	</head>
+	
 
 	<body>
 
@@ -171,65 +172,93 @@ try {
 	if(rs.next()){
 		rs.beforeFirst();
 		%>
-		<b>
 		<%
 		out.println("Well Info: ");
 		%>
-		</b>
 		<%
-	while(rs.next()){
-		out.print(rs.getInt(1) + " ");
-		out.print(rs.getString(2) + " ");
-		out.print(rs.getString(3) + " ");
-		out.print(rs.getInt(4) + " ");
-		out.print(rs.getFloat(5) + " ");
-		out.print(rs.getFloat(6) + " ");
-		out.print(rs.getString(7) + " ");
-		out.print(rs.getString(8) + " ");
-		out.print(rs.getFloat(9) + " ");
-		out.print(rs.getString(10) + " ");
-		out.print(rs.getString(11) + " ");
-		out.print(rs.getFloat(12) + " ");
-		out.print(rs.getFloat(13) + " ");
-		out.print(rs.getFloat(14) + " ");
-		out.print(rs.getInt(15) + " ");
-		out.print(rs.getString(16) + " ");
-			
+	if(!rs.next()){
+		%>
+				<script>
+				alert("No Results!");  
+				window.history.back();
+				</script>
+	<%
 	}
+	else{
+		rs.beforeFirst(); 
+		while(rs.next()){
+			out.print(rs.getInt(1) + " ");
+			out.print(rs.getString(2) + " ");
+			out.print(rs.getString(3) + " ");
+			out.print(rs.getInt(4) + " ");
+			out.print(rs.getFloat(5) + " ");
+			out.print(rs.getFloat(6) + " ");
+			out.print(rs.getString(7) + " ");
+			out.print(rs.getString(8) + " ");
+			out.print(rs.getFloat(9) + " ");
+			out.print(rs.getString(10) + " ");
+			out.print(rs.getString(11) + " ");
+			out.print(rs.getFloat(12) + " ");
+			out.print(rs.getFloat(13) + " ");
+			out.print(rs.getFloat(14) + " ");
+			out.print(rs.getInt(15) + " ");
+			out.print(rs.getString(16) + " ");
+				
+		}
+	}	
+	
 	}
 	%>
-		<Br>
-		<b>
+		
 	<%
 	rs.beforeFirst();
 	if(rs.next()){
 		out.print("Owner Info: ");
 		%>
-		</b>
+		
 		<%
 
-		while(rs1.next()){
-			out.print(rs1.getInt(1) + " ");
-			out.print(rs1.getString(2) + " ");
-			out.print(rs1.getString(3) + " ");
-		
+		if(!rs1.next()){
+		%>
+				<script>
+				alert("No Results!");  
+				window.history.back();
+				</script>
+		<%
+		}else{
+			rs1.beforeFirst();
+			while(rs1.next()){
+						out.print(rs1.getInt(1) + " ");
+						out.print(rs1.getString(2) + " ");
+						out.print(rs1.getString(3) + " ");
+					
+			}
 		}
+		
 	}
 	rs.beforeFirst();
 	%>
-	<Br><b>
+
 	<%
 	if(rs.next()){
 		out.print("Transducer Info: ");
 		%>
-		</b>
 		<%
-
-		while(rs2.next()){
-			out.print(rs2.getInt(1) + " ");
-			out.print(rs2.getString(2) + " ");
-			out.print(rs2.getString(3) + " ");
-			out.print(rs2.getInt(4) + " ");
+		if(!rs2.next()){
+		%>
+				<script>
+				alert("No Results!");  
+				window.history.back();
+				</script>
+		<%
+		}else{
+				rs2.beforeFirst();
+				while(rs2.next()){
+					out.print(rs2.getInt(1) + " ");
+					out.print(rs2.getString(2) + " ");
+					out.print(rs2.getString(3) + " ");
+					out.print(rs2.getInt(4) + " ");
+				}
 		}
 	}
 	out.println();
@@ -237,15 +266,23 @@ try {
 
 
 }catch(Exception e){ 
-	out.println(e);
-	%>
 	
-  <Br><table border="2"><tr><td><b>Upload File has incorrect format, or information contains duplicates that violate constraints</b>
-  </td></tr></table>
 
+	%>
+	<script>
+	alert("Query Error!");  
+	window.history.back();
+	</script>
 
 	<%
 }
 %>
 </body>
-	</html>
+</html>
+
+
+
+<script src="./well_blank.jsp"></script>
+
+
+

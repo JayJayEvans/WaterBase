@@ -85,6 +85,7 @@ String locationQ = String.format("SELECT Transducers.TransID, Transducers.WellID
 
 ps = conn.prepareStatement(locationQ);
 rs = ps.executeQuery();
+int index = 0; 
 
 %>
 
@@ -101,20 +102,32 @@ rs = ps.executeQuery();
 if(!rs.next()){
   %> 
   <tr>
-    <td> <%out.print("<   empty   >"); %> </td>
+    <td><center> <%out.print("<   empty   >"); %> </td></center>
   </tr>
  
   <%
 }else{
+      rs.last();
+      int arr[] =  new int[rs.getRow()];
       rs.beforeFirst(); 
-      while(rs.next()){
       
+      while(rs.next()){
+        arr[index] = rs.getInt(1); 
+        index++; 
         %><tr>
           <td align='center'><%out.print(rs.getInt(1));%></td>
           <td align='center'><%out.print(rs.getInt(2));%></td>
         </tr>
 <%
       }
+      %>
+      <script type="text/javascript">
+      cache.delete(request,{options}).then(function(true) {
+        //your cache entry has been deleted
+      });</script>
+      <%
+      session.setAttribute("results", arr);
+       
 }
 
 
@@ -130,20 +143,18 @@ if(!rs.next()){
           <h4><center><i>Please enter Transducer Id you would like information for from the results above</i></center></h4>
 
           <center><fieldset>
-            Transducer ID: <input placeholder="optional" id="tran_id" name="tran_id"  type="number" tabindex="1"  autofocus>
+            Transducer ID: <input placeholder="required" id="tran_id" name="tran_id"  type="number" tabindex="1"  required autofocus>
           </fieldset></center>
 
-
-
-          
-
           <fieldset>
-            <button name="submit" type="submit" id="myBtn" name="contact-submit"  data-submit="...Sending" >Submit</button>
+            <button name="submit" type="submit" id="myBtn"  name="contact-submit"  data-submit="...Sending" >Submit</button>
           </fieldset>
         </form>
 
 
  </div> 
+
+
 
 
 </body>

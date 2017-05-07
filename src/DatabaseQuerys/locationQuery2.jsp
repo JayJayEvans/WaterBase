@@ -8,19 +8,22 @@
 
 <body>
 
-  <link rel="stylesheet" href="../CSS/rainfall.css"/>  
+<link rel="stylesheet" href="../CSS/location.css"/>  
 
-<script type="text/javascript">
 
-    function myNewFunction(sel)
-    {</script>
-      <%String temp = request.getParameter("isTitles");%>
-        <script type="text/javascript">
-        alert(</script> <%request.getParameter("isTitles");%> <script>); 
-        //alert(sel.options[sel.selectedIndex].text);
-        //alert(System.out.println("ejay"));
-    }
+
+<script>
+  clicked(){
+    location.reload();
+  }
+
 </script>
+  <%@ page import="java.io.*" %>
+  <%@ page language="java" %>
+  <%@ page import="java.sql.*" %>
+  <%@ page import="java.sql.DriverManager.*" %>
+  <%@ page import="java.io.*" %>
+  <%@ page import="java.util.*" %>
 
 
   <%     
@@ -28,7 +31,7 @@
   PreparedStatement ps1;
   PreparedStatement ps2;
   PreparedStatement ps3;
-  ResultSet rs=null;
+  ResultSet rs=null, rs1 = null; 
   Connection conn;
   Class.forName("com.mysql.jdbc.Driver");
   conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
@@ -37,30 +40,161 @@
   %>
 
   <% 
-  int tran_id; 
-  int well_id; 
-  int ejay = 0; 
+  String trani_id = new String(); 
+  int [] result = null; 
+  String query = new String(); 
+  result = (int [])session.getAttribute("results"); 
   %> 
+  <script type="text/javascript">
+      cache.delete(request,{options}).then(function(true) {
+        //your cache entry has been deleted
+      });</script>
+
 
 <%
 //Java 
 
-  tran_id = request.getParameter("tran_id"); 
-  well_id= request.getParameter("well_id"); 
+  trani_id = request.getParameter("tran_id"); 
+
 
   try{
 
-    if(tran_id == null){
-      out.println("tran_id empty"); 
-    }
+      List<Integer> intList = new ArrayList<Integer>();
+      for (int i = 0; i < result.length; i++)
+      {
+          intList.add(result[i]);
+      }
+      if(intList.contains(Integer.parseInt(trani_id))){
+        
+         query = String.format("SELECT * FROM TransducerRecords WHERE %d = TransducerRecords.TransID;",Integer.parseInt(trani_id));
 
+         ps = conn.prepareStatement(query);
+         rs = ps.executeQuery();
+
+        %>
+
+          <center><table style="width:50%">
+           <tr>
+           <th align='center'>Transducer ID</th>
+           <th align='center'>Temperature</th>
+           <th align='center'>Conductivity</th> 
+           <th align='center'>Pressure</th>
+           <th align='center'>Salinity</th> 
+           <th align='center'>TDS</th>
+           <th align='center'>Date</th> 
+           <th align='center'>Time</th> 
+           </tr>
+
+
+
+<%
+
+         if(!rs.next()){
+
+          %> 
+          <tr>
+              <td><center> <%out.print("<   empty record >"); %> </td></center>
+          </tr>
+
+          <%
+
+         }else{
+
+            rs.beforeFirst(); 
+             while(rs.next()){
+             double  temp1 = -100.0; 
+              %>
+                <tr>
+
+                    <td align='center'><%out.print(rs.getInt(1));%></td>
+
+
+                    <td align='center'><%
+                    temp1 = rs.getDouble(2);
+                    if(rs.wasNull()){
+                      out.print("NULL");
+                    }else{
+                        out.print(temp1);
+                    }
+                    
+
+                    %></td>
+
+                    <td align='center'><%
+                    temp1 = rs.getDouble(3);
+                    if(rs.wasNull()){
+                      out.print("NULL");
+                    }else{
+                        out.print(temp1);
+                    }
+                    
+
+                    %></td>
+
+                    <td align='center'><%
+                    temp1 = rs.getDouble(4);
+                    if(rs.wasNull()){
+                      out.print("NULL");
+                    }else{
+                        out.print(temp1);
+                    }
+                    
+
+                    %></td>
+
+                    <td align='center'><%
+                    temp1 = rs.getDouble(5);
+                    if(rs.wasNull()){
+                      out.print("NULL");
+                    }else{
+                        out.print(temp1);
+                    }
+                    
+
+                    %></td>
+
+
+
+                    <td align='center'><%
+                    temp1 = rs.getDouble(6);
+                    if(rs.wasNull()){
+                      out.print("NULL");
+                    }else{
+                        out.print(temp1);
+                    }
+                    
+
+                    %></td>
+
+
+
+
+
+                    <td align='center'><%out.print(rs.getString(7));%></td>
+                    <td align='center'><%out.print(rs.getString(8));%></td>
+                </tr>
+                <%
+             }
+           }
+      }
+      else{
+        throw new Exception(); 
+      }
+    
 
   }catch(Exception e){
 
+      %> 
+      <script> 
+          alert("Verify that ID appears in result table\nPlease Try again!"); 
+          window.history.back();
+      </script>
+      <%
 
   }
 
 %>
+
 
 
 
