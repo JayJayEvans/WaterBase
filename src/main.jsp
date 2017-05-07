@@ -24,7 +24,7 @@
 									          </ul></li>
 
 
- 					 <li class="dropdown"><a href="#" class="trigger-drop">Query Data<i class="arrow"></i></a><ul class="drop">
+ 					 <li class="dropdown"><a href="#" class="trigger-drop">Search Data<i class="arrow"></i></a><ul class="drop">
 
 						    <li><a href="../DatabaseQuerys/wellQuery.jsp">Well Data</a></li>
 					            <li><a href="../DatabaseQuerys/transReadingsQuery.jsp">Transducer Data</a></li>
