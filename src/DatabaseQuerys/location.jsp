@@ -62,23 +62,23 @@
           <h4><center><i>Please enter query information below</i></center></h4>
 
           <fieldset>
-            <input placeholder="Maximum Longitude" id="max_longi" name="max_long" type="text" tabindex="1" required autofocus>
+            <input placeholder="Maximum Longitude" id="max_longi" name="max_long" type="number" tabindex="1" required autofocus>
             <font size="1px" color="red"> *required</font>
           </fieldset>
 
           <fieldset>
-            <input placeholder="Minimum Longitude" id="min_longi" name="min_long" type="text" tabindex="1" required autofocus>
+            <input placeholder="Minimum Longitude" id="min_longi" name="min_long" type="number" tabindex="1" required autofocus>
             <font size="1px" color="red"> *required</font>
           </fieldset>
 
           <fieldset>
-            <input placeholder="Maximum Latitude" id="max_lati" name="max_lat" type="text" tabindex="2" required autofocus>
+            <input placeholder="Maximum Latitude" id="max_lati" name="max_lat" type="number" tabindex="2" required autofocus>
             <font size="1px" color="red"> *required</font>
           </fieldset>
 
 
           <fieldset>
-            <input placeholder="Minimum Latitude" id="min_lati" name="min_lat" type="text" tabindex="1" required autofocus>
+            <input placeholder="Minimum Latitude" id="min_lati" name="min_lat" type="number" tabindex="1" required autofocus>
             <font size="1px" color="red"> *required</font>
           </fieldset>
 
