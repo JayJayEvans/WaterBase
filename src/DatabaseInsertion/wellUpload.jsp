@@ -10,16 +10,7 @@
 		  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src="../JS/tags.js" type="text/javascript"></script>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<center>
-			<table width="993" height="102" border="0">
-				<tr>
-					<td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-					<td align="right" width="726" class="right">24X7 Customer Support - <a href="../AccountControl/contact.jsp">Contact us</a> | <a href="../../index.jsp">Home</a>
-				</tr>
-			</table>
-		</center>
-
-		<TITLE>Well Upload</TITLE>  
+				<TITLE>Well Upload</TITLE>  
 
 
 		<link href="../CSS/menu.css" rel="stylesheet" type="text/css"/>
