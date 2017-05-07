@@ -7,32 +7,17 @@
 	</head>
 	<BODY> 
 
-	  <link rel="stylesheet" href="../CSS/rainfall.css"/>
+	  <link rel="stylesheet" href="../CSS/transReadingQuery.css"/>
 
 	<FORM id="rainfall" ACTION="transReadingsQueryConf.jsp" METHOD="post">
-	
+	<h3><font color ="black"><center>Transducer Data Query</font></center></h3>
+          <h4><center><i>Please enter query information below</i></center></h4>
 		<script type="text/javascript">
 		    function clicked() {
 
-			  if(!document.getElementById('trans').value && !document.getElementById('well').value){
-			  	  location.reload(true);
-			  	  alert("You must provide TransID, WellID, or both!\nPlease try again!");
-				  event.preventDefault();
-				  return false;
-
-
-			  }
-			  if(document.getElementById('beg').value && !document.getElementById('end').value){
-			  	  location.reload(true);
-			  	  alert("You must provide an End Time if you input a Beginning!\nPlease try again!");
-				  event.preventDefault();
-				  return false;
-
-
-			  }
-			  if(!document.getElementById('beg').value && document.getElementById('end').value){
-			  	  location.reload(true);
-			  	  alert("You must provide a Beginning time if you input an End!\nPlease try again!");
+			  if(!document.getElementById('tran_id').value && !document.getElementById('well_id').value){
+			  	  location.reload();
+			  	  alert("You must provide Transducer ID and/or Well ID \nPlease try again!");
 				  event.preventDefault();
 				  return false;
 
@@ -44,11 +29,13 @@
 		     }
 
 		</script>
+
+
 			    TransducerID:<br>
-			    <input type="text" name="TransID" placeholder="Manditory"/><br><br>
+			    <input type="text" id='tran_id' name="TransID" placeholder=""/><br><br>
 			      
 			    WellID:<br>
-			    <input type="text" name="WellID" placeholder="Manditory"/><br><br>
+			    <input type="text" id='well_id' name="WellID" placeholder=""/><br><br>
 			    
 			    Beginning Date:<br>
 			    <input type="date" name="begDate"/><br><br>
@@ -66,8 +53,9 @@
 			      
 			    <input type="checkbox" name="getRain" value="rain">Get rainfall at location?<br><br>
 			   
-			    <input type="submit" value="Submit"/>
-			    <input type="reset">
+			    <button name="submit" type="submit" id="myBtn" name="contact-submit"  data-submit="...Sending" onclick="clicked();"/>Submit</button> 
+			    
+			    <button name="submit" type="reset">Reset</button>
 
 
 
