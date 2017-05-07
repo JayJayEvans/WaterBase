@@ -54,7 +54,11 @@
 <!-- Trigger/Open The Modal -->
 
 
-
+<script type="text/javascript">
+      cache.delete(request,{options}).then(function(true) {
+        //your cache entry has been deleted
+      });
+</script>
 
 <div class="container">  
         <form id="rainfall"  action="locationQuery.jsp" method="post">
