@@ -3,29 +3,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Untitled Document</title>
 
+<title>Rainfall Information</title>
 
 <link rel="stylesheet" href="../CSS/rainfall.css"/>
 
-<center>
-	<table width="993" height="102" border="0">
-		<tr>
-			<td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-			<td align="right" width="726" class="right">24X7 Customer Support - <a href="./contact.jsp">Contact us</a> | <a href="../main.jsp">Home</a>|
-				<% if(session.getAttribute("uname")==null) {
-				%>
-				<a href="../../index.jsp">Login</a>
-				<%} else {
-				%>
-				<a href="./logout.jsp">Logout</a>
-				<%}%></td>
-		</tr>
-	</table>
-</center>
-<title>Rainfall Information</title>
+
+
+<link href="../CSS/menu.css" rel="stylesheet" type="text/css"/>
+		<nav id="navigation">
+	    <a href="#" class="logo"> WaterBase</a>
+	    <ul class="links">    
+			     		    
+		    	      <li class="dropdown"><a href="#" class="trigger-drop">File Upload<i class="arrow"></i></a><ul class="drop">
+					            <li><a href="../DatabaseInsertion/wellUpload.jsp">Well</a></li>
+						    <li><a href="../DatabaseInsertion/transducerUpload.jsp">Transducer</a></li>
+									          </ul></li>
+
+
+ 					 <li class="dropdown"><a href="#" class="trigger-drop">Search Data<i class="arrow"></i></a><ul class="drop">
+
+						    <li><a href="../DatabaseQuerys/wellQuery.jsp">Well Data</a></li>
+					            <li><a href="../DatabaseQuerys/transReadingsQuery.jsp">Transducer Data</a></li>
+						    <li><a href="../DatabaseQuerys/location.jsp">Location Data</a></li>
+
+
+						    <li><a href="../DatabaseQuerys/advancedQuery.jsp">Advanced Transducer Data</a></li>
+
+					  				          </ul></li>
+
+			      <li class="dropdown"><a href="#" class="trigger-drop">Enter Data<i class="arrow"></i></a><ul class="drop">
+						    <li><a href="../DatabaseInsertion/manualEntry.jsp">Well</a></li>
+					   	    <li><a href="../DatabaseInsertion/manualSingleTrans.jsp">Transducer</a></li>
+						    <li><a href="../DatabaseInsertion/manualTransEntry.jsp">Recordings</a></li>
+						    <li><a href="../DatabaseInsertion/rainfall.jsp">Rainfall</a></li>
+    					 				          </ul></li>
+
+			   
+				
+			     <li><a href="../AccountControl/logout.jsp">Logout</a></li>
+
+
+			
+
+	  </ul>
+
+	</nav>
+	
 	</head>
-	<BODY> 
+	
+<BODY> 
+
+
+
+	<div class="container">
 	<FORM id="rainfall" ACTION="manualEntryConf.jsp" METHOD="post">
  		<h3><font color ="black"><center>Well Information</font></center></h3>
     		<h4><center><i>Please enter well  information below</i></center></h4>
@@ -34,7 +65,7 @@
 			    <input type="text" name="WellID" placeholder="Manditory" required/><br>
 			</fieldset>
 			<fieldset>
-			    AquiferCode:<br>
+			    AquiferCode:
 			    <input type="text" name="AquiferCode" placeholder="Manditory" required/><br>
 			</fieldset>
 			<fieldset>
@@ -116,7 +147,7 @@
 			</fieldset>
 			<fieldset>
 
-			    <input type="submit" value="Submit"/>
+				<button name="submit" type="submit" id="myBtn" >Submit</button>
 			</fieldset>
 
 	</FORM>

@@ -1,60 +1,56 @@
+%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*,java.lang.String" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Log in</title>
-<link rel="shortcut icon"href="favicon.ico" />
-<style type="text/css">
-.right {  text-align: right;
-}
-</style>
-<link href="italics.css" rel="stylesheet" type="text/css" />
-</head>
+	<head>
+		        <link href="./src/CSS/menu.css" rel="stylesheet" type="text/css"/>
+			        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+					<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+					<title>Main</title>
+	</head>
 
-<body>
+	<body>
 
 
 
 
-<center> 
-<form action="../src/AccountControl/loginconf.jsp" method="post">
-  <table width="993" height="102" border="0">
-    <tr>
-      <td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
-      <td width="726" class="right">24X7 Customer Support - <a href="../src/AccountControl/contact.jsp">Contact us</a> | <a href="#">Home</a> |  
-        <% if(session.getAttribute("uname")==null) {
-      %>
-        <a href="#">Login</a>
-        <%} else {
-        %>
-        <a href="../src/AccountControl/logout.jsp">Logout</a>
-        <%}%></td>
-    </tr>
 
-  </table>
-  <hr />
-  <p>&nbsp;</p>
-  <table width="1"> 
-  <tr> 
-<td colspan="2" class="italics"> User Login </td> 
-</Tr> 
-<tr> 
-<td> Username: </td> 
-<td> <input type="text" name="id" required> </td> 
-</Tr> 
-<tr> 
-<td> Password: </td> 
-<td> <input type="password" name="password" required> </td> 
-</Tr> 
-<tr> 
-<td> <input type="submit" value="Log In"> </td> 
-<td><input type="reset" value="Clear"> </td> 
-</Tr> 
-</Table>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p> 
-</Form> 
+<nav id="navigation">
+	    <a href="#" class="logo"> WaterBase&copy;</a>
+	    <ul class="links">    
+			     		    
+		    	      <li class="dropdown"><a href="#" class="trigger-drop">File Upload<i class="arrow"></i></a><ul class="drop">
+					            <li><a href="./src/DatabaseInsertion/wellUpload.jsp">Well</a></li>
+						    <li><a href="./src/DatabaseInsertion/transducerUpload.jsp">Transducer</a></li>
+									          </ul></li>
 
-</Center>
+
+ 			      <li class="dropdown"><a href="#" class="trigger-drop">Query Data<i class="arrow"></i></a><ul class="drop">
+						    <li><a href="./src/DatabaseQuerys/wellQuery.jsp">Well Data</a></li>
+					            <li><a href="./src/DatabaseQuerys/transReadingsQuery.jsp">Transducer Data</a></li>
+						    <li><a href="./src/DatabaseQuerys/location.jsp">Location Data</a></li>
+						    <li><a href="./src/DatabaseQuerys/advancedQuery.jsp">Advanced Transducer Data</a></li>
+					  				          </ul></li>
+
+			      <li class="dropdown"><a href="#" class="trigger-drop">Enter Data<i class="arrow"></i></a><ul class="drop">
+						    <li><a href="./src/DatabaseInsertion/manualEntry.jsp">Well</a></li>
+					   	    <li><a href="./src/DatabaseInsertion/manualSingleTrans.jsp">Transducer</a></li>
+						    <li><a href="./src/DatabaseInsertion/manualTransEntry.jsp">Recordings</a></li>
+						    <li><a href="./src/DatabaseInsertion/rainfall.jsp">Rainfall</a></li>
+    					 				          </ul></li>
+
+			   
+				
+			     <li><a href="./src/AccountControl/contact.jsp">Contact Us</a></li>
+
+			
+
+	  </ul>
+
+</nav>
+<center> <img style="margin-top:100px" style="-webkit-user-select: none;background-position: 0px 0px, 10px 10px;background-size: 20px 20px;background-image:linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);" src="http://i66.tinypic.com/346oqht.jpg"></center>
+<font size=1> <i><center>  Jason Evans</center>
+<center>  Ejay Mallard</center>
+<center>  Pearson Reese</center></i></font>
 </body>
+
 </html>
