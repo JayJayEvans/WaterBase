@@ -10,6 +10,14 @@
 		  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src="../JS/tags.js" type="text/javascript"></script>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<center>
+			<table width="993" height="102" border="0">
+				<tr>
+					<td width="200" height="120"><img src="http://i66.tinypic.com/346oqht.jpg" width="200" height="120" alt="Logo" /></td>
+					<td align="right" width="726" class="right">24X7 Customer Support - <a href="../AccountControl/contact.jsp">Contact us</a> | <a href="../../index.jsp">Home</a>
+				</tr>
+			</table>
+		</center>
 
 		<TITLE>Display file upload form to the user</TITLE></HEAD>  
 	 <% //  for uploading the file we used Encrypt type of multipart/form-data and input of file type to browse and submit the file %>
@@ -25,10 +33,11 @@
 	 </center> 
 	 </FORM>
 	 </BODY> 
-	 <br><br><b>README:</b> Each line of file is comma delimited and contains information for a single entry, multiple entries are supported.<br> If you choose to not enter optional data, use a space in place of the data that would be entered.  <br>
-	 <br><b>FILE FORMAT:</b> WellID,AquiferCode,TypeCode,OwnerType,OwnerName,Latitude,Longitude,Country,State,WellDepth,UsageState,PumpType,
-			 <br>BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Diameter,TopDepth,BottomDepth,Comment<br>
-			 <br><b>Optional Data:</b> OwnerType,OwnerName,PumpType,WaterLevelElevation,CasingID,Diameter,TopDepth,BottomDepth,Comments<br> 
+	 <br><br><b>README:</b> Each line of file is comma delimited and contains information for a single entry, multiple entries are supported.<br>
+	 If you choose to not enter optional data, use a space in place of the data that would be entered.  <br>
+	 <br><b>FILE FORMAT:</b> WellID, AquiferCode, TypeCode, OwnerType, OwnerName, Latitude, Longitude, Country, State, WellDepth, UsageState, PumpType,
+			 <br>BottomElevation, WaterLevelElevation, SurfaceElevation, CasingID, Diameter, TopDepth, BottomDepth, Comment<br>
+			 <br><b>Optional Data:</b>OwnerType, OwnerName, PumpType, WaterLevelElevation, CasingID, Diameter, TopDepth, BottomDepth, Comments<br> 
 
 	<br><br><br>
 <!--

@@ -67,6 +67,7 @@ String sql3 = "INSERT INTO Casing(CasingID,Diameter,TopDepth,BottomDepth) VALUES
 String query = "SELECT LAST_INSERT_ID()";
 String token = "";
 boolean casingOccured = true;
+boolean typeOccured = false;
 %>
 <%
 try {
@@ -109,12 +110,15 @@ try {
 						ps.setNull(4,0);
 					else{
 						ps1.setString(1,token);
-					}
+						typeOccured = true;
+						}
 					break;
 
 				case 6: //OwnerName
-					if(token.equals(" "))
+				if(token.equals(" ")){
 						ps.setNull(4,0);
+						ps1.executeUpdate();
+						}
 					else{	
 						ps1.setString(2,token);
 						ps1.executeUpdate();
