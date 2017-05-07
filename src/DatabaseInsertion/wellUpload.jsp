@@ -11,7 +11,52 @@
 		<script src="../JS/tags.js" type="text/javascript"></script>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-		<TITLE>Display file upload form to the user</TITLE></HEAD>  
+		<TITLE>Well Upload</TITLE>  
+
+
+		<link href="../CSS/menu.css" rel="stylesheet" type="text/css"/>
+		<nav id="navigation">
+	    <a href="../../index.jsp" class="logo">WaterBase</a>
+	    <ul class="links">    
+			     		    
+		    	      <li class="dropdown"><a href="#" class="trigger-drop">File Upload<i class="arrow"></i></a><ul class="drop">
+					            <li><a href="../DatabaseInsertion/wellUpload.jsp">Well</a></li>
+						    <li><a href="../DatabaseInsertion/transducerUpload.jsp">Transducer</a></li>
+									          </ul></li>
+
+
+ 					 <li class="dropdown"><a href="#" class="trigger-drop">Search Data<i class="arrow"></i></a><ul class="drop">
+
+						    <li><a href="../DatabaseQuerys/wellQuery.jsp">Well Data</a></li>
+					            <li><a href="../DatabaseQuerys/transReadingsQuery.jsp">Transducer Data</a></li>
+						    <li><a href="../DatabaseQuerys/location.jsp">Location Data</a></li>
+
+
+						    <li><a href="../DatabaseQuerys/advancedQuery.jsp">Advanced Transducer Data</a></li>
+
+					  				          </ul></li>
+
+			      <li class="dropdown"><a href="#" class="trigger-drop">Enter Data<i class="arrow"></i></a><ul class="drop">
+						    <li><a href="../DatabaseInsertion/manualEntry.jsp">Well</a></li>
+					   	    <li><a href="../DatabaseInsertion/manualSingleTrans.jsp">Transducer</a></li>
+						    <li><a href="../DatabaseInsertion/manualTransEntry.jsp">Recordings</a></li>
+						    <li><a href="../DatabaseInsertion/rainfall.jsp">Rainfall</a></li>
+    					 				          </ul></li>
+
+			   
+				
+			     <li><a href="../AccountControl/contact.jsp">Contact Us</a></li>
+
+
+			
+
+	  </ul>
+
+	</nav>
+
+
+
+		</HEAD>  
 	 <% //  for uploading the file we used Encrypt type of multipart/form-data and input of file type to browse and submit the file %>
 	 <BODY> <FORM  ENCTYPE="multipart/form-data" ACTION="singleFileUpload.jsp" METHOD=POST>
 	 <br><br><br>
