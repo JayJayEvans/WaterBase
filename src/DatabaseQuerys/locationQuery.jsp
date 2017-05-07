@@ -65,16 +65,34 @@
   minlat = request.getParameter("min_lat"); 
 
   try{
-  Double.parseDouble(maxlong);
-  Double.parseDouble(minlong);
-  Double.parseDouble(maxlat);
-  Double.parseDouble(minlat);
+  
+  if(Double.parseDouble(maxlong) > 180.0 || Double.parseDouble(maxlong) < -180){
+      throw new Exception(); 
+  }
+  if(Double.parseDouble(minlong) < -180.0 || Double.parseDouble(minlong) > 180.0 ){
+      throw new Exception(); 
+  }
+
+  if( Double.parseDouble(maxlat) > 90.0 || Double.parseDouble(maxlat) < -90.0){
+      throw new Exception(); 
+  }
+ 
+  if( Double.parseDouble(minlat) < -90.0 || Double.parseDouble(minlat) > 90.0){
+      throw new Exception(); 
+  }
+
+
+
+
+
 
 }catch(Exception e){
 %> 
 <script> //javascript
-  alert("Please enter valid number!\nTry again!");
-  event.preventDefault();
+  window.history.back(); 
+  alert("Please enter valid longitude/latitude values!\nTry again!");
+
+ 
 </script>
 <% //end java script  
 } //back to java
