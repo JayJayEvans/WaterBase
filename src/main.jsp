@@ -1,14 +1,21 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*,java.lang.String" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
+		        <link href="../CSS/menu.css" rel="stylesheet" type="text/css"/>
+			        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+					<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+					<title>Main</title>
+	</head>
 
-		<link rel="stylesheet" href="../CSS/rainfall.css"/>
+	<body>
 
 
-	<link href="../CSS/menu.css" rel="stylesheet" type="text/css"/>
-		<nav id="navigation">
-	    <a href="../../index.jsp" class="logo"> WaterBase</a>
+
+
+
+<nav id="navigation">
+	    <a href="#" class="logo"> WaterBase</a>
 	    <ul class="links">    
 			     		    
 		    	      <li class="dropdown"><a href="#" class="trigger-drop">File Upload<i class="arrow"></i></a><ul class="drop">
@@ -37,47 +44,18 @@
 
 			   
 				
-			     <li><a href="../AccountControl/contact.jsp">Contact Us</a></li>
+			     <li><a href="../AccountControl/logout.jsp">Logout</a></li>
 
 
 			
 
 	  </ul>
 
-	</nav>
+</nav>
+<center> <img style="margin-top:100px" style="-webkit-user-select: none;background-position: 0px 0px, 10px 10px;background-size: 20px 20px;background-image:linear-gradient(45deg, #eee 25%, transparent 25%, transparent 75%, #eee 75%, #eee 100%),linear-gradient(45deg, #eee 25%, white 25%, white 75%, #eee 75%, #eee 100%);" src="http://i66.tinypic.com/346oqht.jpg"></center>
+<font size=1> <i><center>  Jason Evans</center>
+<center>  Ejay Mallard</center>
+<center>  Pearson Reese</center></i></font>
+</body>
 
-		
-
-
-
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Manual Single Transducer</title>
-	</head>
-	<BODY>
-		<div class="container">	
-	<FORM id="rainfall" ACTION="manualSingleTransConf.jsp" METHOD="post">
-		<h3><font color ="black"><center>New Transducer Information</font></center></h3>
-		    <h4><center><i>Please enter device information below</i></center></h4>
-		
-			<fieldSet>	
-			    TransID:<br>
-			    <input type="text" name="TransID" placeholder="Manditory" required/><br>
-		        </fieldset>
-	 	        <fieldset>
-			    WellID:<br>
-			    <input type="text" name="WellID" placeholder="Manditory" required/><br>
- 		        </fieldset>
-			<fieldset>
-			    TransType:<br>
-			    <input type="text" name="TransType" placeholder="Manditory" required/><br>
-			</fieldset>
-			    <fieldset>
-			    TransName:<br>
-			    <input type="text" name="TransName" placeholder="Manditory" required/><br>
-		        </fieldset>
-			<fieldset>
-				<button name="submit" type="submit" id="myBtn" >Submit</button>	
-			</fieldset>	
-	</FORM>
-	</BODY>
-	</HTML>
+</html>

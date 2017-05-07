@@ -23,8 +23,8 @@ body {
 }
 
 .container {
-	max-width:400px;
-	width:100%;
+	max-width:100px;
+	width:50%;
 	margin:0 auto;
 	position:relative;
 }
