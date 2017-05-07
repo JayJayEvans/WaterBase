@@ -75,26 +75,26 @@
 
 
 			    TransducerID:<br>
-			    <input type="text" id='tran_id' name="TransID" placeholder=""/><br><br>
+			    <input type="text" id="tran_id" name="tran_id" placeholder=""/><br><br>
 			      
 			    WellID:<br>
-			    <input type="text" id='well_id' name="WellID" placeholder=""/><br><br>
+			    <input type="text" id="well_id" name="well_id" placeholder=""/><br><br>
 			    
 			    Beginning Date:<br>
-			    <input type="date" name="begDate"/><br><br>
+			    <input type="text" id="begDate" name="begDate" placeholder="MM/DD/YYYY"/><br><br>
   
 			    Beginning Time:<br>
-			    <input type="text" name="begTime" placeholder="hh:mm:ss"/><br>
+			    <input type="text" id="begTime" name="begTime" placeholder="hh:mm:ss"/><br>
 			    <small><sup><i>*Military Time</i></sup></small><br><br>
 			    
 			    End Date:<br>
-			    <input type="date" name="endDate"/><br><br>
+			    <input type="text" id="endDate" name="endDate" placeholder="MM/DD/YYYY" /><br><br>
 	      
 			    End Time:<br>
-			    <input type="text" name="endTime" placeholder="hh:mm:ss"/><br>
+			    <input type="text" id="endTime" name="endTime" placeholder="hh:mm:ss"/><br>
 			    <small><sup><i>*Military Time</i></sup></small><br><br>
 			      
-			    <input type="checkbox" name="getRain" value="rain">Get rainfall at location?<br><br>
+			    <input type="checkbox" id="getRain" name="getRain" value="rain">Get rainfall at location?<br><br>
 			   
 			    <button name="submit" type="submit" id="myBtn" name="contact-submit"  data-submit="...Sending" onclick="clicked();"/>Submit</button> 
 			    
