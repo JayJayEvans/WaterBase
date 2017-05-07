@@ -66,6 +66,7 @@ String sql2 = "INSERT INTO Owner(OwnerType,OwnerName) VALUES(?,?)";
 String sql3 = "INSERT INTO Casing(CasingID,Diameter,TopDepth,BottomDepth) VALUES(?,?,?,?)";
 String query = "SELECT LAST_INSERT_ID()";
 String token = "";
+String line = "";
 boolean casingOccured = true;
 boolean typeOccured = false;
 %>
@@ -79,7 +80,7 @@ try {
 	Scanner scan = new Scanner(file);
 	while(scan.hasNextLine()){
 	casingOccured = true;
-	String line = scan.nextLine();
+	line = scan.nextLine();
 	ResultSet rs=null;
 	Scanner sc = new Scanner(line);
 	sc.useDelimiter(",");
@@ -92,9 +93,9 @@ try {
 				case 1://WellID
 					int tok = Integer.parseInt(token);
 					wellID = tok;
-					//if(token == " " )
-					//	ps.setNull(count,0);
-					//else
+					if(token == " " )
+						ps.setNull(count,0);
+					else
 					ps.setInt(count,tok);
 					break;
 
@@ -111,7 +112,7 @@ try {
 					else{
 						ps1.setString(1,token);
 						typeOccured = true;
-						}
+					}
 					break;
 
 				case 6: //OwnerName
@@ -130,7 +131,38 @@ try {
 
 	
 				case 7: //Latitude
+				 if(token.equals(" "))
+				 	ps.setNull(count-2,0);
+				else{
+					float lat = Float.parseFloat(token);	
+					
+					if(lat < -90 || lat > 90)
+					                        throw new NumberFormatException("Latitude is bounded at -90 && +90");
+				        else{
+			                        ps.setFloat(count-2,lat);
+			                }
+				}
+
+				break;
+
+
 				case 8: //Longitude
+				if(token.equals(" "))
+					ps.setNull(count-2,0);
+
+				else{
+					float longit = Float.parseFloat(token);
+					if(longit < -180 || longit > 180)
+					                        throw new NumberFormatException("Latitude is bounded at -180 && +180");
+					ps.setFloat(count-2,longit);
+				}
+				break;
+
+
+
+
+
+
 				case 11://WellDepth
 				case 14://BottomElevation
 				case 15://WaterLevelElevation
@@ -172,7 +204,7 @@ try {
 					break;
 
 
-				case 18:{//Diameter{
+				case 18:{//Diameter
 				
 					if(token.equals(" ") )
 						ps3.setNull(2,0);
@@ -185,7 +217,7 @@ try {
 						break;
 				
 
-				case 19:{//TopDepth{
+				case 19:{ //TopDepth
 					if(token.equals(" ") )
 						ps3.setNull(3,0);
 					else{
@@ -197,7 +229,7 @@ try {
 					break;
 				
 			
-				case 20:{//BottomDepth{
+				case 20:{//BottomDepth
 					
 					if(token.equals(" ") )
 						ps3.setNull(4,0);
@@ -240,15 +272,17 @@ try {
 
 
 }catch(Exception e){ 
-	out.println(e);
+	
 	%>
 	
   <Br><table border="2"><tr><td><b>Upload File has incorrect format, or information contains duplicates that violate constraints</b>
-                     <% out.println(saveFile); %>
+			  <% out.println(saveFile); %><br>
+			  <% out.println("Line: " + line); %>
   </td></tr></table>
 
 
 	<%
+	out.println(e);
 }
 file.delete();
 }

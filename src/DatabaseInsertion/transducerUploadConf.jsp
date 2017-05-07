@@ -51,6 +51,7 @@ Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
 boolean success =true;
 Statement st=conn.createStatement();
+String line = "";
 %>
 
 <%
@@ -63,7 +64,7 @@ String sql2 = "INSERT INTO TransducerRecords(TransID,Temperature,Conductivity,Pr
 Scanner scan = new Scanner(file);
 try{
 while(scan.hasNextLine()){
-String line = scan.nextLine();
+line = scan.nextLine();
 
 String token = "";
 %>
@@ -76,6 +77,7 @@ String token = "";
 	sc.useDelimiter(",");
 	int count = 1;
 	int recordCount = 1;
+	boolean atLeastOne = false;
 	while(sc.hasNext()){
 			token = sc.next();
 		
@@ -97,6 +99,7 @@ String token = "";
 					if(token.equals(" "))
 						ps1.setNull(recordCount,0);
 					else{	
+						atLeastOne=true;
 						ps1.setFloat(recordCount,Float.valueOf(token));
 					}
 					break;
@@ -136,7 +139,7 @@ String token = "";
 				ps1.setNull(recordCount,0);
 				else{
 				try{
-				if(!token.matches("([0-9]{2}):([0-9]{2}):([0-9]{2})")){
+				if(!token.matches("([0-2][0-4]):([0-5][0-9]):([0-5][0-9])")){
 				throw new InputMismatchException("time violates regex");
 
 				}
@@ -165,7 +168,8 @@ String token = "";
 			recordCount++;
 	}
 
-
+	if(!atLeastOne)
+		throw new InputMismatchEexception("Need at Least One of the Optional Fields!");
 	ps1.executeUpdate();
 
 	}
@@ -185,7 +189,8 @@ String token = "";
 	%>
 	
   <Br><table border="2"><tr><td><b>Upload File has incorrect format, or information contains duplicates that violate constraints</b>
-                     <% out.println(saveFile); %>
+			  <% out.println(saveFile); %><br>
+			  <% out.println("Line: " + line); %>
   </td></tr></table>
 
 
