@@ -26,21 +26,14 @@ Connection conn;
 Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
 boolean casingOccured = false;
+boolean ownerOccured = false;
 Statement st=conn.createStatement();
 %>
 
 <%
 
 String param = request.getParameter("WellID");
-%> 
-     <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
-                                 <% out.println(param); %> 
-     </td></tr></table>
-                                                                  <%
-%>
 
-
-<%
 String sql = "INSERT INTO Well(WellID,AquiferCode,TypeCode,OwnerID,Latitude,Longitude,Country,State,WellDepth,UsageState,PumpType,BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Comments)";
 sql += " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 String sql2 = "INSERT INTO Owner(OwnerType,OwnerName) VALUES(?,?)";
@@ -79,18 +72,27 @@ try {
 	param = request.getParameter("Latitude");
 	if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(5,0);
-	else
-		ps.setFloat(5,Float.parseFloat(param));
-
+	else{
+		float lat = Float.parseFloat(param);
+		if(lat < -90 || lat > 90)
+			throw new NumberFormatException("Latitude is bounded at -90 && +90");
+		else{
+			ps.setFloat(5,lat);
+		}
+	}
 	
 	param = request.getParameter("Longitude");
 
 		if(param.equals(" ") || param == null || param.isEmpty())
 		ps.setNull(6,0);
-	else
-		ps.setFloat(6,Float.parseFloat(param));
+		else{
+		float longit = Float.parseFloat(param);
+		if(longit < -180 || longit > 180)
+			throw new NumberFormatException("Latitude is bounded at -180 && +180");
+		ps.setFloat(6,longit);
 
-	
+		}
+
 	param = request.getParameter("Country");
 
 	if(param.equals(" ") || param == null || param.isEmpty())	
@@ -209,22 +211,28 @@ try {
 
 	if(param.equals(" ") || param == null || param.isEmpty())
 		ps1.setNull(1,0);
-	else
+		else{
 		ps1.setString(1,param);
-
-
+		ownerOccured=true;
+		}
 	param = request.getParameter("OwnerName");
 
 	if(param.equals(" ") || param == null || param.isEmpty())
 		ps1.setNull(2,0);
-	else
+		else{
 		ps1.setString(2,param);
-
-	ps1.executeUpdate();
-	rs = ps1.getGeneratedKeys();
-	rs.next();
-	ps.setInt(4,rs.getInt(1));
-	ps2.executeUpdate();
+		ownerOccured=true;
+		}
+	if(ownerOccured){
+		ps1.executeUpdate();
+		rs = ps1.getGeneratedKeys();
+		rs.next();
+		ps.setInt(4,rs.getInt(1));
+	}
+	else
+		ps.setNull(4,0);
+	if(casingOccured)
+		ps2.executeUpdate();
 
 
 	ps.executeUpdate ();
@@ -232,7 +240,7 @@ try {
 
 	%>
 	
- <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
+ <Br><table border="2"><tr><td><b>Information Successfully Recorded!</b>
   </td></tr></table>
  
 
@@ -241,14 +249,13 @@ try {
 
 
 }catch(Exception e){ 
-	out.println(e);
 	%>
 	
-  <Br><table border="2"><tr><td><b>Upload File has incorrect format, or information contains duplicates that violate constraints</b>
+  <Br><table border="2"><tr><td><b>Error In Input! Data Failed To Be Inserted!</b>
   </td></tr></table>
-
-
 	<%
+	out.println(e);
+
 }
 %>
 </body>

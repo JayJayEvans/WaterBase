@@ -32,7 +32,8 @@
 		<script type="text/javascript">
 			  function clicked() {
 
-				  if(!document.getElementById('trans_id').value || !document.getElementById('date').value || !document.getElementById('time').value){
+				  if(!document.getElementById('temp').value && !document.getElementById('cond').value && 
+	  				!document.getElementById('press').value && !document.getElementById('sal').value && !document.getElementById('tds').value){
 					  //location.reload(true);
 					  alert("You must provide required data!\nPlease try again!");
 					  event.preventDefault();
@@ -62,7 +63,7 @@
 		<fieldset>  
 			Time:<br>
 			<input type="text" name="Time" id='time' placeholder="manditory" required/><br>
-			<font size="1px" color="red">HH:MM:SS </font><br>			      	
+			<font size="1px" color="red">HH:MM:SS Military Format</font><br>			      	
 		</fieldset>                                
 		<fieldset>  
 			Temperature:<br>

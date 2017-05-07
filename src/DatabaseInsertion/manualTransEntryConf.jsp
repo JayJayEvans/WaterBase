@@ -19,6 +19,8 @@ Statement st=conn.createStatement();
 
 <%
 boolean success = true;
+
+
 %>
 
 
@@ -27,8 +29,6 @@ String token = "";
 String sql = "INSERT INTO TransducerRecords(TransID,Date,Temperature,Conductivity,Pressure,Salinity,TDS,Time) VALUES(?,?,?,?,?,?,?,?)";
 try{
 
-%>
-<%
 token = request.getParameter("TransID");
 
 	ps = conn.prepareStatement (sql);
@@ -45,11 +45,25 @@ token = request.getParameter("TransID");
 				}	
 
 				token = request.getParameter("Date");
-					try{
-						if(!token.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")){
-							throw new InputMismatchException("date violates regex");
-						}
+				try{
+					if(!token.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")){
+						throw new InputMismatchException("date violates regex");
 					}
+					String tokenz = token;
+					String[] output = tokenz.split("/");
+					int year = Integer.parseInt(output[2]);
+					int month = Integer.parseInt(output[0]);
+					int day = Integer.parseInt(output[1]);
+					int []daysinmonth={31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+					if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+						daysinmonth[1]=29;
+					if (month<13){
+						if( day <= daysinmonth[month-1] )
+							ps.setString(2,token);
+					}
+					else
+						throw new InputMismatchException("Date Is Not Valid");
+				}
 					catch (InputMismatchException e){
 						success = false;
 						%>
@@ -59,11 +73,6 @@ token = request.getParameter("TransID");
 							    window.history.back();
 						</script>
 						<%
-					}
-					finally{
-						if(success == true){
-							ps.setString(2,token);
-						}
 					}
 				
 
@@ -106,9 +115,11 @@ token = request.getParameter("TransID");
 						
 				token = request.getParameter("Time");
 					try{
-						if(!token.matches("([0-9]{2}):([0-9]{2}):([0-9]{2})")){
+						if(!token.matches("([0-2][0-9]):([0-5][0-9]):([0-5][0-9])")){
 							throw new InputMismatchException("time violates regex");
 						}
+						ps.setString(8,token);
+
 					}
 					catch (InputMismatchException e){
 						success = false;
@@ -120,12 +131,7 @@ token = request.getParameter("TransID");
 						</script>
 						<%
 					}
-					finally{
-						if(success == true){
-							ps.setString(8,token);
-						}
-					}
-
+							
 
 
 
