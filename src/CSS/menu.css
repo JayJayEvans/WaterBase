@@ -2,7 +2,7 @@
   box-sizing: border-box; }
 
 body {
-  background: #33334d;
+  background: #FFF;
   color: #222;
   line-height: normal;
   font-size: 16px;
@@ -10,7 +10,7 @@ body {
   position: relative; }
 
 a, a:hover {
-  color: #33334d;
+  color: #007499;
   text-decoration: none;
   font-weight: 600; }
 
@@ -39,7 +39,7 @@ nav {
       top: -8px;
       font-size: 13pt; }
     nav .logo:hover {
-      background: #9494b8; }
+      background: #2F7958; }
   nav .links {
     float: right;
     margin-right: 30px;
@@ -58,7 +58,7 @@ nav {
         height: 30px; }
         nav .links li > a:hover {
           color: #fff;
-          background: #33334d;
+          background: #007499;
           border-radius: 2px; }
         nav .links li > a[class^="trigger-"] {
           padding-right: 40px; }
@@ -81,6 +81,7 @@ nav {
             height: 15px; }
       nav .links li ul {
         position: absolute;
+        width: 300px; 
         left: 0;
         margin: 0;
         background: #fff;
@@ -95,9 +96,9 @@ nav {
           margin: 0;
           width: 100%; }
           nav .links li ul > li:hover {
-            background: #9494b8; }
+            background: #2F7958; }
             nav .links li ul > li:hover > a {
-              background: #9494b8;
+              background: #2F7958;
               color: #fff; }
       nav .links li:hover > .drop {
         display: block;
