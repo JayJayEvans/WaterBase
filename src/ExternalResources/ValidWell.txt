@@ -1,0 +1,2 @@
+1,a23,B,Government,NSA,12.34,11.3,United States,Texas,2000.0,unused,c132,1202.4, ,1242.8, , , , , ,
+2,b45,A,Person,Johnson Everrete, 11,12,China,Republic Of China,3,Used,b78,1234,1212,121,1,22,23,24,Pie,

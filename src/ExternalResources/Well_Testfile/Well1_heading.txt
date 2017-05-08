@@ -1,0 +1,1 @@
+StateWellNumber,LatitudeDD,LongitudeDD,County,AquiferCode,Owner,WellTypeCode,DrillingEndDate,WellDepth,CasingId,Diameter,TopDepth,BottomDepth,LandSurfaceElevation,WaterElevation,DepthtoWater,WaterLevelsAvailable,WaterQualityAvailable,Pump,WellUse,Remarks

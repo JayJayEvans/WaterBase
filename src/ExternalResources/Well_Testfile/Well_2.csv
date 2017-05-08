@@ -1,0 +1,19 @@
+Disclaimer,,,,,,,,,,,,,,,,,,
+"""GWDB DISCLAIMER:ÿ Except where noted, all of the information provided in the Texas Water Development Board (TWDB) Groundwater Database (http://www.twdb.texas.gov/groundwater/data/gwdbrpt.asp) is believed to be accurate and reliable; however, the TWDB assumes no responsibility for any errors appearing in rules or otherwise. Further, TWDB assumes no responsibility for the use of the information provided. PLEASE NOTE that users of these data are responsible for checking the accuracy, completeness, currency and/or suitability of all information themselves. TWDB makes no guarantees or warranties as to the accuracy, completeness, currency, or suitability of the information provided via the Groundwater Database (GWDB). TWDB specifically disclaims any and all liability for any claims or damages that may result from providing GWDB data or the information it contains. For additional information or answers to questions concerning the TWDB GWDB, contact the Groundwater Data Team at GroundwaterData@twdb.texas.gov.""",,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+StateWellNumber,LatitudeDD,LongitudeDD,County,AquiferCode,State,Owner,WellTypeCode,DrillingEndDate,WellDepth,CasingId,DepthtoWater,LandSurfaceElevation,WaterElevation,WaterLevelsAvailable,WaterQualityAvailable,WellUse,Pump,Remarks
+3933401,31.448334,-96.997778,McLennan,111ABZR,TX,USGS,O,0/0/1963,54,,23,361,338,Yes,No,Unused,,"Test hole.  Caved at 23 ft., moist samples at about 28 ft."
+4022201,31.735278,-97.298056,McLennan,111ABZR,TX,John S. Harvey,W,0/0/1953,41,,32,478,446,Yes,Yes,Domestic,Jet,Well taps older terrace alluvium. Temp. 75 degrees F.
+4022202,31.713334,-97.293056,McLennan,111ABZR,TX,Wortham ,W,,27,,20,470,450,Yes,No,Unused,,Well taps older terrace alluvium.
+4022301,31.743334,-97.281111,McLennan,111ABZR,TX,John S. Harvey,W,0/0/1960,32,,26.14,435,408.86,Yes,Yes,Irrigation,,Temp 68 degrees F.
+4022302,31.743889,-97.28,McLennan,111ABZR,TX,John S. Harvey,W,0/0/1953,40,,,435,435,No,No,Unused,,
+4022303,31.712778,-97.271667,McLennan,111ABZR,TX,Nix Bros. ,W,,31,,25.7,455,429.3,Yes,No,Unused,,
+4022304,31.715556,-97.275,McLennan,111ABZR,TX,Leif Jensen ,W,,35,,29.4,452,422.6,Yes,No,Unused,,
+4022305,31.710834,-97.265001,McLennan,111ABZR,TX,,W,,19,,14,451,437,Yes,No,Unused,,
+4022306,31.729167,-97.276111,McLennan,111ABZR,TX,C.Bryant,W,,17,,12.9,439,426.1,Yes,No,Stock,,
+4022601,31.698056,-97.2725,McLennan,111ABZR,TX,H. Kelly,W,,32,,28.3,421,392.7,Yes,No,Unused,,
+4022602,31.705556,-97.254723,McLennan,111ABZR,TX,H. Slough ,W,0/0/1954,21,,13,453,440,Yes,No,Unused,,
+4022603,31.697222,-97.252223,McLennan,111ABZR,TX,,W,,20,,,420,420,No,No,Unused,,Flows from alluvium or older terrace alluvium.
+4022604,31.683889,-97.250556,McLennan,111ABZR,TX,L.W. Knoll,W,,32,,27.1,468,440.9,Yes,No,Domestic,,Well taps older terrace alluvium.
+4023101,31.714723,-97.232222,McLennan,111ABZR,TX,Donaldson ,W,,28,,19.1,469,449.9,Yes,No,Domestic,,Well taps older terrace alluvium or Washita Group.
+4023102,31.716389,-97.224722,McLennan,111ABZR,TX,,W,0/0/1962,21,,17.9,463,445.1,Yes,No,Domestic,,Well taps older terrace alluvium or Washita Group.
