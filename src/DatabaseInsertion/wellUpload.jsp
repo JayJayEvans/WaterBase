@@ -10,8 +10,7 @@
 		  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src="../JS/tags.js" type="text/javascript"></script>
 				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-		<TITLE>Well Upload</TITLE>  
+				<TITLE>Well Upload</TITLE>  
 
 
 		<link href="../CSS/menu.css" rel="stylesheet" type="text/css"/>
@@ -70,10 +69,11 @@
 	 </center> 
 	 </FORM>
 	 </BODY> 
-	 <br><br><b>README:</b> Each line of file is comma delimited and contains information for a single entry, multiple entries are supported.<br> If you choose to not enter optional data, use a space in place of the data that would be entered.  <br>
-	 <br><b>FILE FORMAT:</b> WellID,AquiferCode,TypeCode,OwnerType,OwnerName,Latitude,Longitude,Country,State,WellDepth,UsageState,PumpType,
-			 <br>BottomElevation,WaterLevelElevation,SurfaceElevation,CasingID,Diameter,TopDepth,BottomDepth,Comment<br>
-			 <br><b>Optional Data:</b> OwnerType,OwnerName,PumpType,WaterLevelElevation,CasingID,Diameter,TopDepth,BottomDepth,Comments<br> 
+	 <br><br><b>README:</b> Each line of file is comma delimited and contains information for a single entry, multiple entries are supported.<br>
+	 If you choose to not enter optional data, use a space in place of the data that would be entered.  <br>
+	 <br><b>FILE FORMAT:</b> WellID, AquiferCode, TypeCode, OwnerType, OwnerName, Latitude, Longitude, Country, State, WellDepth, UsageState, PumpType,
+			 <br>BottomElevation, WaterLevelElevation, SurfaceElevation, CasingID, Diameter, TopDepth, BottomDepth, Comment<br>
+			 <br><b>Optional Data:</b>OwnerType, OwnerName, PumpType, WaterLevelElevation, CasingID, Diameter, TopDepth, BottomDepth, Comments<br> 
 
 	<br><br><br>
 <!--

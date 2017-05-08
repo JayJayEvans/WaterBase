@@ -25,6 +25,7 @@ boolean success = true;
 
 
 <%
+String tran = "";
 String token = "";
 String sql = "INSERT INTO TransducerRecords(TransID,Date,Temperature,Conductivity,Pressure,Salinity,TDS,Time) VALUES(?,?,?,?,?,?,?,?)";
 try{
@@ -38,7 +39,7 @@ token = request.getParameter("TransID");
 					ps.setNull(1,0);
 				}
 				else{
-
+					tran=token;
 					int tok = Integer.parseInt(token);
 						ps.setInt(1,tok);
 					
@@ -115,7 +116,7 @@ token = request.getParameter("TransID");
 						
 				token = request.getParameter("Time");
 					try{
-						if(!token.matches("([0-2][0-9]):([0-5][0-9]):([0-5][0-9])")){
+						if(!token.matches("([0-2][0-4]):([0-5][0-9]):([0-5][0-9])")){
 							throw new InputMismatchException("time violates regex");
 						}
 						ps.setString(8,token);
@@ -141,8 +142,8 @@ token = request.getParameter("TransID");
 
 	%>
 	
- <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
-                     <% out.println(token); %>
+ <Br><table border="2"><tr><td><b>You have successfully inserted a new record for Transducer:</b>
+                     <% out.println(tran); %>
   </td></tr></table>
  
 
@@ -151,11 +152,10 @@ token = request.getParameter("TransID");
 
 
 }catch(Exception e){ 
-	out.println(e);
 	%>
 	
-  <Br><table border="2"><tr><td><b>Upload File has incorrect format, or information contains duplicates that violate constraints</b>
-                     <% out.println(token); %>
+  <Br><table border="2"><tr><td><b>Record Insertion Failed due to improper type entry, or information duplicates that violate constraints</b>
+			  <br> <% out.println(e); %>
   </td></tr></table>
 
 

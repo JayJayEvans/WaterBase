@@ -26,6 +26,7 @@ boolean wellExists = false;
 <%
 String token = "";
 String sql = "INSERT INTO Transducers(TransID,TransType,TransName,WellID) VALUES(?,?,?,?)";
+String tran ="";
 try{
 
 %>
@@ -39,7 +40,7 @@ token = request.getParameter("TransID");
 					ps.setNull(1,0);
 				}
 				else{
-
+					tran=token;
 					int tok = Integer.parseInt(token);
 					ps.setInt(1,tok);
 					
@@ -61,8 +62,8 @@ token = request.getParameter("TransID");
 
 	%>
 	
- <Br><table border="2"><tr><td><b>You have successfully inserted a new transducer!</b>
-                     <% out.println(token); %>
+ <Br><table border="2"><tr><td><b>You have successfully inserted a new transducer: </b>
+                     <% out.println(tran); %>
   </td></tr></table>
  
 
