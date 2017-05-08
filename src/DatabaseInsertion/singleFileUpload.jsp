@@ -82,6 +82,7 @@ try {
 	casingOccured = true;
 	line = scan.nextLine();
 	ResultSet rs=null;
+	typeOccured = false;
 	Scanner sc = new Scanner(line);
 	sc.useDelimiter(",");
 	int count = 1;
@@ -93,10 +94,14 @@ try {
 				case 1://WellID
 					int tok = Integer.parseInt(token);
 					wellID = tok;
-					if(token == " " )
+					if(token == " " ){
 						ps.setNull(count,0);
-					else
-					ps.setInt(count,tok);
+
+					}
+					else{
+						ps.setInt(count,tok);
+
+					}
 					break;
 
 				case 2: //AquiferCode
@@ -118,7 +123,8 @@ try {
 				case 6: //OwnerName
 				if(token.equals(" ")){
 						ps.setNull(4,0);
-						ps1.executeUpdate();
+						if(typeOccured)
+							ps1.executeUpdate();
 						}
 					else{	
 						ps1.setString(2,token);

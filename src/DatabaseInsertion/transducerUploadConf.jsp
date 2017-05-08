@@ -60,7 +60,7 @@ File file = new File(saveFile);
 
 
 <%
-String sql2 = "INSERT INTO TransducerRecords(TransID,Temperature,Conductivity,Pressure,Salinity,TDS,Date,Time) VALUES(?,?,?,?,?,?,?,?)";
+String sql2 = "INSERT INTO TransducerRecords(TransID,Temperature,Conductivity,Pressure,Salinity,TDS,DateTime) VALUES(?,?,?,?,?,?,?)";
 Scanner scan = new Scanner(file);
 try{
 while(scan.hasNextLine()){
@@ -69,7 +69,7 @@ line = scan.nextLine();
 String token = "";
 %>
 <%
-
+	String stamp ="";
 	ps1 = conn.prepareStatement(sql2);
 	ps2 = null;
 	ResultSet rs=null;
@@ -78,6 +78,7 @@ String token = "";
 	int count = 1;
 	int recordCount = 1;
 	boolean atLeastOne = false;
+	success = true;
 	while(sc.hasNext()){
 			token = sc.next();
 		
@@ -108,7 +109,7 @@ String token = "";
 						ps1.setNull(recordCount,0);
 					else{
 						try{
-							if(!token.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")){
+							if(!token.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")){
 								throw new InputMismatchException("date violates regex");
 
 						 	}
@@ -123,26 +124,17 @@ String token = "";
 						 </script>
 						 <%
 						 }
-						 finally{
-						 	if(success == true){
-						 		ps1.setString(recordCount,token);
-						 	}
-						 }
-
-
+						 	if(success == true)
+						 		stamp = token;
 
 					}
 					break;
 				case 8:
 
-				if(token.equals(" "))
-				ps1.setNull(recordCount,0);
-				else{
 				try{
-				if(!token.matches("([0-2][0-4]):([0-5][0-9]):([0-5][0-9])")){
-				throw new InputMismatchException("time violates regex");
+				if(!token.matches("([0-2][0-9]):([0-5][0-9]):([0-5][0-9])"))
+					throw new InputMismatchException("time violates regex");
 
-				}
 				}
 				catch (InputMismatchException e){
 				success = false;
@@ -154,22 +146,21 @@ String token = "";
 				</script>
 				<%
 				}
-				finally{
 					if(success == true){
-						ps1.setString(recordCount,token);
+						stamp += " ";
+						stamp += token;
+						ps1.setTimestamp(7,java.sql.Timestamp.valueOf(stamp));
 					}
-				}
 
 
 
-				}
 				break;
 			}
 			recordCount++;
 	}
 
 	if(!atLeastOne)
-		throw new InputMismatchEexception("Need at Least One of the Optional Fields!");
+		throw new InputMismatchException("Need at Least One of the Optional Fields!");
 	ps1.executeUpdate();
 
 	}

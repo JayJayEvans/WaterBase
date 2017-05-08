@@ -172,19 +172,13 @@ try {
 	if(rs.next()){
 		rs.beforeFirst();
 		%>
+		<b>
 		<%
 		out.println("Well Info: ");
 		%>
+		</b>
 		<%
-	if(!rs.next()){
-		%>
-				<script>
-				alert("No Results!");  
-				window.history.back();
-				</script>
-	<%
-	}
-	else{
+	
 		rs.beforeFirst(); 
 		while(rs.next()){
 			out.print(rs.getInt(1) + " ");
@@ -205,26 +199,34 @@ try {
 			out.print(rs.getString(16) + " ");
 				
 		}
+		rs.beforeFirst();
 	}	
-	
-	}
-	%>
-		
-	<%
-	rs.beforeFirst();
-	if(rs.next()){
-		out.print("Owner Info: ");
-		%>
-		
-		<%
-
-		if(!rs1.next()){
+	if(!rs.next()){
+		out.println(" <empty> ");
 		%>
 				<script>
 				alert("No Results!");  
 				window.history.back();
 				</script>
+	<%
+	}
+	
+	
+	
+	%>
+	<br><b>	
+	<%
+	rs.beforeFirst();
+	if(rs.next()){
+		out.print("Owner Info: ");
+		%>
+		</b>	
 		<%
+
+		if(!rs1.next()){
+		
+			out.println(" <empty>");
+		
 		}else{
 			rs1.beforeFirst();
 			while(rs1.next()){
@@ -238,19 +240,17 @@ try {
 	}
 	rs.beforeFirst();
 	%>
-
+	<br><b>
 	<%
 	if(rs.next()){
 		out.print("Transducer Info: ");
 		%>
+	</b>
 		<%
 		if(!rs2.next()){
-		%>
-				<script>
-				alert("No Results!");  
-				window.history.back();
-				</script>
-		<%
+		
+			out.println(" <empty> ");
+			
 		}else{
 				rs2.beforeFirst();
 				while(rs2.next()){

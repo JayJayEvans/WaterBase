@@ -87,7 +87,7 @@
 		<fieldset>	 
 			Date:<br>
 			<input type="text" name="Date" id='date' placeholder="manditory" required/><br>
-			<font size="1px" color="red">MM/DD/YYYY</font><br> 
+			<font size="1px" color="red">YYYY-MM-DD</font><br> 
 		</fieldset>                                
 		<fieldset>  
 			Time:<br>

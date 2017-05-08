@@ -27,10 +27,11 @@ boolean success = true;
 <%
 String tran = "";
 String token = "";
-String sql = "INSERT INTO TransducerRecords(TransID,Date,Temperature,Conductivity,Pressure,Salinity,TDS,Time) VALUES(?,?,?,?,?,?,?,?)";
+String sql = "INSERT INTO TransducerRecords(TransID,Temperature,Conductivity,Pressure,Salinity,TDS,DateTime) VALUES(?,?,?,?,?,?,?)";
 try{
 
 token = request.getParameter("TransID");
+String stamp = "";
 
 	ps = conn.prepareStatement (sql);
 	ps2 = null;
@@ -47,25 +48,13 @@ token = request.getParameter("TransID");
 
 				token = request.getParameter("Date");
 				try{
-					if(!token.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")){
+					if(!token.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")){
 						throw new InputMismatchException("date violates regex");
 					}
-					String tokenz = token;
-					String[] output = tokenz.split("/");
-					int year = Integer.parseInt(output[2]);
-					int month = Integer.parseInt(output[0]);
-					int day = Integer.parseInt(output[1]);
-					int []daysinmonth={31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-					if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
-						daysinmonth[1]=29;
-					if (month<13){
-						if( day <= daysinmonth[month-1] )
-							ps.setString(2,token);
-					}
 					else
-						throw new InputMismatchException("Date Is Not Valid");
+						stamp = token;
 				}
-					catch (InputMismatchException e){
+				catch (InputMismatchException e){
 						success = false;
 						%>
 						<script type="text/javascript">
@@ -74,52 +63,54 @@ token = request.getParameter("TransID");
 							    window.history.back();
 						</script>
 						<%
-					}
+				}
 				
 
 				
 				token = request.getParameter("Temperature");
 				 if(token.equals(" ") || token == null || token.isEmpty())		
-					ps.setNull(3,0);
+					ps.setNull(2,0);
 					else
-						ps.setFloat(3,Float.parseFloat(token));
+						ps.setFloat(2,Float.parseFloat(token));
 
 				token = request.getParameter("Conductivity");
 				 if(token.equals(" ") || token == null || token.isEmpty())
-						ps.setNull(4,0);
+						ps.setNull(3,0);
 					else
-						ps.setFloat(4,Float.parseFloat(token));
+						ps.setFloat(3,Float.parseFloat(token));
 				
 				token = request.getParameter("Pressure");
 						
 				 if(token.equals(" ") || token == null || token.isEmpty())				
-						ps.setNull(5,0);
+						ps.setNull(4,0);
 					else
-						ps.setFloat(5,Float.parseFloat(token));
+						ps.setFloat(4,Float.parseFloat(token));
 
 
 				token = request.getParameter("Salinity");
 					 if(token.equals(" ") || token == null || token.isEmpty())
-						ps.setNull(6,0);
+						ps.setNull(5,0);
 					else
-						ps.setFloat(6,Float.parseFloat(token));
+						ps.setFloat(5,Float.parseFloat(token));
 			
 			
 				token = request.getParameter("TDS");
 						
 					 if(token.equals(" ") || token == null || token.isEmpty())
-						ps.setNull(7,0);
+						ps.setNull(6,0);
 					else
-						ps.setFloat(7,Float.parseFloat(token));
+						ps.setFloat(6,Float.parseFloat(token));
 				
 				
 						
 				token = request.getParameter("Time");
 					try{
-						if(!token.matches("([0-2][0-4]):([0-5][0-9]):([0-5][0-9])")){
+						if(!token.matches("([0-2][0-9]):([0-5][0-9]):([0-5][0-9])")){
 							throw new InputMismatchException("time violates regex");
 						}
-						ps.setString(8,token);
+						stamp += " ";
+						stamp += token; 
+						ps.setTimestamp(7,java.sql.Timestamp.valueOf(stamp));
 
 					}
 					catch (InputMismatchException e){

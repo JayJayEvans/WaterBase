@@ -94,7 +94,7 @@
     </fieldset>
     <fieldset>
       <input placeholder="Date" id="dato" name='date' type="text" tabindex="3">
-       <font size="1px" color="red"> MM/DD/YYYY</font>
+       <font size="1px" color="red"> YYYY-MM-DD</font>
     </fieldset>
     
     <fieldset>

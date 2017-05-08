@@ -80,10 +80,11 @@
 			ps.setNull(3,0);
 		}else{
 				try{
-		  			if(!date.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")){
+		  			if(!date.matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")){
 		  				throw new InputMismatchException("date violates regex");
 		  				 
 		  			}
+					ps.setDate(3,java.sql.Date.valueOf(date));
 	  			}
 	  			catch (InputMismatchException e){
 	  				success = false; 
@@ -94,11 +95,6 @@
 			 			window.history.back();
 			 		</script>
 			 		<%
-	  			}
-	  			finally{
-	  				if(success == true){
-	  					ps.setString(3,date);
-	  				}
 	  			}
 		}
 		if(true_amount.equals(" ") || true_amount == null || true_amount.isEmpty()){

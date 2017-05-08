@@ -81,8 +81,7 @@
            <th align='center'>Pressure</th>
            <th align='center'>Salinity</th> 
            <th align='center'>TDS</th>
-           <th align='center'>Date</th> 
-           <th align='center'>Time</th> 
+           <th align='center'>DateTime</th> 
            </tr>
 
 
@@ -170,8 +169,7 @@
 
 
 
-                    <td align='center'><%out.print(rs.getString(7));%></td>
-                    <td align='center'><%out.print(rs.getString(8));%></td>
+                    <td align='center'><%out.print(rs.getTimestamp(7));%></td>
                 </tr>
                 <%
              }

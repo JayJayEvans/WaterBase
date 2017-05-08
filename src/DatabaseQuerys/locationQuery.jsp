@@ -97,7 +97,7 @@
 <% //end java script  
 } //back to java
 
-String locationQ = String.format("SELECT Transducers.TransID, Transducers.WellID FROM Transducers, (SELECT Well.WellID FROM Well WHERE Well.Latitude > %s AND Well.Latitude < %s AND Well.Longitude >%s AND Well.Longitude < %s ) AS WELLids WHERE WELLids.WellID = Transducers.WellID;", minlat, maxlat, minlong, maxlong);
+String locationQ = String.format("SELECT Transducers.TransID, Transducers.WellID FROM Transducers, (SELECT Well.WellID FROM Well WHERE Well.Latitude >= %s AND Well.Latitude <= %s AND Well.Longitude >=%s AND Well.Longitude <= %s ) AS WELLids WHERE WELLids.WellID = Transducers.WellID;", minlat, maxlat, minlong, maxlong);
 
 
 
