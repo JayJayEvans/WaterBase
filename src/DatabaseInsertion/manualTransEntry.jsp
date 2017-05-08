@@ -96,23 +96,23 @@
 		</fieldset>                                
 		<fieldset>  
 			Temperature:<br>
-			<input type="text" name="Temperature" id='temp' placeholder="optional"/><br>
+			<input type="text" name="Temperature" id='temp' placeholder="manditory" required/><br>
 		</fieldset>                                
 		<fieldset>  		 
 			Conductivity:<br>
-			<input type="text" name="Conductivity" id='cond' placeholder="optional"/><br>
+			<input type="text" name="Conductivity" id='cond' placeholder="manditory" required/><br>
 		</fieldset>                                
 		<fieldset>  		 
 			Pressure:<br>
-			<input type="text" name="Pressure" id='press' placeholder="optional"/><br>
+			<input type="text" name="Pressure" id='press' placeholder="manditory" required/><br>
 		</fieldset>                                
 		<fieldset>  	  
 			Salinity:<br>
-			<input type="text" name="Salinity" id = 'sal' placeholder="optional"/><br>
+			<input type="text" name="Salinity" id = 'sal' placeholder="manditory" required/><br>
 		</fieldset>                                
 		<fieldset>  	 
 			TDS:<br>
-			<input type="text" name="TDS" id='tds' placeholder="optional"/><br>
+			<input type="text" name="TDS" id='tds' placeholder="manditory" required/><br>
 
 		</fieldset>                                
 		<fieldset>  

@@ -54,10 +54,17 @@ boolean endDateEntered = false;
 boolean begTimeEntered = false;
 boolean endTimeEntered = false;
 boolean raincheck = false;
-
+boolean needAnd = false;
 ResultSet rs=null;
 ResultSet rs1=null;
 ResultSet rs2=null;
+ResultSet rs3=null;
+ResultSet rs4=null;
+String query = "SELECT * from Transducers WHERE ";
+String recordQuery = "SELECT * FROM TransducerRecords WHERE ";
+String wellQuery = "SELECT Latitude,Longitude FROM Well WHERE ";
+String trueQuery = "SELECT true_amt FROM True_Rainfall WHERE ";
+String avgQuery = "SELECT avg_amt FROM Avg_Rainfall WHERE ";
 %>
 <%
 try {
@@ -72,11 +79,20 @@ try {
 	if(!transIDStr.equals("")){
 		transIdEntered = true;
 		transIDInt = Integer.parseInt(transIDStr);
+		query += "TransID='";
+		query += transIDStr;
+		query += "'";
+		needAnd=true;
 	}
 
 	if(!wellIDStr.equals("")){
 		wellIdEntered = true;
 		wellIDInt = Integer.parseInt(wellIDStr);
+		if(needAnd)
+			query += " AND ";
+		query += "WellID='";
+		query += wellIDStr;
+		query +="'";
 	}
 
 	if(!begDate.equals("")){
@@ -132,105 +148,95 @@ try {
 <%
   	}
 
-  	if(!raincheck) {
-
-	  	//Query for when only the transID is entered
-	  	if(transIdEntered && !wellIdEntered && !begDateEntered && !endDateEntered &&
-	  		!begTimeEntered && !endTimeEntered) {	  		
-			String transID_Query = new String();
-			transID_Query = String.format("SELECT * FROM TransducerRecords WHERE TransID = %d ORDER BY Date ASC, Time;", transIDInt);
-
-			ps = conn.prepareStatement(transID_Query);
-	        rs = ps.executeQuery();
-	  	}
-	    //Query for when the transID and start/end date are entered
-	  	else if(transIdEntered && !wellIdEntered && begDateEntered && endDateEntered &&
-	  		!begTimeEntered && !endTimeEntered) {
-
-			String transID_date_Query = new String();
-			transID_date_Query = String.format("SELECT * FROM TransducerRecords WHERE Date between date(%s) and date(%s) AND TransID IN (SELECT TransID FROM TransducerRecords WHERE TransID = %d) ORDER BY Date ASC, Time;", begDate, endDate, transIDInt);
-
-			ps = conn.prepareStatement(transID_date_Query);
-	        rs = ps.executeQuery();
-	  	}
-	    //Query for when the transID and start/end date and time are entered
-	  	else if(transIdEntered && !wellIdEntered && begDateEntered && endDateEntered &&
-	  		begTimeEntered && endTimeEntered) {
 			
-			String transID_date_time_Query = new String();
-			transID_date_time_Query = String.format("(SELECT * FROM TransducerRecords WHERE TransID = %d AND Date = %s AND Time = %s) EXCEPT (SELECT * FROM TransducerRecords WHERE TransID = %d AND Date = %s AND Time = %s) ORDER BY Date ASC, Time;", transIDInt, begDate, begTime, transIDInt, endDate, endTime);
+ ps = conn.prepareStatement(query);
+ rs = ps.executeQuery();
+ boolean needOr = false;
+ int well = -100000;
+ if(!rs.next())
+ 	out.println(" <empty> ");
+else{
+rs.beforeFirst();
+while(rs.next()){
+	if(needOr){
+		recordQuery += " OR ";
+		wellQuery += " OR ";	
+	}
+	recordQuery += "TransID='";
+	recordQuery += Integer.toString(rs.getInt(1));
+	recordQuery += "'";
+	rs.getString(2);	
+	rs.getString(3);
+	well = rs.getInt(4);
+	wellQuery += "WellID='";
+	wellQuery += Integer.toString(well);
+	wellQuery += "'";
+	needOr = true;
 
-			ps = conn.prepareStatement(transID_date_time_Query);
-	        rs = ps.executeQuery();
-	  	}
-	  	//Query for when only the wellID is entered
-	  	else if(!transIdEntered && wellIdEntered && !begDateEntered && !endDateEntered &&
-	  		!begTimeEntered && !endTimeEntered) {
-	  		
-			String wellID_Query = new String();
-			wellID_Query = String.format("SELECT r.* FROM Transducers t, TransducerRecords r WHERE t.TransID = r.TransID AND t.WellID = %d", wellIDInt);
+}
+recordQuery += " ORDER BY DateTime ASC";
+//rs.beforeFirst();
+}
 
-			ps = conn.prepareStatement(wellID_Query);
-	        rs = ps.executeQuery();
-	  	}
-		//Query for when the wellID and start/end date are entered
-	  	else if(!transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
-	  		!begTimeEntered && !endTimeEntered) {
-	  		
-			String wellID_date_Query = new String();
-			wellID_date_Query = String.format("SELECT * FROM Transducers WHERE ");
+ps1 = conn.prepareStatement(recordQuery);
+rs1 = ps1.executeQuery();
 
-			ps = conn.prepareStatement(wellID_date_Query);
-	        rs = ps.executeQuery();
-	  	}
-		//Query for when the wellID and start/end date and time are entered
-	  	else if(!transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
-	  		begTimeEntered && endTimeEntered) {
-	  		
-			String wellID_date_time_Query = new String();
-			wellID_date_time_Query = String.format("SELECT * FROM Transducers WHERE ");
+ps2 = conn.prepareStatement(wellQuery);
+rs2 = ps2.executeQuery();
 
-			ps = conn.prepareStatement(wellID_date_time_Query);
-	        rs = ps.executeQuery();
-	  	}
-		//Query for when the transID and wellID are entered
-	  	else if(transIdEntered && wellIdEntered && !begDateEntered && !endDateEntered &&
-	  		!begTimeEntered && !endTimeEntered) {
-	  		
-	  		//ERROR CHECK
 
-			String transID_wellID_Query = new String();
-			transID_wellID_Query = String.format("SELECT * FROM Transducers WHERE ");
+double lat =0.0;
+double longit = 0.0;
+while(rs2.next()){
+	avgQuery += "latitude='";
+	lat = rs2.getFloat(1);
+	avgQuery += Double.toString(lat);
+	avgQuery += "' AND ";
+	trueQuery += "latitude='";
+	trueQuery += Double.toString(lat);
+	trueQuery += "' AND ";
 
-			ps = conn.prepareStatement(transID_wellID_Query);
-	        rs = ps.executeQuery();
-	  	}
-		//Query for when the transID, wellID and start/end date and time are entered
-	  	else if(transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
-	  		begTimeEntered && endTimeEntered) {
-	  		
-			String transID_wellID_date_time_Query = new String();
-			transID_wellID_date_time_Query = String.format("SELECT * FROM Transducers WHERE ");
+	longit = rs2.getFloat(2);		
+	avgQuery += "longitude='";
+	avgQuery += Double.toString(longit);
+	avgQuery +="'";
+	trueQuery += "longitude='";
+	trueQuery += Double.toString(longit);
+	trueQuery += "'";
+	trueQuery += " ORDER BY date ASC";
 
-			ps = conn.prepareStatement(transID_wellID_date_time_Query);
-	        rs = ps.executeQuery();
-	  	}
+}
+
+
+
+ps3 = conn.prepareStatement(trueQuery);
+rs3 = ps3.executeQuery();
+ps4 = conn.prepareStatement(avgQuery);
+rs4 = ps4.executeQuery();
+
+
+
+
 %>
 
         <center><table style="width:50%">
         <tr>
+	 <th align='center'>Well ID</th>
         <th align='center'>Transducer ID</th>
         <th align='center'>Temperature</th>
         <th align='center'>Conductivity</th> 
         <th align='center'>Pressure</th>
         <th align='center'>Salinity</th> 
         <th align='center'>TDS</th>
-        <th align='center'>Date</th> 
-        <th align='center'>Time</th> 
-        </tr>
+        <th align='center'>DateTime</th> 
+         <th align='center'>Avrg RainFall</th> 
+	 <th align='center'>True Rainfall</th> 
+
+	
+	</tr>
 <%
 
-        if(!rs.next()){
+        if(!rs1.next()){
 
 %> 
 	        <tr>
@@ -240,32 +246,33 @@ try {
         }
         else{
 
-            rs.beforeFirst(); 
+            rs1.beforeFirst(); 
             
-            while(rs.next()){
-            	double  temp1 = -100.0; 
-%>
+            while(rs1.next()){
+	    	%>
                 <tr>
 
-            	<td align='center'><%out.print(rs.getInt(1));%></td>
+            	<td align='center'><%out.print(well);%></td>
+
+<%
+
+	    	double  temp1 = -100.0; 
+%>
+                
+
+            	<td align='center'><%out.print(rs1.getInt(1));%></td>
 
 
                 <td align='center'><%
-                temp1 = rs.getDouble(2);
+                out.print(rs1.getFloat(2));
         
-                if(rs.wasNull()){
-                    out.print("NULL");
-                }
-                else{
-                    out.print(temp1);
-                }
                     
 				%></td>
 
                 <td align='center'><%
-                temp1 = rs.getDouble(3);
+                temp1 = rs1.getDouble(3);
                     
-                if(rs.wasNull()){
+                if(rs1.wasNull()){
                     out.print("NULL");
                 }
                 else{
@@ -275,9 +282,9 @@ try {
                 %></td>
 
                 <td align='center'><%
-                temp1 = rs.getDouble(4);
+                temp1 = rs1.getDouble(4);
                 
-                if(rs.wasNull()){
+                if(rs1.wasNull()){
                     out.print("NULL");
                 }
                 else{
@@ -287,9 +294,9 @@ try {
                 %></td>
 
                 <td align='center'><%
-                temp1 = rs.getDouble(5);
+                temp1 = rs1.getDouble(5);
                 
-                if(rs.wasNull()){
+                if(rs1.wasNull()){
                     out.print("NULL");
                 }
                 else{
@@ -299,9 +306,9 @@ try {
                 %></td>
 
                 <td align='center'><%
-                temp1 = rs.getDouble(6);
+                temp1 = rs1.getDouble(6);
                    
-                if(rs.wasNull()){
+                if(rs1.wasNull()){
                     out.print("NULL");
                 }
                 else{
@@ -310,152 +317,52 @@ try {
 
                 %></td>
 
-                <td align='center'><%out.print(rs.getString(7));%></td>
-                <td align='center'><%out.print(rs.getString(8));%></td>
-                </tr>
-                <%
-            }
+                <td align='center'><%out.print(rs1.getTimestamp(7));%></td>
+                 
+            
+		  <td align='center'><%
+                   
+                if(!rs4.next()){
+                    out.print("NULL");
+                }
+                else{
+                    out.print(rs4.getDouble(1));
+                }    
+
+                %></td>
+
+		  <td align='center'><%
+		  if(!rs3.next()){
+			out.println("NULL");
+		  }
+                   
+                else{
+                    out.print(rs3.getDouble(1));
+                }    
+
+                %></td>
+
+
+
+
+
+
+
+
+		</tr>
+
+<%		
+		}
         }
-	}
-	else {
-
-	}
-
-
-
-
-/*****************************************************************
-
-	if(wellIdEntered == false){
-		String getWellID = "SELECT WellID FROM Well WHERE ";
-		if(ownerEntered){
-			getWellID += "OwnerID='";
-			getWellID += owner;
-			getWellID += "'";
-		}
-		else if(typeEntered){
-			getWellID += "TypeCode='";
-			getWellID += type;
-			getWellID += "'";
-		}
-		else if(aquiferEntered){
-			getWellID += "AquiferCode='";
-			getWellID += aquifer;
-			getWellID += "'";
-
-		}
-		ps4 = conn.prepareStatement(getWellID);
-		ResultSet rs4 = ps4.executeQuery();
-
-		while(rs4.next())
-			wellID = Integer.toString(rs4.getInt("WellID"));
-
-		transQuery += "WellID='";
-		transQuery += wellID;
-		transQuery += "'";
-
-	}
-
-
-
-	if(ownerEntered==false){
-		String getOwner = "SELECT OwnerID FROM Well WHERE WellID='";
-		getOwner += wellID;
-		getOwner += "'";
-		//out.println(getOwner);
-		ps3 = conn.prepareStatement(getOwner);
-		ResultSet rs3 = ps3.executeQuery();
-
-		while(rs3.next()){
-			owner = Integer.toString(rs3.getInt("OwnerID"));
-		
-		
-		}
-		ownerQuery += "OwnerID='";
-		ownerQuery += owner;
-		ownerQuery += "'";
 	
 
-	//out.println(wellQuery);
-	//out.println(ownerQuery);
-	//out.println(transQuery);	
-	ps = conn.prepareStatement(wellQuery);
-	ps1 = conn.prepareStatement(ownerQuery);
-	ps2 = conn.prepareStatement(transQuery);
-	rs = ps.executeQuery();
-	if(rs.next())
-		rs1 = ps1.executeQuery();
-	rs.beforeFirst();
-	if(rs.next())
-		rs2 = ps2.executeQuery();
-	rs.beforeFirst();
 
-	int count = 1;
-	while(rs.next()){
-		out.print(rs.getInt(1) + " ");
-		out.print(rs.getString(2) + " ");
-		out.print(rs.getString(3) + " ");
-		out.print(rs.getInt(4) + " ");
-		out.print(rs.getFloat(5) + " ");
-		out.print(rs.getFloat(6) + " ");
-		out.print(rs.getString(7) + " ");
-		out.print(rs.getString(8) + " ");
-		out.print(rs.getFloat(9) + " ");
-		out.print(rs.getString(10) + " ");
-		out.print(rs.getString(11) + " ");
-		out.print(rs.getFloat(12) + " ");
-		out.print(rs.getFloat(13) + " ");
-		out.print(rs.getFloat(14) + " ");
-		out.print(rs.getInt(15) + " ");
-		out.print(rs.getString(16) + " ");
-			
-	}
-	%>
-		<Br>
-
-	<%
-	rs.beforeFirst();
-	if(rs.next()){
-		while(rs1.next()){
-			out.print(rs1.getInt(1) + " ");
-			out.print(rs1.getString(2) + " ");
-			out.print(rs1.getString(3) + " ");
-		
-		}
-	}
-	rs.beforeFirst();
-	%>
-		<Br>
-	<%
-	if(rs.next()){
-		while(rs2.next()){
-			out.print(rs2.getInt(1) + " ");
-			out.print(rs2.getString(2) + " ");
-			out.print(rs2.getString(3) + " ");
-			out.print(rs2.getInt(4) + " ");
-		}
-	}
-	out.println();
-
-	%>
-	
- <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b>
-  </td></tr></table>
- 
-
-	<%	}
-******************************************************/
 
 
 
 }catch(Exception e){ 
 	out.println(e);
-	%>
-	
-  
-	<%
-	}
-	%>
-	
+}
+%>	
 	</body>
 	</html>

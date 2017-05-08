@@ -49,9 +49,7 @@
 		
 	</head>
 	<BODY> 
-
 	  <link rel="stylesheet" href="../CSS/transReadingQuery.css"/>
-
 	<FORM id="rainfall" ACTION="transReadingsQueryConf.jsp" METHOD="post">
 	<h3><font color ="black"><center>Transducer Data Query</font></center></h3>
           <h4><center><i>Please enter query information below</i></center></h4>
@@ -81,14 +79,14 @@
 			    <input type="text" id="well_id" name="well_id" placeholder=""/><br><br>
 			    
 			    Beginning Date:<br>
-			    <input type="text" id="begDate" name="begDate" placeholder="MM/DD/YYYY"/><br><br>
+			    <input type="text" id="begDate" name="begDate" placeholder="YYYY-MM-DD"/><br><br>
   
 			    Beginning Time:<br>
 			    <input type="text" id="begTime" name="begTime" placeholder="hh:mm:ss"/><br>
 			    <small><sup><i>*Military Time</i></sup></small><br><br>
 			    
 			    End Date:<br>
-			    <input type="text" id="endDate" name="endDate" placeholder="MM/DD/YYYY" /><br><br>
+			    <input type="text" id="endDate" name="endDate" placeholder="YYYY-MM-DD" /><br><br>
 	      
 			    End Time:<br>
 			    <input type="text" id="endTime" name="endTime" placeholder="hh:mm:ss"/><br>
@@ -98,7 +96,6 @@
 			   
 			    <button name="submit" type="submit" id="myBtn" name="contact-submit"  data-submit="...Sending" onclick="clicked();"/>Submit</button> 
 			    
-			    <button name="submit" type="reset">Reset</button>
 
 
 
