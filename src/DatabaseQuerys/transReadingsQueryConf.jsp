@@ -16,6 +16,8 @@
 <%@ page import="java.sql.DriverManager.*" %>
 <%@ page import="java.io.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.*" %>
 
 <%     
 PreparedStatement ps;
@@ -27,12 +29,10 @@ PreparedStatement ps4;
 Connection conn;
 Class.forName("com.mysql.jdbc.Driver");
 conn=DriverManager.getConnection("jdbc:mysql://ec2-52-42-229-104.us-west-2.compute.amazonaws.com:3306/project", "evansj", "suiteswellzwfate1");
-Statement st=conn.createStatement();
+Statement st=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 %> 
 
-     <Br><table border="2"><tr><td><b>You have successfully upload the file by the name of:</b> 
-     </td></tr></table>
-
+    
 <%
 //Java
 
@@ -116,6 +116,7 @@ try {
 %> 
     <script> 
         alert("You must provide a start date and an end date!\nPlease Try again!"); 
+
         window.history.back();
     </script>
 <%
@@ -146,12 +147,8 @@ try {
 	  	else if(transIdEntered && !wellIdEntered && begDateEntered && endDateEntered &&
 	  		!begTimeEntered && !endTimeEntered) {
 
-	  		//Set default values for time
-	  		begTime = "00:00:00";
-	  		endTime = "23:59:59";
-			
 			String transID_date_Query = new String();
-			transID_date_Query = String.format("(SELECT * FROM TransducerRecords WHERE TransID = %d AND Date = %s AND Time = %s) EXCEPT (SELECT * FROM TransducerRecords WHERE TransID = %d AND Date = %s AND Time = %s) ORDER BY Date ASC, Time;", transIDInt, begDate, begTime, transIDInt, endDate, endTime);
+			transID_date_Query = String.format("SELECT * FROM TransducerRecords WHERE Date between date(%s) and date(%s) AND TransID IN (SELECT TransID FROM TransducerRecords WHERE TransID = %d) ORDER BY Date ASC, Time;", begDate, endDate, transIDInt);
 
 			ps = conn.prepareStatement(transID_date_Query);
 	        rs = ps.executeQuery();
@@ -172,6 +169,9 @@ try {
 	  		
 			String wellID_Query = new String();
 			wellID_Query = String.format("SELECT r.* FROM Transducers t, TransducerRecords r WHERE t.TransID = r.TransID AND t.WellID = %d", wellIDInt);
+
+			ps = conn.prepareStatement(wellID_Query);
+	        rs = ps.executeQuery();
 	  	}
 		//Query for when the wellID and start/end date are entered
 	  	else if(!transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
@@ -179,6 +179,9 @@ try {
 	  		
 			String wellID_date_Query = new String();
 			wellID_date_Query = String.format("SELECT * FROM Transducers WHERE ");
+
+			ps = conn.prepareStatement(wellID_date_Query);
+	        rs = ps.executeQuery();
 	  	}
 		//Query for when the wellID and start/end date and time are entered
 	  	else if(!transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
@@ -186,6 +189,9 @@ try {
 	  		
 			String wellID_date_time_Query = new String();
 			wellID_date_time_Query = String.format("SELECT * FROM Transducers WHERE ");
+
+			ps = conn.prepareStatement(wellID_date_time_Query);
+	        rs = ps.executeQuery();
 	  	}
 		//Query for when the transID and wellID are entered
 	  	else if(transIdEntered && wellIdEntered && !begDateEntered && !endDateEntered &&
@@ -195,13 +201,19 @@ try {
 
 			String transID_wellID_Query = new String();
 			transID_wellID_Query = String.format("SELECT * FROM Transducers WHERE ");
+
+			ps = conn.prepareStatement(transID_wellID_Query);
+	        rs = ps.executeQuery();
 	  	}
 		//Query for when the transID, wellID and start/end date and time are entered
-	  	else if(!transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
+	  	else if(transIdEntered && wellIdEntered && begDateEntered && endDateEntered &&
 	  		begTimeEntered && endTimeEntered) {
 	  		
 			String transID_wellID_date_time_Query = new String();
 			transID_wellID_date_time_Query = String.format("SELECT * FROM Transducers WHERE ");
+
+			ps = conn.prepareStatement(transID_wellID_date_time_Query);
+	        rs = ps.executeQuery();
 	  	}
 %>
 
@@ -440,10 +452,7 @@ try {
 	out.println(e);
 	%>
 	
-  <Br><table border="2"><tr><td><b>Upload File has incorrect format, or information contains duplicates that violate constraints</b>
-  </td></tr></table>
-
-
+  
 	<%
 	}
 	%>
